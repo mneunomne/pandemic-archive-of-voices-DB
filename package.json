@@ -1,0 +1,19 @@
+{
+  "name": "pandemic-archive-of-voices-db",
+  "version": "1.0.0",
+  "description": "database for the pandemic archive of voices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mneunomne/pandemic-archive-of-voices-DB.git"
+  },
+  "author": "Alberto Harres",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mneunomne/pandemic-archive-of-voices-DB/issues"
+  },
+  "homepage": "https://github.com/mneunomne/pandemic-archive-of-voices-DB#readme"
+}
