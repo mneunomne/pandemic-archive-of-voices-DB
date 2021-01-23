@@ -4,7 +4,8 @@
   "description": "database for the pandemic archive of voices",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "convert": "node server/convert_audios.js",
+    "extract": "node server/extract_data.js"
   },
   "repository": {
     "type": "git",
