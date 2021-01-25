@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mneunomne/pandemic-archive-of-voices-DB#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "get-audio-duration": "^2.0.3"
   }
 }
