@@ -7,6 +7,38 @@ Database for the Pandemic Archive of Voices.
 - [SoX](http://sox.sourceforge.net/) for audio conversion from `.ogg` to `.wav` and `.wav`.
 - [opus-tools](https://opus-codec.org/downloads/) for Opus `.ogg` file conversion.
 
+## API
+
+* **Get all database data**
+
+  *Returns whole JSON Object containing all audio objects*  
+
+  `/data`
+
+* ***Get speaker's audio by speaker's id**
+
+  *Returns all audio objects from speaker*  
+
+  `/speaker_id/:id`
+
+* ***Get speaker's audio by speaker's id**
+  
+  *Returns all spakers who **contain** the `:name` string*
+
+  `/speaker/:name`
+
+* **Get audio by audio id**
+
+  *Returns specific audio object from its id*  
+
+  `/audio_id/:id`
+
+* **Get audio by audio text**
+  
+  *Returns all audios that **contain** the `text` in the transcription value `text` in audio object*
+
+  `/audio_id/:text`
+
 ## Step-by-step to extract audios from telegram and create json file
 
 ### Download Telegram Data
