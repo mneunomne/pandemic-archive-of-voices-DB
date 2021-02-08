@@ -3,6 +3,8 @@ const fs = require('fs');
 
 const app = express()
 
+const port = process.env.PORT || 3000
+
 let db_data = fs.readFileSync('db/data.json')
 
 app.use(express.urlencoded({ extended: true }))
@@ -43,9 +45,9 @@ app.get('/audio_text/:text', function (req, res) {
   res.json(audios);
 })
 
-app.listen(3000, (err) => {
+app.listen(port, (err) => {
   if (err) throw err
-  console.log('Server running in http://127.0.0.1:3000')
+  console.log(`Server running in port ${port}`)
 })
 
 
