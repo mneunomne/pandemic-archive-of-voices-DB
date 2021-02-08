@@ -2,11 +2,11 @@
   "name": "pandemic-archive-of-voices-db",
   "version": "1.0.0",
   "description": "database for the pandemic archive of voices",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "convert": "node server/convert_audios.js",
     "extract": "node server/extract_data.js",
-    "server": "node server/server.js"
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
