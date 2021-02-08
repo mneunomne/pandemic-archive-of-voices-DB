@@ -5,7 +5,7 @@ const app = express()
 
 const port = process.env.PORT || 3000
 
-let db_data = fs.readFileSync('db/data.json')
+let db_data = fs.readFileSync('public/db/data.json')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -44,6 +44,8 @@ app.get('/audio_text/:text', function (req, res) {
   let audios = obj.audios.filter(a => a.text.toLowerCase().includes(text))
   res.json(audios);
 })
+
+app.use(express.static('public'))
 
 app.listen(port, (err) => {
   if (err) throw err

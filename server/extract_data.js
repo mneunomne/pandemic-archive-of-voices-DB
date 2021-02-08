@@ -1,10 +1,10 @@
 const fs = require('fs');
 
 const filename = 'result.json'
-const dest_folder = 'db/'
+const dest_folder = 'public/db/'
 const telegram_data_folder = 'exports/DataExport_2021-01-23/'
 const original_audios_folder = 'chats/chat_05/voice_messages'
-const dest_audios_folder = 'db/audios'
+const dest_audios_folder = 'public/db/audios'
 // const { getAudioDurationInSeconds } = require('get-audio-duration');
 
 function getData () {

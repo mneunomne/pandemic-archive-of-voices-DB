@@ -2,7 +2,7 @@ const fs = require('fs');
 const { exec } = require("child_process");
 
 const filename = 'result.json'
-const dest_folder = 'db/audios'
+const dest_folder = 'public/db/audios'
 const telegram_data_folder = 'exports/DataExport_2021-01-23/'
 
 
