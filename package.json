@@ -21,5 +21,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "get-audio-duration": "^2.0.3"
+  },
+  "devDependencies": {
+    "marked": "^2.0.0"
   }
 }

@@ -1,9 +1,18 @@
 const express = require('express')
 const fs = require('fs');
+const marked = require('marked');
 
 const app = express()
 
 const port = process.env.PORT || 3000
+
+// generate readme html
+var readMe = fs.readFileSync('README.md', 'utf-8');
+var markdownReadMe = marked(readMe);
+
+markdownReadMe = markdownReadMe.concat(`<style>body { font-family: 'Courier New'; }</style>`)
+
+fs.writeFileSync('./public/README.html', markdownReadMe);
 
 let db_data = fs.readFileSync('public/db/data.json')
 

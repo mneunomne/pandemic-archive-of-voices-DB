@@ -1,0 +1,90 @@
+<h1 id="the-pandemic-archive-of-voices">The Pandemic Archive of Voices</h1>
+<p>Database for the Pandemic Archive of Voices.</p>
+<h2 id="api-url">API URL</h2>
+<p><a href="https://pandemic-archive-of-voices.herokuapp.com/">https://pandemic-archive-of-voices.herokuapp.com/</a></p>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li><a href="http://sox.sourceforge.net/">SoX</a> for audio conversion from <code>.ogg</code> to <code>.wav</code> and <code>.wav</code>.</li>
+<li><a href="https://opus-codec.org/downloads/">opus-tools</a> for Opus <code>.ogg</code> file conversion.</li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li><p><strong>Get all database data</strong></p>
+<p><em>Returns whole JSON Object containing all audio objects</em>  </p>
+<p><code>/data</code></p>
+</li>
+<li><p>*<strong>Get speaker&#39;s audio by speaker&#39;s id</strong></p>
+<p><em>Returns all audio objects from speaker</em>  </p>
+<p><code>/speaker_id/:id</code></p>
+</li>
+<li><p>*<strong>Get speaker&#39;s audio by speaker&#39;s id</strong></p>
+<p><em>Returns all spakers who <strong>contain</strong> the <code>:name</code> string</em></p>
+<p><code>/speaker/:name</code></p>
+</li>
+<li><p><strong>Get audio by audio id</strong></p>
+<p><em>Returns specific audio object from its id</em>  </p>
+<p><code>/audio_id/:id</code></p>
+</li>
+<li><p><strong>Get audio by audio text</strong></p>
+<p><em>Returns all audios that <strong>contain</strong> the <code>text</code> in the transcription value <code>text</code> in audio object</em></p>
+<p><code>/audio_id/:text</code></p>
+</li>
+</ul>
+<h2 id="dowload-zipped-database">Dowload zipped database</h2>
+<p><a href="https://pandemic-archive-of-voices.herokuapp.com/db.zip">https://pandemic-archive-of-voices.herokuapp.com/db.zip</a></p>
+<h2 id="step-by-step-to-extract-audios-from-telegram-and-create-json-file">Step-by-step to extract audios from telegram and create json file</h2>
+<p>A bit of the process on how to extract and later convert the telegram audios and transform them into the comprehensive json file with converted files paths, sender id, audio length, text transcription, etc.</p>
+<h3 id="download-telegram-data">Download Telegram Data</h3>
+<ul>
+<li><p>Download telegram data from groups, downloading only the voice messages</p>
+</li>
+<li><p>Clean DataExport folder, excluding data other groups</p>
+</li>
+</ul>
+<h3 id="clean-json-file">Clean JSON file</h3>
+<ul>
+<li><p>Clean <code>result.json</code> file, leaving only the array of messages from Archive of Voices group</p>
+</li>
+<li><p>Exclude pined message and other actions from message array</p>
+</li>
+<li><p>Reorder messages to make sure that all audios have the text version following the audio message right away. </p>
+</li>
+</ul>
+<h3 id="convert-to-wav">Convert to .wav</h3>
+<ul>
+<li>Convert <code>.ogg</code> audio files to <code>.wav</code> files, copying them to the <code>data/</code> folder using <code>npm run convert</code> command. The files are exported in the following folder structure: <code>db/audios/${speaker_id}/</code>.</li>
+</ul>
+<h3 id="generate-final-json-file">Generate final json file</h3>
+<ul>
+<li>Extract <code>results.json</code> with <code>npm run extract</code>, generating, among other data, audio data elements with the folowing values:<pre><code>{
+  &quot;from&quot;: &quot;alberto harres&quot;,           // speaker name
+  &quot;id&quot;: 0,                            // audio file id
+  &quot;file&quot;: &quot;db/audios/filename.wav&quot;,   // path to audio file
+  &quot;text&quot;: &quot;audio text&quot;                // audio text
+  &quot;from_id&quot;: 0,                       // speaker id
+  &quot;duration_seconds&quot;: 2               // audio duration in seconds
+}
+</code></pre>
+</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><p>About converting Opus <code>.ogg</code> files used by telegram voice messages: <a href="https://stackoverflow.com/questions/22322372/sox-doesnt-work-with-opus-audio-files">SoX doesn&#39;t work with Opus Audio files</a></p>
+</li>
+<li><p>Sample conversion on <a href="http://sox.sourceforge.net/">SoX</a> <a href="https://stackoverflow.com/questions/23980283/sox-resample-and-convert">SoX resample and convert</a></p>
+</li>
+</ul>
+<h2 id="to-do">TO DO</h2>
+<ul>
+<li>Calculate actual length of the audio files in seconds (at the moment only the <code>duraton_seconds</code> from telegram is being used, which rounds up the number into an integer)</li>
+<li>index.html with documentation</li>
+<li>add language parameter to each audio (has to be done manually, but how to not be overwritten when the json is produced?)</li>
+<li>Make new API calls<ul>
+<li>get_random_audio</li>
+<li>get_random_speaker</li>
+<li>get_spekear_from_language</li>
+<li>get_audio_from_language</li>
+</ul>
+</li>
+</ul>
+<style>body { font-family: 'Courier New'; }</style>
