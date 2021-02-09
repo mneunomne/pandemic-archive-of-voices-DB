@@ -3,7 +3,8 @@
 Database for the Pandemic Archive of Voices.
 
 ## API URL
-[https://pandemic-archive-of-voices.herokuapp.com/](https://pandemic-archive-of-voices.herokuapp.com/)
+
+`https://pandemic-archive-of-voices.herokuapp.com/api/`
 
 ## Dependencies
 
