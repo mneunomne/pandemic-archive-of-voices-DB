@@ -93,7 +93,5 @@ A bit of the process on how to extract and later convert the telegram audios and
 - index.html with documentation
 - add language parameter to each audio (has to be done manually, but how to not be overwritten when the json is produced?)
 - Make new API calls
-  - get_random_audio
-  - get_random_speaker
   - get_spekear_from_language
   - get_audio_from_language

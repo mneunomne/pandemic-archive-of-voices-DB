@@ -24,6 +24,11 @@ app.get('/api/data', function (req, res) {
   res.json(obj);
 })
 
+app.get('/speakers', function (req, res) {
+  let obj = JSON.parse(db_data);
+  res.json(obj.spakers);
+})
+
 app.get('/speaker_id/:id', function (req, res) {
   let id = parseInt(req.params.id)
   let obj = JSON.parse(db_data);
