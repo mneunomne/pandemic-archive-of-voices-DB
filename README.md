@@ -82,8 +82,19 @@ A bit of the process on how to extract and later convert the telegram audios and
   }
   ```
 
-## refs
+## References
 
 - About converting Opus `.ogg` files used by telegram voice messages: [SoX doesn't work with Opus Audio files](https://stackoverflow.com/questions/22322372/sox-doesnt-work-with-opus-audio-files)
 
 - Sample conversion on [SoX](http://sox.sourceforge.net/) [SoX resample and convert](https://stackoverflow.com/questions/23980283/sox-resample-and-convert)
+
+## TO DO
+
+- Calculate actual length of the audio files in seconds (at the moment only the `duraton_seconds` from telegram is being used, which rounds up the number into an integer)
+- index.html with documentation
+- add language parameter to each audio (has to be done manually, but how to not be overwritten when the json is produced?)
+- Make new API calls
+  - get_random_audio
+  - get_random_speaker
+  - get_spekear_from_language
+  - get_audio_from_language
