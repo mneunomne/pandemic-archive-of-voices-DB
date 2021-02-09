@@ -1,4 +1,4 @@
-# The Pandemic Archive of Voices
+# The Pandemic Archive of Voices - Database & API
 
 Database for the Pandemic Archive of Voices.
 
