@@ -42,7 +42,13 @@ Database for the Pandemic Archive of Voices.
 
   `/audio_id/:text`
 
+## Dowload zipped database 
+
+[https://pandemic-archive-of-voices.herokuapp.com/db.zip](https://pandemic-archive-of-voices.herokuapp.com/db.zip)
+
 ## Step-by-step to extract audios from telegram and create json file
+
+A bit of the process on how to extract and later convert the telegram audios and transform them into the comprehensive json file with converted files paths, sender id, audio length, text transcription, etc.
 
 ### Download Telegram Data
 
