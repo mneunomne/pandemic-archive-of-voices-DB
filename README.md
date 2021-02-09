@@ -1,7 +1,5 @@
 # The Pandemic Archive of Voices - Database & API
 
-Database for the Pandemic Archive of Voices.
-
 ## API URL
 
 `https://pandemic-archive-of-voices.herokuapp.com/api/`
