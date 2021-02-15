@@ -59,6 +59,20 @@ app.get('/api/audio_text/:text', function (req, res) {
   res.json(audios);
 })
 
+app.get('/api/audio_lang_name/:lang_name', function (req, res) {
+  let lang_name = req.params.lang_name
+  let obj = JSON.parse(db_data);
+  let audios = obj.audios.filter(a => a.lang.name.toLowerCase().includes(lang_name))
+  res.json(audios);
+})
+
+app.get('/api/audio_lang_code/:lang_code', function (req, res) {
+  let lang_code = req.params.lang_code
+  let obj = JSON.parse(db_data);
+  let audios = obj.audios.filter(a => a.lang.code.toLowerCase().includes(lang_code))
+  res.json(audios);
+})
+
 app.use(express.static('public'))
 
 app.listen(port, (err) => {

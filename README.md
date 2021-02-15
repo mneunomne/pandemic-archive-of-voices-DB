@@ -15,31 +15,44 @@
 
   *Returns whole JSON Object containing all audio objects*  
 
-  `/data`
+  `/api/data`
 
-* ***Get speaker's audio by speaker's id**
+* ***Get speaker's audios by speaker's id**
 
   *Returns all audio objects from speaker*  
 
-  `/speaker_id/:id`
+  `/api/speaker_id/:id`
 
-* ***Get speaker's audio by speaker's id**
+* ***Get speaker's audios by speaker's id**
   
   *Returns all spakers who **contain** the `:name` string*
 
-  `/speaker/:name`
+  `/api/speaker/:name`
 
-* **Get audio by audio id**
+* **Get audio by id**
 
   *Returns specific audio object from its id*  
 
-  `/audio_id/:id`
+  `/api/audio_id/:id`
 
-* **Get audio by audio text**
+* **Get audios by text**
   
   *Returns all audios that **contain** the `text` in the transcription value `text` in audio object*
 
-  `/audio_id/:text`
+  `/api/audio_id/:text`
+
+* **Get audios by language name**
+  
+  *Returns all audios that **contain** the `lang_name` in the `name` paramenter inside `lang` in audio object*
+
+  `/api/audio_lang_name/:lang_name`
+
+* **Get audios by audio text**
+  
+  *Returns all audios that **contain** the `lang_code` in the `code` paramenter inside `lang` in audio object*
+
+  `/api/audio_lang_code/:lang_code`
+
 
 ## Dowload zipped database 
 
@@ -78,6 +91,11 @@ A bit of the process on how to extract and later convert the telegram audios and
     "text": "audio text"                // audio text
     "from_id": 0,                       // speaker id
     "duration_seconds": 2               // audio duration in seconds
+    "lang": {                           // language of the audio
+        "name": "brazilian portuguese", // name of the language or dialect in english 
+        "code": "pt-br",                // language or dialect code
+        "standard": "ISO 639-1"         // standard used for code, since some dialects are not in the ISO 639-1 standard
+    }
   }
   ```
 
@@ -90,13 +108,8 @@ A bit of the process on how to extract and later convert the telegram audios and
 ## TO DO
 
 - Calculate actual length of the audio files in seconds (at the moment only the `duraton_seconds` from telegram is being used, which rounds up the number into an integer)
-- index.html with documentation
-- add language parameter to each audio (has to be done manually, but how to not be overwritten when the json is produced?)
-- Make new API calls
-  - get_spekear_from_language
-  - get_audio_from_language
 - Documentation and Guidelines on how to contribute new audios to The Pandemic Audio Archive
 
 ## License
 
-[MIT]()
+[MIT](https://opensource.org/licenses/MIT)
