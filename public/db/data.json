@@ -11,7 +11,12 @@
             "id": 13,
             "text": "Números",
             "from_id": 5631317686,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "nilya musaeva*️⃣",
@@ -19,7 +24,12 @@
             "id": 15,
             "text": "еда",
             "from_id": 4472772915,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "S. C.",
@@ -27,7 +37,12 @@
             "id": 22,
             "text": "",
             "from_id": 4408865338,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "mandarin chinese",
+                "code": "cmn",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "ruoxi",
@@ -35,7 +50,12 @@
             "id": 27,
             "text": "怪迷日眼",
             "from_id": 5136095171,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "chongqing dialect",
+                "code": "chen1267",
+                "standard": "glottolog"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -43,7 +63,12 @@
             "id": 30,
             "text": "Ensimesmado",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "ruoxi",
@@ -51,7 +76,12 @@
             "id": 32,
             "text": "造孽巴撒",
             "from_id": 5136095171,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "chongqing dialect",
+                "code": "chen1267",
+                "standard": "glottolog"
+            }
         },
         {
             "from": "ruoxi",
@@ -59,7 +89,12 @@
             "id": 34,
             "text": "遇球得到",
             "from_id": 5136095171,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "chongqing dialect",
+                "code": "chen1267",
+                "standard": "glottolog"
+            }
         },
         {
             "from": "Kazuki",
@@ -67,7 +102,12 @@
             "id": 36,
             "text": "ロックダウン",
             "from_id": 5314577364,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -75,7 +115,12 @@
             "id": 39,
             "text": "非常事態宣言",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -83,7 +128,12 @@
             "id": 41,
             "text": "20秒間",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -91,7 +141,12 @@
             "id": 43,
             "text": "三密",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -99,7 +154,12 @@
             "id": 45,
             "text": "Zoom会議",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -107,7 +167,12 @@
             "id": 47,
             "text": "コロナに効く！",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -115,7 +180,12 @@
             "id": 49,
             "text": "コロナに負けない",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -123,7 +193,12 @@
             "id": 51,
             "text": "コロナ下",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -131,7 +206,12 @@
             "id": 56,
             "text": "閉店しました",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -139,7 +219,12 @@
             "id": 58,
             "text": "こんなご時世ですが",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -147,7 +232,12 @@
             "id": 60,
             "text": "また会う日まで",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Hem Poudyal",
@@ -155,7 +245,12 @@
             "id": 67,
             "text": "कोरोनाको समय, एक्लोपन अनि असहजता",
             "from_id": 5411097981,
-            "duration_seconds": 6
+            "duration_seconds": 6,
+            "lang": {
+                "name": "nepali",
+                "code": "ne",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Hem Poudyal",
@@ -163,7 +258,12 @@
             "id": 76,
             "text": "संवेदनशील मानव जीवन",
             "from_id": 5411097981,
-            "duration_seconds": 4
+            "duration_seconds": 4,
+            "lang": {
+                "name": "nepali",
+                "code": "ne",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Hem Poudyal",
@@ -171,7 +271,12 @@
             "id": 78,
             "text": "बाध्यता",
             "from_id": 5411097981,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "nepali",
+                "code": "ne",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -179,7 +284,12 @@
             "id": 80,
             "text": "Sirenes",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -187,7 +297,12 @@
             "id": 82,
             "text": "Respiradores",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -195,7 +310,12 @@
             "id": 84,
             "text": "Esperança",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Antônio Hof",
@@ -203,7 +323,12 @@
             "id": 87,
             "text": "Alemão",
             "from_id": 5629926613,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "nilya musaeva*️⃣",
@@ -211,7 +336,12 @@
             "id": 89,
             "text": "система цифровых пропусков",
             "from_id": 4472772915,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "S. C.",
@@ -219,7 +349,12 @@
             "id": 91,
             "text": "宅",
             "from_id": 4408865338,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "mandarin chinese",
+                "code": "cmn",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "S. C.",
@@ -227,7 +362,12 @@
             "id": 93,
             "text": "健康码",
             "from_id": 4408865338,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "mandarin chinese",
+                "code": "cmn",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Chi Him Chik",
@@ -235,7 +375,12 @@
             "id": 98,
             "text": "第一波",
             "from_id": 5576183485,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "cantonese",
+                "code": "yue",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Chi Him Chik",
@@ -243,7 +388,12 @@
             "id": 100,
             "text": "第二波",
             "from_id": 5576183485,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "cantonese",
+                "code": "yue",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Chi Him Chik",
@@ -251,7 +401,12 @@
             "id": 102,
             "text": "第三波",
             "from_id": 5576183485,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "cantonese",
+                "code": "yue",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Chi Him Chik",
@@ -259,7 +414,12 @@
             "id": 104,
             "text": "第四波",
             "from_id": 5576183485,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "cantonese",
+                "code": "yue",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Sangbong Lee",
@@ -267,7 +427,12 @@
             "id": 106,
             "text": "코로나 감염병 확산",
             "from_id": 5524258652,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "korean",
+                "code": "ko",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Sangbong Lee",
@@ -275,7 +440,12 @@
             "id": 108,
             "text": "확진자",
             "from_id": 5524258652,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "korean",
+                "code": "ko",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Sangbong Lee",
@@ -283,7 +453,12 @@
             "id": 110,
             "text": "가짜뉴스와 음모론",
             "from_id": 5524258652,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "korean",
+                "code": "ko",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Sangbong Lee",
@@ -291,7 +466,12 @@
             "id": 112,
             "text": "격리시설",
             "from_id": 5524258652,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "korean",
+                "code": "ko",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Sangbong Lee",
@@ -299,7 +479,12 @@
             "id": 114,
             "text": "가짜뉴스와 음모론",
             "from_id": 5524258652,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "korean",
+                "code": "ko",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -307,7 +492,12 @@
             "id": 116,
             "text": "Protocolos de distanciamento social",
             "from_id": 5631317686,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -315,7 +505,12 @@
             "id": 118,
             "text": "Incertezas",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -323,7 +518,12 @@
             "id": 120,
             "text": "Minutos de silêncio",
             "from_id": 5631317686,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Josh",
@@ -331,7 +531,12 @@
             "id": 124,
             "text": "dog's dinner",
             "from_id": 4953417715,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "british english",
+                "code": "en-GB",
+                "standard": "IETF"
+            }
         },
         {
             "from": "Josh",
@@ -339,7 +544,12 @@
             "id": 126,
             "text": "extended support bubble",
             "from_id": 4953417715,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "british english",
+                "code": "en-GB",
+                "standard": "IETF"
+            }
         },
         {
             "from": "Antônio Hof",
@@ -347,7 +557,12 @@
             "id": 131,
             "text": "Máscara",
             "from_id": 5629926613,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Antônio Hof",
@@ -355,7 +570,12 @@
             "id": 133,
             "text": "zigue-zague",
             "from_id": 5629926613,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "nilya musaeva*️⃣",
@@ -363,7 +583,12 @@
             "id": 135,
             "text": "надоело",
             "from_id": 4472772915,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Bojana",
@@ -371,7 +596,12 @@
             "id": 137,
             "text": "nedostajanje",
             "from_id": 4612847105,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "serbian",
+                "code": "srp",
+                "standard":"ISO 639-3"
+            }
         },
         {
             "from": "Bojana",
@@ -379,7 +609,12 @@
             "id": 139,
             "text": "vreme",
             "from_id": 4612847105,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "serbian",
+                "code": "srp",
+                "standard":"ISO 639-3"
+            }
         },
         {
             "from": "Bojana",
@@ -387,7 +622,12 @@
             "id": 141,
             "text": "bliskost",
             "from_id": 4612847105,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "serbian",
+                "code": "srp",
+                "standard":"ISO 639-3"
+            }
         },
         {
             "from": "Bojana",
@@ -395,7 +635,12 @@
             "id": 143,
             "text": "daljina",
             "from_id": 4612847105,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "serbian",
+                "code": "srp",
+                "standard":"ISO 639-3"
+            }
         },
         {
             "from": "Bojana",
@@ -403,7 +648,12 @@
             "id": 145,
             "text": "ograničenost",
             "from_id": 4612847105,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "serbian",
+                "code": "srp",
+                "standard":"ISO 639-3"
+            }
         },
         {
             "from": "Soumya Hfk",
@@ -411,7 +661,12 @@
             "id": 148,
             "text": "সবাই ভালো থেকো",
             "from_id": 5572716069,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "bengali",
+                "code": "bn",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -419,7 +674,12 @@
             "id": 153,
             "text": "Luto",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Victor Artiga",
@@ -427,7 +687,12 @@
             "id": 156,
             "text": "Distancia",
             "from_id": 4963464597,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Victor Artiga",
@@ -435,7 +700,12 @@
             "id": 158,
             "text": "Introspección",
             "from_id": 4963464597,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Victor Artiga",
@@ -443,7 +713,12 @@
             "id": 160,
             "text": "Amistades",
             "from_id": 4963464597,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Victor Artiga",
@@ -451,7 +726,12 @@
             "id": 162,
             "text": "Cercania",
             "from_id": 4963464597,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Victor Artiga",
@@ -459,7 +739,12 @@
             "id": 164,
             "text": "Nostalgia",
             "from_id": 4963464597,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Josh",
@@ -467,7 +752,12 @@
             "id": 166,
             "text": "church bells and sirens",
             "from_id": 4953417715,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "british english",
+                "code": "en-GB",
+                "standard": "IETF"
+            }
         },
         {
             "from": "Josh",
@@ -475,7 +765,12 @@
             "id": 168,
             "text": "pandemonium",
             "from_id": 4953417715,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "british english",
+                "code": "en-GB",
+                "standard": "IETF"
+            }
         },
         {
             "from": "nilya musaeva*️⃣",
@@ -483,7 +778,12 @@
             "id": 173,
             "text": "মন মরা ভাব",
             "from_id": 4472772915,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Debaditya Bhowmik",
@@ -491,7 +791,12 @@
             "id": 181,
             "text": "",
             "from_id": 5715773637,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "bengali",
+                "code": "bn",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Julia",
@@ -499,7 +804,12 @@
             "id": 182,
             "text": "hamstern",
             "from_id": 5319950334,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "german",
+                "code": "de",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Debaditya Bhowmik",
@@ -507,7 +817,12 @@
             "id": 185,
             "text": "",
             "from_id": 5715773637,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "bengali",
+                "code": "bn",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Julia",
@@ -515,7 +830,12 @@
             "id": 186,
             "text": "vereinsamen",
             "from_id": 5319950334,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "german",
+                "code": "de",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -523,7 +843,12 @@
             "id": 188,
             "text": "Kırlangıç",
             "from_id": 5465850985,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -531,7 +856,12 @@
             "id": 190,
             "text": "Huzur",
             "from_id": 5465850985,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -539,7 +869,12 @@
             "id": 192,
             "text": "Tesadüf",
             "from_id": 5465850985,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -547,7 +882,12 @@
             "id": 194,
             "text": "Afilli",
             "from_id": 5465850985,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -555,7 +895,12 @@
             "id": 196,
             "text": "Serzeniş",
             "from_id": 5465850985,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -563,7 +908,12 @@
             "id": 198,
             "text": "Sadakat",
             "from_id": 5465850985,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -571,7 +921,12 @@
             "id": 200,
             "text": "Masum",
             "from_id": 5465850985,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -579,7 +934,12 @@
             "id": 202,
             "text": "Masumiyet",
             "from_id": 5465850985,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -587,7 +947,12 @@
             "id": 204,
             "text": "Aşk",
             "from_id": 5465850985,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ayse Seyhan",
@@ -595,7 +960,12 @@
             "id": 206,
             "text": "Ansızın",
             "from_id": 5465850985,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Chi Him Chik",
@@ -603,7 +973,12 @@
             "id": 208,
             "text": "封關呀仆街",
             "from_id": 5576183485,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "cantonese",
+                "code": "yue",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Chi Him Chik",
@@ -611,7 +986,12 @@
             "id": 211,
             "text": "帶口罩呀屌你老母",
             "from_id": 5576183485,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "cantonese",
+                "code": "yue",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -619,7 +999,12 @@
             "id": 213,
             "text": "Falta de ar",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Antônio Hof",
@@ -627,7 +1012,12 @@
             "id": 215,
             "text": "solidão",
             "from_id": 5629926613,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Antônio Hof",
@@ -635,7 +1025,12 @@
             "id": 217,
             "text": "ermo",
             "from_id": 5629926613,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -643,7 +1038,12 @@
             "id": 220,
             "text": "",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -651,7 +1051,12 @@
             "id": 221,
             "text": "",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -659,7 +1064,12 @@
             "id": 222,
             "text": "",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -667,7 +1077,12 @@
             "id": 223,
             "text": "",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -675,7 +1090,12 @@
             "id": 224,
             "text": "O Mundo",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Anna",
@@ -683,7 +1103,12 @@
             "id": 226,
             "text": "Салідарнасць",
             "from_id": 4570123136,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Anna",
@@ -691,7 +1116,12 @@
             "id": 228,
             "text": "Рэвалюцыя",
             "from_id": 4570123136,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Anna",
@@ -699,7 +1129,12 @@
             "id": 230,
             "text": "Супольнасць",
             "from_id": 4570123136,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "ruoxi",
@@ -707,7 +1142,12 @@
             "id": 232,
             "text": "恍儿胡兮",
             "from_id": 5136095171,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "chongqing dialect",
+                "code": "chen1267",
+                "standard": "glottolog"
+            }
         },
         {
             "from": "ruoxi",
@@ -715,71 +1155,116 @@
             "id": 234,
             "text": "哭兮来呆",
             "from_id": 5136095171,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "chongqing dialect",
+                "code": "chen1267",
+                "standard": "glottolog"
+            }
         },
         {
             "from": "Abdulghaffar",
             "file": "db/audios/4746759530/audio_93@19-12-2020_12-04-26.wav",
             "id": 236,
-            "text": "عزلة\nReclusion",
+            "text": "عزلة",
             "from_id": 4746759530,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "arabic",
+                "code": "ar",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Abdulghaffar",
             "file": "db/audios/4746759530/audio_94@19-12-2020_12-05-00.wav",
             "id": 238,
-            "text": "تضامن\nSolidarity",
+            "text": "تضامن",
             "from_id": 4746759530,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "arabic",
+                "code": "ar",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Abdulghaffar",
             "file": "db/audios/4746759530/audio_95@19-12-2020_12-05-54.wav",
             "id": 240,
-            "text": "حنين\nYearning",
+            "text": "حنين",
             "from_id": 4746759530,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "arabic",
+                "code": "ar",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Abdulghaffar",
             "file": "db/audios/4746759530/audio_96@19-12-2020_12-06-21.wav",
             "id": 242,
-            "text": "واقع\nReality",
+            "text": "واقع",
             "from_id": 4746759530,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "arabic",
+                "code": "ar",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Abdulghaffar",
             "file": "db/audios/4746759530/audio_97@19-12-2020_12-07-12.wav",
             "id": 245,
-            "text": "حياة\nLife",
+            "text": "حياة",
             "from_id": 4746759530,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "arabic",
+                "code": "ar",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Abdulghaffar",
             "file": "db/audios/4746759530/audio_98@19-12-2020_12-07-32.wav",
             "id": 247,
-            "text": "خيال\nImagination",
+            "text": "خيال",
             "from_id": 4746759530,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "arabic",
+                "code": "ar",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Abdulghaffar",
             "file": "db/audios/4746759530/audio_99@19-12-2020_12-07-49.wav",
             "id": 249,
-            "text": "انتظار\nWaiting",
+            "text": "انتظار",
             "from_id": 4746759530,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "arabic",
+                "code": "ar",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Abdulghaffar",
             "file": "db/audios/4746759530/audio_100@19-12-2020_12-08-06.wav",
             "id": 251,
-            "text": "تغيير\nChange",
+            "text": "تغيير",
             "from_id": 4746759530,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "arabic",
+                "code": "ar",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Pelin",
@@ -787,7 +1272,12 @@
             "id": 253,
             "text": "Bunaltı",
             "from_id": 5227186112,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Pelin",
@@ -795,7 +1285,12 @@
             "id": 255,
             "text": "Beynelmilel",
             "from_id": 5227186112,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Pelin",
@@ -803,7 +1298,12 @@
             "id": 257,
             "text": "Fütursuz",
             "from_id": 5227186112,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Pelin",
@@ -811,7 +1311,12 @@
             "id": 259,
             "text": "Belirsizlik",
             "from_id": 5227186112,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Pelin",
@@ -819,7 +1324,12 @@
             "id": 261,
             "text": "Muallak",
             "from_id": 5227186112,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Pelin",
@@ -827,7 +1337,12 @@
             "id": 263,
             "text": "Yeni gerçeklik",
             "from_id": 5227186112,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "turkish",
+                "code": "tr",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "ruoxi",
@@ -835,7 +1350,12 @@
             "id": 265,
             "text": "囊个嫩个列个安",
             "from_id": 5136095171,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "chongqing dialect",
+                "code": "chen1267",
+                "standard": "glottolog"
+            }
         },
         {
             "from": "Bruno HfK",
@@ -843,7 +1363,12 @@
             "id": 270,
             "text": "Provocações",
             "from_id": 5203538418,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Ivett K.",
@@ -851,7 +1376,12 @@
             "id": 272,
             "text": "SZFE-tüntetés",
             "from_id": 5170943596,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "hungarian",
+                "code": "hu",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ivett K.",
@@ -859,7 +1389,12 @@
             "id": 274,
             "text": "Operatív törzs",
             "from_id": 5170943596,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "hungarian",
+                "code": "hu",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ivett K.",
@@ -867,7 +1402,12 @@
             "id": 276,
             "text": "Bicikliút a körúton",
             "from_id": 5170943596,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "hungarian",
+                "code": "hu",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ivett K.",
@@ -875,7 +1415,12 @@
             "id": 278,
             "text": "Szeparáltság",
             "from_id": 5170943596,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "hungarian",
+                "code": "hu",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Ivett K.",
@@ -883,7 +1428,12 @@
             "id": 280,
             "text": "A szituáció kihasználása",
             "from_id": 5170943596,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "hungarian",
+                "code": "hu",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Antônio Hof",
@@ -891,7 +1441,12 @@
             "id": 282,
             "text": "estrangulado",
             "from_id": 5629926613,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Antônio Hof",
@@ -899,7 +1454,12 @@
             "id": 284,
             "text": "desbotado",
             "from_id": 5629926613,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Antônio Hof",
@@ -907,7 +1467,12 @@
             "id": 286,
             "text": "destituído",
             "from_id": 5629926613,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Soumya Hfk",
@@ -915,7 +1480,12 @@
             "id": 288,
             "text": "",
             "from_id": 5572716069,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "bengali",
+                "code": "bn",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Soumya Hfk",
@@ -923,7 +1493,12 @@
             "id": 289,
             "text": "দেখা যাক কি হয়",
             "from_id": 5572716069,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "bengali",
+                "code": "bn",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -931,7 +1506,12 @@
             "id": 293,
             "text": "自粛警察",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -939,7 +1519,12 @@
             "id": 297,
             "text": "俺はまだいいけど",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -947,7 +1532,12 @@
             "id": 300,
             "text": "一億総引きこもり",
             "from_id": 5314577364,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -955,7 +1545,12 @@
             "id": 302,
             "text": "俺もともと引きこもりだし",
             "from_id": 5314577364,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -963,7 +1558,12 @@
             "id": 304,
             "text": "実はドッキリでした",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -971,7 +1571,12 @@
             "id": 306,
             "text": "茶番感",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -979,7 +1584,12 @@
             "id": 308,
             "text": "クリスマスは今年もやって来る",
             "from_id": 5314577364,
-            "duration_seconds": 5
+            "duration_seconds": 5,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -987,7 +1597,12 @@
             "id": 310,
             "text": "県外ナンバーお断り",
             "from_id": 5314577364,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -995,7 +1610,12 @@
             "id": 312,
             "text": "ゼノフォビア",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1003,7 +1623,12 @@
             "id": 314,
             "text": "ナショナリズム",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1011,7 +1636,12 @@
             "id": 316,
             "text": "マスク買い占め",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1019,7 +1649,12 @@
             "id": 318,
             "text": "トイレットペーパー品切れ",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1027,7 +1662,12 @@
             "id": 320,
             "text": "手作りマスク",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1035,7 +1675,12 @@
             "id": 322,
             "text": "それでも桜は咲く",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1043,7 +1688,12 @@
             "id": 324,
             "text": "自殺者４割り増し",
             "from_id": 5314577364,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1051,7 +1701,12 @@
             "id": 326,
             "text": "テイクアウト始めました",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1059,7 +1714,12 @@
             "id": 328,
             "text": "介在",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1067,7 +1727,12 @@
             "id": 330,
             "text": "媒体",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Kazuki",
@@ -1075,7 +1740,12 @@
             "id": 332,
             "text": "介入",
             "from_id": 5314577364,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "japanese",
+                "code": "ja",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "ruoxi",
@@ -1083,7 +1753,12 @@
             "id": 334,
             "text": "小猫呼噜",
             "from_id": 5136095171,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "chongqing dialect",
+                "code": "chen1267",
+                "standard": "glottolog"
+            }
         },
         {
             "from": "nilya musaeva*️⃣",
@@ -1091,7 +1766,12 @@
             "id": 336,
             "text": "пизда рулю ))))))",
             "from_id": 4472772915,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Slava Romanov",
@@ -1099,7 +1779,12 @@
             "id": 338,
             "text": "Холодильник",
             "from_id": 4487042723,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Slava Romanov",
@@ -1107,7 +1792,12 @@
             "id": 340,
             "text": "Домашняя дым-машина",
             "from_id": 4487042723,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Slava Romanov",
@@ -1115,7 +1805,12 @@
             "id": 342,
             "text": "Попытки убедить родных",
             "from_id": 4487042723,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Slava Romanov",
@@ -1123,7 +1818,12 @@
             "id": 344,
             "text": "Доставка суши",
             "from_id": 4487042723,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Slava Romanov",
@@ -1131,7 +1831,12 @@
             "id": 346,
             "text": "Изопропанол",
             "from_id": 4487042723,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Slava Romanov",
@@ -1139,7 +1844,12 @@
             "id": 348,
             "text": "Выпрыгнуть в окно возможностей",
             "from_id": 4487042723,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1147,7 +1857,12 @@
             "id": 352,
             "text": "Aislamiento",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1155,7 +1870,12 @@
             "id": 354,
             "text": "Extrañar",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1163,7 +1883,12 @@
             "id": 356,
             "text": "Normalidad",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1171,7 +1896,12 @@
             "id": 358,
             "text": "Compañía",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1179,7 +1909,12 @@
             "id": 360,
             "text": "Depresión",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1187,7 +1922,12 @@
             "id": 362,
             "text": "Incertidumbre",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1195,7 +1935,12 @@
             "id": 364,
             "text": "Dormitorio",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1203,7 +1948,12 @@
             "id": 366,
             "text": "Sobrevivir",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1211,7 +1961,12 @@
             "id": 368,
             "text": "Motivación",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Marcela DM",
@@ -1219,7 +1974,12 @@
             "id": 370,
             "text": "Miedo",
             "from_id": 5172654043,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "spanish",
+                "code": "es",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -1227,7 +1987,12 @@
             "id": 373,
             "text": "Grupo de risco",
             "from_id": 5631317686,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Anna",
@@ -1235,7 +2000,12 @@
             "id": 375,
             "text": "Адзінота",
             "from_id": 4570123136,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Anna",
@@ -1243,7 +2013,12 @@
             "id": 377,
             "text": "Хлеб",
             "from_id": 4570123136,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Anna",
@@ -1251,7 +2026,12 @@
             "id": 379,
             "text": "Сумаваць",
             "from_id": 4570123136,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "russian",
+                "code": "ru",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Hem Poudyal",
@@ -1259,7 +2039,12 @@
             "id": 381,
             "text": "माहामारी",
             "from_id": 5411097981,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "nepali",
+                "code": "ne",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Hem Poudyal",
@@ -1267,7 +2052,12 @@
             "id": 383,
             "text": "यथार्थ स्विकार्नु",
             "from_id": 5411097981,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "nepali",
+                "code": "ne",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Hem Poudyal",
@@ -1275,7 +2065,12 @@
             "id": 385,
             "text": "दुर शिक्षा",
             "from_id": 5411097981,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "nepali",
+                "code": "ne",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Hem Poudyal",
@@ -1283,7 +2078,12 @@
             "id": 387,
             "text": "सामाजिक दुरी",
             "from_id": 5411097981,
-            "duration_seconds": 3
+            "duration_seconds": 3,
+            "lang": {
+                "name": "nepali",
+                "code": "ne",
+                "standard":"ISO 639-1"
+            }
         },
         {
             "from": "Lucca",
@@ -1291,7 +2091,12 @@
             "id": 389,
             "text": "Einsamkeit",
             "from_id": 5155406234,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "german",
+                "code": "de",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Lucca",
@@ -1299,7 +2104,12 @@
             "id": 391,
             "text": "Langeweile",
             "from_id": 5155406234,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "german",
+                "code": "de",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Lucca",
@@ -1307,7 +2117,12 @@
             "id": 393,
             "text": "Monotonie",
             "from_id": 5155406234,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "german",
+                "code": "de",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Lucca",
@@ -1315,7 +2130,12 @@
             "id": 395,
             "text": "Dunkelheit",
             "from_id": 5155406234,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "german",
+                "code": "de",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Lucca",
@@ -1323,7 +2143,12 @@
             "id": 397,
             "text": "Sehnsucht",
             "from_id": 5155406234,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "german",
+                "code": "de",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "S. C.",
@@ -1331,7 +2156,12 @@
             "id": 399,
             "text": "外卖",
             "from_id": 4408865338,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "mandarin chinese",
+                "code": "cmn",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -1339,7 +2169,12 @@
             "id": 403,
             "text": "Carinho",
             "from_id": 5631317686,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "ruoxi",
@@ -1347,7 +2182,12 @@
             "id": 405,
             "text": "吃火锅",
             "from_id": 5136095171,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "chongqing dialect",
+                "code": "chen1267",
+                "standard": "glottolog"
+            }
         },
         {
             "from": "Chi Him Chik",
@@ -1355,7 +2195,12 @@
             "id": 407,
             "text": "乜都唔做",
             "from_id": 5576183485,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "cantonese",
+                "code": "yue",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Chi Him Chik",
@@ -1363,7 +2208,12 @@
             "id": 409,
             "text": "乜都做唔到",
             "from_id": 5576183485,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "cantonese",
+                "code": "yue",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "nilya musaeva*️⃣",
@@ -1371,7 +2221,12 @@
             "id": 411,
             "text": "tikişçilik",
             "from_id": 4472772915,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "azerbaijani",
+                "code": "az",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -1379,7 +2234,12 @@
             "id": 415,
             "text": "Saudades",
             "from_id": 5631317686,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "Bonasladybug",
@@ -1387,7 +2247,12 @@
             "id": 418,
             "text": "دلتنگی",
             "from_id": 4357336763,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "persian",
+                "code": "pes",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Bonasladybug",
@@ -1395,7 +2260,12 @@
             "id": 421,
             "text": "صبر",
             "from_id": 4357336763,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "persian",
+                "code": "pes",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Bonasladybug",
@@ -1403,7 +2273,12 @@
             "id": 423,
             "text": "رقصیدن",
             "from_id": 4357336763,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "persian",
+                "code": "pes",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Bonasladybug",
@@ -1411,7 +2286,12 @@
             "id": 425,
             "text": "موسیقی",
             "from_id": 4357336763,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "persian",
+                "code": "pes",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Bonasladybug",
@@ -1419,7 +2299,12 @@
             "id": 427,
             "text": "خانواده",
             "from_id": 4357336763,
-            "duration_seconds": 1
+            "duration_seconds": 1,
+            "lang": {
+                "name": "persian",
+                "code": "pes",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Bonasladybug",
@@ -1427,7 +2312,12 @@
             "id": 429,
             "text": "سلامتی",
             "from_id": 4357336763,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "persian",
+                "code": "pes",
+                "standard": "ISO 639-3"
+            }
         },
         {
             "from": "Alberto Harres",
@@ -1435,7 +2325,12 @@
             "id": 431,
             "text": "Afetos criptografados",
             "from_id": 5631317686,
-            "duration_seconds": 4
+            "duration_seconds": 4,
+            "lang": {
+                "name": "brazilian portuguese",
+                "code": "pt-br",
+                "standard": "ISO 639-1"
+            }
         },
         {
             "from": "S. C.",
@@ -1443,7 +2338,12 @@
             "id": 433,
             "text": "剪头发",
             "from_id": 4408865338,
-            "duration_seconds": 2
+            "duration_seconds": 2,
+            "lang": {
+                "name": "mandarin chinese",
+                "code": "cmn",
+                "standard": "ISO 639-3"
+            }
         }
     ],
     "speakers": [
@@ -1452,7 +2352,7 @@
             "id": 5631317686
         },
         {
-            "speaker": "nilya musaeva*️⃣",
+            "speaker": "nilya musaeva",
             "id": 4472772915
         },
         {

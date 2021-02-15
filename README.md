@@ -95,3 +95,8 @@ A bit of the process on how to extract and later convert the telegram audios and
 - Make new API calls
   - get_spekear_from_language
   - get_audio_from_language
+- Documentation and Guidelines on how to contribute new audios to The Pandemic Audio Archive
+
+## License
+
+[MIT]()

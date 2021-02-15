@@ -24,9 +24,9 @@ app.get('/api/data', function (req, res) {
   res.json(obj);
 })
 
-app.get('/speakers', function (req, res) {
+app.get('/api/speakers', function (req, res) {
   let obj = JSON.parse(db_data);
-  res.json(obj.spakers);
+  res.json(obj.speakers);
 })
 
 app.get('/speaker_id/:id', function (req, res) {
@@ -39,7 +39,7 @@ app.get('/speaker_id/:id', function (req, res) {
 })
 
 app.get('/api/speaker/:name', function (req, res) {
-  let name = req.params.name
+  let name = req.params.name.toLowerCase()
   let obj = JSON.parse(db_data);
   let audios = obj.audios.filter(a => a.from.toLowerCase().includes(name))
   res.json(audios);
