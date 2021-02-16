@@ -99,6 +99,21 @@ A bit of the process on how to extract and later convert the telegram audios and
   }
   ```
 
+## Speakers
+
+*I thank all collaborators that contributed with audios:*
+
+```
+  ["nilya musaeva","S. C.","ruoxi","Kazuki",
+  "Hem","Antônio","Chi Him","Sangbong",
+  "Alberto Harres","Josh","Bojana","Victor",
+  "Debaditya","Julia","Ayse Seyhan","Anna",
+  "Abdulghaffar","Pelin","Bruno","Ivett K.",
+  "Slava Romanov","Marcela DM","Lucca","Bonasladybug", 
+  "Soumya"]
+```
+
+
 ## References
 
 - About converting Opus `.ogg` files used by telegram voice messages: [SoX doesn't work with Opus Audio files](https://stackoverflow.com/questions/22322372/sox-doesnt-work-with-opus-audio-files)
