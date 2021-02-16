@@ -10,23 +10,31 @@
 <ul>
 <li><p><strong>Get all database data</strong></p>
 <p><em>Returns whole JSON Object containing all audio objects</em>  </p>
-<p><code>/data</code></p>
+<p><code>/api/data</code></p>
 </li>
-<li><p>*<strong>Get speaker&#39;s audio by speaker&#39;s id</strong></p>
+<li><p>*<strong>Get speaker&#39;s audios by speaker&#39;s id</strong></p>
 <p><em>Returns all audio objects from speaker</em>  </p>
-<p><code>/speaker_id/:id</code></p>
+<p><code>/api/speaker_id/:id</code></p>
 </li>
-<li><p>*<strong>Get speaker&#39;s audio by speaker&#39;s id</strong></p>
+<li><p>*<strong>Get speaker&#39;s audios by speaker&#39;s id</strong></p>
 <p><em>Returns all spakers who <strong>contain</strong> the <code>:name</code> string</em></p>
-<p><code>/speaker/:name</code></p>
+<p><code>/api/speaker/:name</code></p>
 </li>
-<li><p><strong>Get audio by audio id</strong></p>
+<li><p><strong>Get audio by id</strong></p>
 <p><em>Returns specific audio object from its id</em>  </p>
-<p><code>/audio_id/:id</code></p>
+<p><code>/api/audio_id/:id</code></p>
 </li>
-<li><p><strong>Get audio by audio text</strong></p>
+<li><p><strong>Get audios by text</strong></p>
 <p><em>Returns all audios that <strong>contain</strong> the <code>text</code> in the transcription value <code>text</code> in audio object</em></p>
-<p><code>/audio_id/:text</code></p>
+<p><code>/api/audio_id/:text</code></p>
+</li>
+<li><p><strong>Get audios by language name</strong></p>
+<p><em>Returns all audios that <strong>contain</strong> the <code>lang_name</code> in the <code>name</code> paramenter inside <code>lang</code> in audio object</em></p>
+<p><code>/api/audio_lang_name/:lang_name</code></p>
+</li>
+<li><p><strong>Get audios by audio text</strong></p>
+<p><em>Returns all audios that <strong>contain</strong> the <code>lang_code</code> in the <code>code</code> paramenter inside <code>lang</code> in audio object</em></p>
+<p><code>/api/audio_lang_code/:lang_code</code></p>
 </li>
 </ul>
 <h2 id="dowload-zipped-database">Dowload zipped database</h2>
@@ -62,6 +70,11 @@
   &quot;text&quot;: &quot;audio text&quot;                // audio text
   &quot;from_id&quot;: 0,                       // speaker id
   &quot;duration_seconds&quot;: 2               // audio duration in seconds
+  &quot;lang&quot;: {                           // language of the audio
+      &quot;name&quot;: &quot;brazilian portuguese&quot;, // name of the language or dialect in english 
+      &quot;code&quot;: &quot;pt-br&quot;,                // language or dialect code
+      &quot;standard&quot;: &quot;ISO 639-1&quot;         // standard used for code, since some dialects are not in the ISO 639-1 standard
+  }
 }
 </code></pre>
 </li>
@@ -76,12 +89,8 @@
 <h2 id="to-do">TO DO</h2>
 <ul>
 <li>Calculate actual length of the audio files in seconds (at the moment only the <code>duraton_seconds</code> from telegram is being used, which rounds up the number into an integer)</li>
-<li>index.html with documentation</li>
-<li>add language parameter to each audio (has to be done manually, but how to not be overwritten when the json is produced?)</li>
-<li>Make new API calls<ul>
-<li>get_spekear_from_language</li>
-<li>get_audio_from_language</li>
+<li>Documentation and Guidelines on how to contribute new audios to The Pandemic Audio Archive</li>
 </ul>
-</li>
-</ul>
+<h2 id="license">License</h2>
+<p><a href="https://opensource.org/licenses/MIT">MIT</a></p>
 <style>body { font-family: 'Courier New'; }</style>
