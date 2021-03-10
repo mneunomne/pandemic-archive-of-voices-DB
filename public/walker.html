@@ -10,6 +10,7 @@
     <title>The Pandemic Archive of Voices - Walker</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js" integrity="sha512-UFPpekaMf0TrCIkPv9mRT3reo/HzSjkOLq57Rtzb+E1ej1TRUOes6J/Ge4uZXyxWA9b4i5DqSZns79YaUoJ2kA==" crossorigin="anonymous"></script>
     <style>
     body {
@@ -24,19 +25,39 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
-    .ball {
+    #names {
       position: absolute;
+      top: 50%;
+      left: calc(50% + 170px);
+      width: 150px;
+      height: 300px;
+      transform: translate(0px, -50%);
+    }
+    .ball {
       width: 10px;
       height: 10px;
       border-radius: 50%;
       background: black;
+    }
+
+    #area .ball {
+      position: absolute;
       transition: all 100ms;
+    }
+    #names .ball {
+      margin-bottom: 2px;
+      font-size: 11px;
+      text-indent: 14px;
+      white-space: nowrap;
     }
     </style>
   </head>
   <body>
     <div id="area">
       
+    </div>
+    <div id="names">
+
     </div>
     <script src="./js/walker.js"></script>
   </body>
