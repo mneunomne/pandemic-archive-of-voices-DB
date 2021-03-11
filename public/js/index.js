@@ -58,7 +58,6 @@ class Orchestration {
 
   play (audio, interval, callback) {
     let play_id = Math.floor(Math.random() + 10000)
-    console.log('play!', audio.duration_seconds, interval)
     this.send(audio, play_id)
     setTimeout(() => {
       console.log('finnished')
@@ -66,7 +65,7 @@ class Orchestration {
       setTimeout(() => {
         callback()
       }, interval * 1000)
-    }, audio.duration_seconds * 1000)
+    }, (audio.duration_seconds + 1) * 1000)
   }
 
   send (audio, play_id) {
@@ -110,9 +109,10 @@ const onAudioEnded = (evt) => {
   let balls = $(`.ball[data-id="${from_id}"]`)
   balls.each(function () {
     $(this).removeClass(`speaking-${play_id}`)
-    
-    var new_text = $(this).text().replace(` ${audio.text}`, ""); 
-    $(this).text(new_text);
+    setTimeout(() => {
+      var new_text = $(this).text().replace(` ${audio.text}`, "");
+      $(this).text(new_text);
+    },500)
   })
   // console.log('onAudioEnded',id)
 }
@@ -128,5 +128,6 @@ $.getJSON("db/data.json", function(json) {
   var orch = new Orchestration(data.audios)
   orch.playAudiosWithInterval(50, 1)
   orch.playAudiosWithInterval(90, 1.3)
+  orch.playAudiosWithInterval(50, 3.5)
   orch.playAudiosWithInterval(30, 10)
 });
