@@ -6,6 +6,10 @@ class Walker {
     this.vel = Math.random() / 500
     this.width = w
     this.height = h
+    $(window).resize(() => {
+      this.width = $('#area').width()
+      this.height = $('#area').height()
+    });
   }
   step() {
     let x = this.simplex.noise2D(this.tx, this.width)

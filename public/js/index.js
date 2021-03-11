@@ -95,9 +95,7 @@ const onAudioPlayed = (evt) => {
   let balls = $(`.ball[data-id="${audio.from_id}"]`)
   balls.each(function () {
     let txt = $(this).text()
-    // if (txt.length > 0) {
-      $(this).text(txt + ` ${audio.text}`)
-    // }
+    $(this).text(txt + ` ${audio.text}`)
     $(this).addClass(`speaking-${play_id}`);
   })
 }
@@ -112,7 +110,7 @@ const onAudioEnded = (evt) => {
     setTimeout(() => {
       var new_text = $(this).text().replace(` ${audio.text}`, "");
       $(this).text(new_text);
-    },500)
+    }, 500)
   })
   // console.log('onAudioEnded',id)
 }
