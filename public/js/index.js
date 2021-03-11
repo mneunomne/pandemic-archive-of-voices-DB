@@ -18,7 +18,7 @@ function createWalker(s, i) {
   circle2.innerText = s.speaker
 
   // walk
-  let walker = new Walker(300, 300)
+  let walker = new Walker($('#area').width(), $('#area').height())
   setInterval(() => {
     let pos = walker.step()
     circle.setAttribute("style", `top: ${pos.y}px; left: ${pos.x}px; background: ${colors[i]}`)
