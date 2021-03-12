@@ -7,7 +7,7 @@
     "convert": "node server/convert_audios.js",
     "extract": "node server/extract_data.js",
     "start": "node server/server.js",
-    "compress": "zip -r public/db.zip public/db"
+    "compress": "cd public/ && zip -r db.zip db/"
   },
   "repository": {
     "type": "git",

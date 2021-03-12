@@ -11,11 +11,19 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="./js/walker.js"></script>
+    <script src="./js/debug.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js" integrity="sha512-UFPpekaMf0TrCIkPv9mRT3reo/HzSjkOLq57Rtzb+E1ej1TRUOes6J/Ge4uZXyxWA9b4i5DqSZns79YaUoJ2kA==" crossorigin="anonymous"></script>
     <style>
     body {
       font-family: 'Courier New';
+    }
+    #debug {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      display: none;
     }
     #area {
       width: calc(100vw - 100px);
@@ -46,6 +54,13 @@
       margin-bottom: 2px;
       font-size: 14px;
       white-space: nowrap;
+      transform: translateX(-50%);
+    }
+
+    .ball.show {
+      opacity:1;
+      width: 10px;
+      height: 10px;
     }
 
     .ball[class^="ball speaking-"] {
@@ -66,6 +81,11 @@
     </style>
   </head>
   <body>
+    <div id="debug">
+      DEBUG
+      <button class="btn" id="btn_showPoints">showPoints</button>
+      <button class="btn" id="btn_showLines">showLines</button>
+    </div>
     <div id="area">
       
     </div>

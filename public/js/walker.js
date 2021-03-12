@@ -6,6 +6,7 @@ class Walker {
     this.vel = Math.random() / 500
     this.width = w
     this.height = h
+    this.points = []
     $(window).resize(() => {
       this.width = $('#area').width()
       this.height = $('#area').height()
@@ -16,6 +17,7 @@ class Walker {
     let y = this.simplex.noise2D(this.ty, this.height)
     this.tx+= this.vel;
     this.ty+= this.vel;
+    this.points.push({x, y})
     return {
       x: x*this.width/2 + this.width/2, 
       y: y*this.height/2 + this.height/2
