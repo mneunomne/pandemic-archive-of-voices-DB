@@ -1,5 +1,5 @@
 class NoiseWalker {
-  constructor (w, h) {
+  constructor (w, h, index) {
     this.simplex = new SimplexNoise()
     this.tx = Math.random()*1000;
     this.ty = Math.random()*1000;
@@ -24,11 +24,12 @@ class NoiseWalker {
 }
 
 class Orbiter {
-  constructor (w, h) {
+  constructor (w, h, index) {
+    console.log('index ', index)
     this.time = 0
     this.centre = createVector(0,0)
-    this.pos = createVector(Math.random() * 200 + 100,0)
-    this.vel = createVector(0,- 3)
+    this.pos = createVector( 50 + (index  * 10),50)
+    this.vel = createVector(0,-3)
     this.width = w
     this.height = h
     this.points = []
@@ -52,8 +53,8 @@ class Orbiter {
 
 
 class Speaker extends Orbiter {
-  constructor(w, h, color) {
-    super(w, h)
+  constructor(w, h, color, index) {
+    super(w, h, index)
     this.color = color
   }
   draw () {

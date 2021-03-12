@@ -15,8 +15,9 @@ function setup() {
 }
 
 function createSpeaker(i) {
+  console.log('i',i)
   // walk
-  let speaker = new Speaker(_width, _height, colors[i])
+  let speaker = new Speaker(_width, _height, colors[i], i)
   speakers.push(speaker)
 }
 
