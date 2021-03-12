@@ -1,5 +1,5 @@
-class Speaker {
-  constructor(w, h, color) {
+class NoiseWalker {
+  constructor (w, h) {
     this.simplex = new SimplexNoise()
     this.tx = Math.random()*1000;
     this.ty = Math.random()*1000;
@@ -7,13 +7,6 @@ class Speaker {
     this.width = w
     this.height = h
     this.points = []
-    this.color = color
-    /*
-    $(window).resize(() => {
-      this.width = $('#area').width()
-      this.height = $('#area').height()
-    });
-    */
   }
   update() {
     let x = this.simplex.noise2D(this.tx, this.width)
@@ -28,7 +21,41 @@ class Speaker {
       y: this.y
     }
   }
+}
 
+class Orbiter {
+  constructor (w, h) {
+    this.time = 0
+    this.centre = createVector(0,0)
+    this.pos = createVector(Math.random() * 200 + 100,0)
+    this.vel = createVector(0,- 3)
+    this.width = w
+    this.height = h
+    this.points = []
+  }
+  update() {
+    var acc = this.centre.copy()
+    acc.sub(this.pos)
+    acc.setMag(0.15)
+    this.vel.add(acc)
+    this.pos.add(this.vel)
+    // console.log('this.pos',this.pos.x, this.pos.y)
+    this.x = this.pos.x + this.width/2
+    this.y = this.pos.y + this.height/2
+    this.points.push({x: this.x, y: this.y})
+    return {
+      x: this.x,
+      y: this.y
+    }
+  }
+}
+
+
+class Speaker extends Orbiter {
+  constructor(w, h, color) {
+    super(w, h)
+    this.color = color
+  }
   draw () {
     /*
     stroke(this.color)
@@ -44,7 +71,6 @@ class Speaker {
     let p1 = this.points[this.points.length-2]
     let p2 = this.points[this.points.length-1]
     line(p1.x, p1.y, p2.x, p2.y)
-
-    // ellipse(this.x, this.y, 1, 1);
+    // ellipse(this.x, this.y, 5, 5);
   }
 }
