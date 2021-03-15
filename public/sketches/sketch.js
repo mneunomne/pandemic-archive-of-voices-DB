@@ -7,7 +7,7 @@ var _height = window.innerHeight
 var speakers = []
 
 var orchestration
-
+var debug
 
 $.getJSON("db/data.json", function(json) {
   data = json; // this will show the info it in firebug console
@@ -15,6 +15,7 @@ $.getJSON("db/data.json", function(json) {
 
 function setup() {
   createCanvas(_width, _height, P2D);
+  debug = new Debug()
 
   data.speakers.map((s_data,i) => createSpeaker(s_data, i))
   
@@ -43,7 +44,7 @@ function update() {
 }
 var _i = 0
 function draw() {
-  background(0)
+  if (window.drawBg) background(0)
   update()
   for (let i = 0; i < speakers.length; i++) {
     speakers[i].draw()
