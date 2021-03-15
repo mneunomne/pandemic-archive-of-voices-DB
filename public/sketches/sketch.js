@@ -9,21 +9,20 @@ var speakers = []
 var orchestration
 var debug
 
-$.getJSON("db/data.json", function(json) {
-  data = json; // this will show the info it in firebug console
-});
-
 function setup() {
   createCanvas(_width, _height, P2D);
   debug = new Debug()
 
-  data.speakers.map((s_data,i) => createSpeaker(s_data, i))
-  
-  orchestration = new Orchestration(data.audios)
-  orchestration.playAudiosWithInterval(50, 1)
-  orchestration.playAudiosWithInterval(50, 3)
-  orchestration.playAudiosWithInterval(50, 5)
-  background(0, 0, 0)
+  $.getJSON("db/data.json", function(json) {
+    data = json; // this will show the info it in firebug console
+    data.speakers.map((s_data,i) => createSpeaker(s_data, i))
+    
+    orchestration = new Orchestration(data.audios)
+    orchestration.playAudiosWithInterval(50, 1)
+    orchestration.playAudiosWithInterval(50, 3)
+    orchestration.playAudiosWithInterval(50, 5)
+    background(0, 0, 0)
+  });
   textFont('Arial');
   textSize(18)
   fill(255)
