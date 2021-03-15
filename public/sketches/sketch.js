@@ -22,7 +22,8 @@ function setup() {
     orchestration.playAudiosWithInterval(50, 3)
     orchestration.playAudiosWithInterval(50, 5)
     background(0, 0, 0)
-  });
+  })
+  
   textFont('Arial');
   textSize(18)
   fill(255)
