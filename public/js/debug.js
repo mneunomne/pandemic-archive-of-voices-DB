@@ -5,17 +5,18 @@ class Debug {
   constructor() {
     this.show = false
     this.$el = $('#gui')
+    this.$el.hide()
     this.addEvents()
     this.initParams()
   }
   initParams () {
     // points
-    this.showPoints = false 
+    this.showPoints = true 
     window.showPoints = this.showPoints
     this.$showPoints = $('#btn_showPoints')
     this.$showPoints.prop('checked', this.showPoints)
     // draw bg
-    this.drawBg = true 
+    this.drawBg = false 
     window.drawBg = this.drawBg
     this.$drawBg = $('#btn_drawBg')
     this.$drawBg.prop('checked', this.drawBg)

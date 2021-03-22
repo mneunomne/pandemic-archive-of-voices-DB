@@ -4,7 +4,7 @@ class Mover {
     this.simplex = new SimplexNoise()
     this.tx = Math.random()*1000;
     this.ty = Math.random()*1000;
-    this.vel = Math.random() / 1000
+    this.vel = Math.random() / 500
     this.width = w
     this.height = h
     this.points = []
