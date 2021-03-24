@@ -120,11 +120,6 @@ A bit of the process on how to extract and later convert the telegram audios and
 
 - Sample conversion on [SoX](http://sox.sourceforge.net/) [SoX resample and convert](https://stackoverflow.com/questions/23980283/sox-resample-and-convert)
 
-## TO DO
-
-- Calculate actual length of the audio files in seconds (at the moment only the `duraton_seconds` from telegram is being used, which rounds up the number into an integer)
-- Documentation and Guidelines on how to contribute new audios to The Pandemic Audio Archive
-
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
