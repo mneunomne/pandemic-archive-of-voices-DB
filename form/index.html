@@ -13,7 +13,12 @@
 		integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 		<script src="https://unpkg.com/wavesurfer.js"></script>
 		<script src="lib/wavesurfer.microphone.min.js"></script>
-
+		<script src="lib/jquery-3.6.0.min.js"></script>
+		<style>
+			.waveform {
+				max-width: 300px;
+			}
+		</style>
 </head>
 <body>
 	<div class="container">
@@ -103,12 +108,19 @@
 				<input type="text" class="form-control" id="otherLanguage" aria-describedby="otherLanguage"
 					placeholder="Other / Speaker Language">
 				</div>
-			<div id="waveform" class="mb-2"></div>
-			<button class="btn btn-primary" onclick="wavesurfer.microphone.start()">
+			<div id="waveformMic" class="waveform mb-2"></div>
+			<div id="waveformAudio" class="waveform mb-2 hidden"></div>
+			<button class="btn btn-primary">
 				<i class="glyphicon glyphicon-play"></i>
 				Start Mic
 			</button>
-			<button class="btn btn-primary">Submit</button>
+			<button class="btn btn-primary" id="record">
+				<i class="glyphicon glyphicon-record">Record</i>
+			</button>
+			<button class="btn btn-primary" id="stop">
+				<i class="glyphicon glyphicon-stop">Stop</i>
+			</button>
+			<!--<button class="btn btn-primary">Submit</button>-->
 	</div>
 	<script src="script.js"></script>
 </body>
