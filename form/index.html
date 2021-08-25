@@ -16,22 +16,88 @@
 		<script src="lib/jquery-3.6.0.min.js"></script>
 		<style>
 			.waveform {
-				max-width: 300px;
+				max-width: 100%;
 			}
+
+			.form-select, body {
+				font-family: 'Roboto Mono', monospace;
+				background-color: #000;
+				color: white;
+				font-size: 12px;
+			}
+
+			.btn-primary, .btn-primary.disabled {
+				color: white;
+				background-color: #000000;
+				border-color: white;
+				font-size: 12px;
+			}
+
+			.form-control {
+				background-color: black;
+				color: white;
+			}
+
+			input:-internal-autofill-selected:active, .form-control:focus {
+				background-color: black !important;
+				color: white;
+			}
+
 		</style>
 </head>
 <body>
 	<div class="container">
-		<h1>Contribution form</h1>
+		<header>
+			<h3 class="mt-2">Pandemic archive of voices </h3>
+			<p>Share a word/expression, in your own native language, that can translate a personal perspective on the current context we are living in. </p>	
+		</header>
+		<form class="row g-3 needs-validation" novalidate>
+			<div class="form-group mb-4">
+				<div id="waveformMic" class="waveform mb-2"></div>
+				<div id="waveformAudio" style="display: none;" class="waveform mb-2"></div>
+				<!-- start mic -->
+				<button style="display: none;" type="button" class="btn btn-primary" id="start">
+					<i class="glyphicon glyphicon-play"></i>
+					Start Mic
+				</button>
+				<!-- record -->
+				<button style="display: none;" type="button" class="btn btn-primary" id="record">
+					<i class="glyphicon glyphicon-record">Record</i>
+				</button>
+				<!-- stop recording -->
+				<button style="display: none;" type="button" class="btn btn-primary" id="stop">
+					<i class="glyphicon glyphicon-stop">Stop</i>
+				</button>
+				<!-- try again -->
+				<button style="display: none;" type="button" class="btn btn-primary" id="again">
+					<i class="glyphicon glyphicon-stop">Try again</i>
+				</button>
+				<!-- play -->
+				<button style="display: none;" type="button"  class="btn btn-primary" id="play">
+					<i class="glyphicon glyphicon-play"></i>
+					Play
+					/
+					<i class="glyphicon glyphicon-pause"></i>
+					Pause
+				</button>
+			</div>
+			<!-- textual form -->
 			<div class="form-group mb-4">
 				<label for="textInput">Literal Text</label>
-				<input type="email" class="form-control" id="textInput" aria-describedby="textInputHelp"
-					placeholder="Literal text">
-				<small id="textInputHelp" class="form-text text-muted">Write here the text version of the contributed audio in their original language</small>
+				<input type="email" class="form-control" id="textInput" aria-describedby="textInputHelp" placeholder="Literal text" required>
+
+				<small id="textInputHelp" class="form-text text-muted">Write here the textual version of the contributed audio in its original language.</small>
+				<!--
+				<small id="textInputError" class="text-danger">
+					Please write the textual version of the submited audio.
+				  </small>
+				-->     
 			</div>
+			<!-- language input -->
 			<div class="form-group mb-4">
 				<label for="languageInput">Speaker Language</label>
 				<select class="form-select mb-2" id="languageInput" data-placeholder="Choose a Language...">
+					<option disabled selected value>Choose a Language...</option>
 					<option value="AF">Afrikaans</option>
 					<option value="SQ">Albanian</option>
 					<option value="AR">Arabic</option>
@@ -46,7 +112,7 @@
 					<option value="CS">Czech</option>
 					<option value="DA">Danish</option>
 					<option value="NL">Dutch</option>
-					<option selected="selected" value="EN">English</option>
+					<option value="EN">English</option>
 					<option value="ET">Estonian</option>
 					<option value="FJ">Fiji</option>
 					<option value="FI">Finnish</option>
@@ -106,20 +172,13 @@
 					<option value="XH">Xhosa</option>
 				</select>
 				<input type="text" class="form-control" id="otherLanguage" aria-describedby="otherLanguage"
-					placeholder="Other / Speaker Language">
+					placeholder="Dialect (optional)">
 				</div>
-			<div id="waveformMic" class="waveform mb-2"></div>
-			<div id="waveformAudio" class="waveform mb-2 hidden"></div>
-			<button class="btn btn-primary">
-				<i class="glyphicon glyphicon-play"></i>
-				Start Mic
+			
+			<button class="btn btn-primary disabled mb-4" type="button" id="submit">
+				<i class="glyphicon glyphicon-stop">Submit</i>
 			</button>
-			<button class="btn btn-primary" id="record">
-				<i class="glyphicon glyphicon-record">Record</i>
-			</button>
-			<button class="btn btn-primary" id="stop">
-				<i class="glyphicon glyphicon-stop">Stop</i>
-			</button>
+		</form>
 			<!--<button class="btn btn-primary">Submit</button>-->
 	</div>
 	<script src="script.js"></script>
