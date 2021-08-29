@@ -14,8 +14,6 @@ const { Client } = require('node-osc');
 Global vars
 ---------------------------------------------------*/
 const port = process.env.PORT || 3000
-const hostname = process.env.HOSTNAME || '127.0.0.1'
-const ip_dadress = process.env.IP_ADDRESS || '127.0.0.1'
 const dest_folder = `public/${process.env.DEST_FOLDER}`
 
 /* -------------------------------------------------
@@ -227,7 +225,7 @@ const writeData = function (data) {
   fs.writeFileSync(`${dest_folder}/data.json`, JSON.stringify(db_data, null, 4))
 }
 
-app.listen(port, ip_address, (err) => {
+app.listen(port, (err) => {
   if (err) throw err
   console.log(`Server running in ${ip_address}:${port}`)
 })
