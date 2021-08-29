@@ -9,12 +9,27 @@ require('dotenv').config()
 const upload = multer();
 const app = express()
 const { Client } = require('node-osc');
+const http = require('http')
+const https = require('https')
 
 /* -------------------------------------------------
 Global vars
 ---------------------------------------------------*/
 const port = process.env.PORT || 3000
 const dest_folder = `public/${process.env.DEST_FOLDER}`
+var server = null
+
+
+/* -------------------------------------------------
+Start http(s) server
+---------------------------------------------------*/
+if (process.env.LOCAL === '1') {
+  // LOCAL ENV
+  server = http.Server(app)
+} else {
+  // REMOTE ENV
+  server = https.Server(app)
+}
 
 /* -------------------------------------------------
 Certificates
@@ -52,6 +67,30 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 app.use(express.static('public'))
+
+/* -------------------------------------------------
+Socket io
+---------------------------------------------------*/
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  }
+});
+// Add a connect listener
+io.on('connection', function(socket) { 
+  console.log('Client connected.');
+  // Disconnect listener
+  socket.on('disconnect', function() {
+      console.log('Client disconnected.');
+  });
+});
+/* -------------------------------------------------
+Listen to port
+---------------------------------------------------*/
+server.listen(port, (err) => {
+  if (err) throw err
+  console.log(`Server running in ${port}`)
+})
 
 /* -------------------------------------------------
 Router
@@ -183,6 +222,9 @@ app.post('/api/audio', upload.none(), function (req, res) {
           // write on json file
           writeData(audio_data)
 
+
+          io.emit("update", JSON.stringify(audio_data));
+
           // send osc message with new audio data\
           /*
           oscClient.send('/new_audio', JSON.stringify(audio_data), () => {
@@ -226,12 +268,6 @@ const writeData = function (data) {
   // write file
   fs.writeFileSync(`${dest_folder}/data.json`, JSON.stringify(db_data, null, 4))
 }
-
-app.listen(port, (err) => {
-  if (err) throw err
-  console.log(`Server running in ${port}`)
-})
-
 
 function makeid(length) {
   var result           = '';

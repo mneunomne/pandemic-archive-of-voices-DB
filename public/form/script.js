@@ -22,7 +22,8 @@ var wavesurferAudio = WaveSurfer.create({
     mediaControls: true
 });
 
-const server_url = `https://pandemic-archive-of-voices-db.herokuapp.com`
+// const server_url = `https://pandemic-archive-of-voices-db.herokuapp.com`
+const server_url = `http://localhost:7777`
 
 var $record = $("#record")
 var $stop = $("#stop")
