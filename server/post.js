@@ -8,8 +8,9 @@ const { getAudioDurationInSeconds } = require('get-audio-duration');
 
 const upload = multer();
 const app = express()
-const port = process.env.PORT || 3000
 const dest_folder = 'public/db_test'
+
+const port = process.env.PORT || 3000
 
 let json_data = fs.readFileSync('public/db_test/data.json')
 let db_data = JSON.parse(json_data)

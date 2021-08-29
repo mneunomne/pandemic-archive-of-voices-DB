@@ -8,7 +8,8 @@
     "extract": "node server/extract_data.js",
     "start": "node server/server.js",
     "post": "node server/post.js",
-    "compress": "cd public/ && zip -r db.zip db/"
+    "compress": "cd public/ && zip -r db.zip db/",
+    "generate_max_folders": "node server/generate_max_folders.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,8 @@
   "homepage": "https://github.com/mneunomne/pandemic-archive-of-voices-DB#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "directory-tree": "^2.3.1",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "get-audio-duration": "^2.0.3",
     "marked": "^2.0.0",
