@@ -229,7 +229,7 @@ const writeData = function (data) {
 
 app.listen(port, (err) => {
   if (err) throw err
-  console.log(`Server running in ${ip_address}:${port}`)
+  console.log(`Server running in ${port}`)
 })
 
 
