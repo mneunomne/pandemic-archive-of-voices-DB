@@ -24,11 +24,11 @@ var certificate = fs.readFileSync( 'certificate.pem' );
 
 /* -------------------------------------------------
 Start OSC Client
----------------------------------------------------*/
 var oscClient = new Client(process.env.SYNC_OSC_IP, process.env.SYNC_OSC_PORT);
 oscClient.send('/hello', 200, () => {
   console.log('sent osc message')
 })
+---------------------------------------------------*/
 
 
 /* -------------------------------------------------
@@ -183,10 +183,12 @@ app.post('/api/audio', upload.none(), function (req, res) {
           // write on json file
           writeData(audio_data)
 
-          // send osc message with new audio data
+          // send osc message with new audio data\
+          /*
           oscClient.send('/new_audio', JSON.stringify(audio_data), () => {
             console.log('sent osc message')
           })
+          */
 
           res.end('{"success" : "Submited new audio", "status" : 200}');
         });
