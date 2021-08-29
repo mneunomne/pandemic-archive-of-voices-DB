@@ -22,7 +22,7 @@ var wavesurferAudio = WaveSurfer.create({
     mediaControls: true
 });
 
-const server_url = `http://localhost:7777`
+const server_url = `https://pandemic-archive-of-voices-db.herokuapp.com`
 
 var $record = $("#record")
 var $stop = $("#stop")
@@ -82,6 +82,7 @@ const start = function () {
 }
 
 const startRecording = function () {
+    console.log('stream', stream)
     if (!stream) return
 
     startRecordingTimestamp = Date.now()
