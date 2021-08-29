@@ -8,8 +8,7 @@
     "extract": "node server/extract_data.js",
     "start": "node server/server.js",
     "post": "node server/post.js",
-    "compress": "cd public/ && zip -r db.zip db/",
-    "keys": "node security/create_keys.js"
+    "compress": "cd public/ && zip -r db.zip db/"
   },
   "repository": {
     "type": "git",
