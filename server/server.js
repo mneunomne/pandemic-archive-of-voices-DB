@@ -19,6 +19,12 @@ const ip_address = process.env.IP_ADDRESS || '127.0.0.1'
 const dest_folder = `public/${process.env.DEST_FOLDER}`
 
 /* -------------------------------------------------
+Certificates
+var privateKey = fs.readFileSync( 'privatekey.pem' );
+var certificate = fs.readFileSync( 'certificate.pem' );
+---------------------------------------------------*/
+
+/* -------------------------------------------------
 Start OSC Client
 ---------------------------------------------------*/
 var oscClient = new Client(process.env.SYNC_OSC_IP, process.env.SYNC_OSC_PORT);
