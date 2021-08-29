@@ -8,17 +8,35 @@ const { getAudioDurationInSeconds } = require('get-audio-duration')
 require('dotenv').config()
 const upload = multer();
 const app = express()
+const { Client } = require('node-osc');
 
+/* -------------------------------------------------
+Global vars
+---------------------------------------------------*/
 const port = process.env.PORT || 3000
 const hostname = process.env.HOSTNAME || '127.0.0.1'
+const ip_address = process.env.IP_ADDRESS || '127.0.0.1'
 
-// generate readme html
+/* -------------------------------------------------
+Start OSC Client
+---------------------------------------------------*/
+var oscClient = new Client(process.env.SYNC_OSC_IP, process.env.SYNC_OSC_PORT);
+oscClient.send('/hello', 200, () => {
+  console.log('sent osc message')
+})
+
+
+/* -------------------------------------------------
+Generate README html 
+---------------------------------------------------*/
 var readMe = fs.readFileSync('README.md', 'utf-8');
 var markdownReadMe = marked(readMe);
 markdownReadMe = markdownReadMe.concat(`<style>body { font-family: 'Courier New'; }</style>`)
 fs.writeFileSync('./public/README.html', markdownReadMe);
 
-// read data.json file
+/* -------------------------------------------------
+Read data.json file
+---------------------------------------------------*/
 let db_data = fs.readFileSync('public/db/data.json')
 
 app.use(express.urlencoded({ extended: true }))
@@ -142,7 +160,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
         getAudioDurationInSeconds(filepath).then((duration) => {
           // language
           var audio_id = makeid(8)
-          writeData({
+          let audio_data = {
             name: "",
             user_id: userId,
             filepath: filepath,
@@ -151,7 +169,15 @@ app.post('/api/audio', upload.none(), function (req, res) {
             duration_seconds: duration,
             lang_code: lang_code,
             lang_other: lang_other,
+          }
+          // write on json file
+          writeData(audio_data)
+
+          // send osc message with new audio data
+          oscClient.send('/hello', 200, () => {
+            console.log('sent osc message')
           })
+
           res.end('{"success" : "Submited new audio", "status" : 200}');
         });
       }
@@ -189,9 +215,9 @@ const writeData = function (data) {
   fs.writeFileSync(`${dest_folder}/data.json`, JSON.stringify(db_data, null, 4))
 }
 
-app.listen(port, hostname, (err) => {
+app.listen(port, ip_address, (err) => {
   if (err) throw err
-  console.log(`Server running in port ${port}`)
+  console.log(`Server running in ${ip_address}:${port}`)
 })
 
 
