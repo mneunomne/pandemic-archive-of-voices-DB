@@ -15,7 +15,7 @@ Global vars
 ---------------------------------------------------*/
 const port = process.env.PORT || 3000
 const hostname = process.env.HOSTNAME || '127.0.0.1'
-const ip_address = process.env.IP_ADDRESS || '127.0.0.1'
+const ip_dadress = process.env.IP_ADDRESS || '127.0.0.1'
 const dest_folder = `public/${process.env.DEST_FOLDER}`
 
 /* -------------------------------------------------
