@@ -16,11 +16,13 @@ var wavesurferMic = WaveSurfer.create({
 var wavesurferAudio = WaveSurfer.create({
     container: '#waveformAudio',
     waveColor: '#ffffff',
-    progressColor: '#46B54D',
+    progressColor: 'red',
     barHeight: 2,
     barWidth: 2,
     mediaControls: true
 });
+
+const server_url = `http://localhost:7777`
 
 var $record = $("#record")
 var $stop = $("#stop")
@@ -41,8 +43,8 @@ var startRecordingTimestamp = null
 
 
 const init = function () {
-    addEvents()
     start()
+    addEvents()
 }
 
 const addEvents = function () {
@@ -65,8 +67,9 @@ const addEvents = function () {
     $play.on('click', onPlay)
     $submit.on('click', onSubmit)
     wavesurferMic.microphone.on('deviceReady', function(s) {
-        console.log('Device ready!', stream);  
+        console.log('Device ready!');  
         stream = s
+        $record.show()
     });
     wavesurferMic.microphone.on('deviceError', function(code) {
         console.warn('Device error: ' + code);
@@ -131,12 +134,9 @@ const onStop = function () {
     
 }
 
-
 const onPlay = function () {
     wavesurferAudio.playPause();
 }
-
-const server_url = `http://localhost:3000`
 
 function makeid(length) {
     var result           = '';

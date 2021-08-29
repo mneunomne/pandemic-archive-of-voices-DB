@@ -16,6 +16,7 @@ Global vars
 const port = process.env.PORT || 3000
 const hostname = process.env.HOSTNAME || '127.0.0.1'
 const ip_address = process.env.IP_ADDRESS || '127.0.0.1'
+const dest_folder = `public/${process.env.DEST_FOLDER}`
 
 /* -------------------------------------------------
 Start OSC Client
@@ -37,8 +38,12 @@ fs.writeFileSync('./public/README.html', markdownReadMe);
 /* -------------------------------------------------
 Read data.json file
 ---------------------------------------------------*/
-let db_data = fs.readFileSync('public/db/data.json')
+var db_json = fs.readFileSync('public/db/data.json')
+var db_data = JSON.parse(db_json)
 
+/* -------------------------------------------------
+Express configs
+---------------------------------------------------*/
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
@@ -48,18 +53,18 @@ app.use(express.static('public'))
 Router
 ---------------------------------------------------*/
 app.get('/api/data', function (req, res) {
-  let obj = JSON.parse(db_data);
+  let obj = JSON.parse(db_json);
   res.json(obj);
 })
 
 app.get('/api/speakers', function (req, res) {
-  let obj = JSON.parse(db_data);
+  let obj = JSON.parse(db_json);
   res.json(obj.speakers);
 })
 
 app.get('/speaker_id/:id', function (req, res) {
   let id = parseInt(req.params.id)
-  let obj = JSON.parse(db_data);
+  let obj = JSON.parse(db_json);
   let audios = obj.audios.filter(a => {
     return a.from_id === id
   })
@@ -68,35 +73,35 @@ app.get('/speaker_id/:id', function (req, res) {
 
 app.get('/api/speaker/:name', function (req, res) {
   let name = req.params.name.toLowerCase()
-  let obj = JSON.parse(db_data);
+  let obj = JSON.parse(db_json);
   let audios = obj.audios.filter(a => a.from.toLowerCase().includes(name))
   res.json(audios);
 })
 
 app.get('/api/audio_id/:id', function (req, res) {
   let id = req.params.id
-  let obj = JSON.parse(db_data);
+  let obj = JSON.parse(db_json);
   let audio = obj.audios.find(a => a.id === id)
   res.json(audio);
 })
 
 app.get('/api/audio_text/:text', function (req, res) {
   let text = req.params.text
-  let obj = JSON.parse(db_data);
+  let obj = JSON.parse(db_json);
   let audios = obj.audios.filter(a => a.text.toLowerCase().includes(text))
   res.json(audios);
 })
 
 app.get('/api/audio_lang_name/:lang_name', function (req, res) {
   let lang_name = req.params.lang_name
-  let obj = JSON.parse(db_data);
+  let obj = JSON.parse(db_json);
   let audios = obj.audios.filter(a => a.lang.name.toLowerCase().includes(lang_name))
   res.json(audios);
 })
 
 app.get('/api/audio_lang_code/:lang_code', function (req, res) {
   let lang_code = req.params.lang_code
-  let obj = JSON.parse(db_data);
+  let obj = JSON.parse(db_json);
   let audios = obj.audios.filter(a => a.lang.code.toLowerCase().includes(lang_code))
   res.json(audios);
 })
@@ -133,7 +138,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
     res.end('{"error" : "error in text", "status" : 400}');
     return
   }
-
+  var dest_folder = 'public/db_test'
   var base64data = audioBlob.split(",")[1]
   var timestamp = Date.now()
   var userFolder = `${dest_folder}/audios/${userId}`
@@ -158,12 +163,13 @@ app.post('/api/audio', upload.none(), function (req, res) {
         console.log(`conversion stderr: ${stderr}`)
 
         getAudioDurationInSeconds(filepath).then((duration) => {
+          let path = filepath.split('public/')[1]
           // language
           var audio_id = makeid(8)
           let audio_data = {
             name: "",
             user_id: userId,
-            filepath: filepath,
+            filepath: path,
             id: audio_id,
             text: text,
             duration_seconds: duration,
@@ -174,7 +180,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
           writeData(audio_data)
 
           // send osc message with new audio data
-          oscClient.send('/hello', 200, () => {
+          oscClient.send('/new_audio', JSON.stringify(audio_data), () => {
             console.log('sent osc message')
           })
 
@@ -219,6 +225,18 @@ app.listen(port, ip_address, (err) => {
   if (err) throw err
   console.log(`Server running in ${ip_address}:${port}`)
 })
+
+
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
+}
 
 
 module.exports = app
