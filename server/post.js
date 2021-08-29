@@ -8,7 +8,7 @@ const { getAudioDurationInSeconds } = require('get-audio-duration');
 
 const upload = multer();
 const app = express()
-const dest_folder = 'public/db_test'
+const dest_folder = `public/${process.env.DEST_FOLDER}`
 
 const port = process.env.PORT || 3000
 
