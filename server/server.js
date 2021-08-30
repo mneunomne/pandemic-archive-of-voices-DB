@@ -11,6 +11,7 @@ const app = express()
 const { Client } = require('node-osc');
 const http = require('http')
 const https = require('https')
+var aws = require('aws-sdk');
 
 /* -------------------------------------------------
 Global vars
@@ -18,7 +19,16 @@ Global vars
 const port = process.env.PORT || 3000
 const dest_folder = `public/${process.env.DEST_FOLDER}`
 var server = null
+const S3_BUCKET = process.env.S3_BUCKET;
 
+/* -------------------------------------------------
+Amazon S3
+---------------------------------------------------*/
+aws.config.region = 'eu-west-1';
+var s3 = new aws.S3({
+  accessKeyId: env.process.AWS_ACCESS_KEY_ID,
+  secretAccessKey: env.process.AWS_SECRET_ACCESS_KEY
+});
 
 /* -------------------------------------------------
 Start http(s) server
@@ -190,8 +200,9 @@ app.post('/api/audio', upload.none(), function (req, res) {
     fs.mkdirSync(userFolder);
   }
   // Write new file
-  var filepath_tmp = `${userFolder}/${timestamp}_tmp.wav`
-  var filepath = `${userFolder}/${timestamp}.wav`
+  var audio_id = makeid(8)
+  var filepath_tmp = `${userFolder}/${audio_id}_tmp.wav`
+  var filepath = `${userFolder}/${audio_id}.wav`
   fs.writeFile(filepath_tmp, base64data, { encoding: 'base64' }, function (err) {
     console.log('File created');
     // convert audio file with ffmpeg
@@ -206,9 +217,21 @@ app.post('/api/audio', upload.none(), function (req, res) {
         console.log(`conversion stderr: ${stderr}`)
 
         getAudioDurationInSeconds(filepath).then((duration) => {
-          let path = filepath.split('public/')[1]
-          // language
-          var audio_id = makeid(8)
+          var fileStream = fs.createReadStream(filepath);
+          var uploadParams = {
+            Bucket: S3_BUCKET || "archive-of-voices", 
+            Key: `audios/${userId}/${audio_id}.wav`, 
+            Body: fileStream
+          }
+          // upload to S3
+          s3.upload(uploadParams, function(err, data) {
+            if (err) {
+                throw err;
+            }
+            console.log(`File uploaded successfully`, data);
+          });
+
+          /*
           let audio_data = {
             name: "",
             user_id: userId,
@@ -218,18 +241,12 @@ app.post('/api/audio', upload.none(), function (req, res) {
             duration_seconds: duration,
             lang_code: lang_code,
             lang_other: lang_other,
+            timestamp: timestamp 
           }
           // write on json file
           writeData(audio_data)
-
-
+          
           io.emit("update", JSON.stringify(audio_data));
-
-          // send osc message with new audio data\
-          /*
-          oscClient.send('/new_audio', JSON.stringify(audio_data), () => {
-            console.log('sent osc message')
-          })
           */
 
           res.end('{"success" : "Submited new audio", "status" : 200}');
