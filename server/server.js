@@ -208,7 +208,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
     res.end('{"error" : "error in text", "status" : 400}');
     return
   }
-  var dest_folder = 'public/db_test'
+  var dest_folder = 'public/db'
   var base64data = audioBlob.split(",")[1]
   var timestamp = Date.now()
   var userFolder = `${dest_folder}/audios/${user_id}`
@@ -260,6 +260,10 @@ app.post('/api/audio', upload.none(), function (req, res) {
                   io.emit("update", {id: audio_id});
                 }, 500)
             });
+
+            User.findOne({id: user_id}, function (err, audio) {
+              
+            })
           })
         }
         
