@@ -23,7 +23,7 @@ var wavesurferAudio = WaveSurfer.create({
 });
 
 // const server_url = `https://pandemic-archive-of-voices-db.herokuapp.com`
-const server_url = `http://localhost:7777`
+const server_url = (location.hostname.includes('127.0.0.1') || location.hostname.includes('localhost')) ? `http://localhost:7777` : `https://pandemic-archive-of-voices-db.herokuapp.com`
 
 var $record = $("#record")
 var $stop = $("#stop")
