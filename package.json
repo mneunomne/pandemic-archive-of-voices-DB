@@ -8,7 +8,8 @@
     "extract": "nodemon server/extract_data.js",
     "start": "nodemon server/server.js",
     "post": "nodemon server/post.js",
-    "compress": "cd public/ && zip -r db.zip db/"
+    "compress": "cd public/ && zip -r db.zip db/",
+    "migrate": "nodemon server/migrate_to_mongodb.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "express": "^4.17.1",
     "get-audio-duration": "^2.0.3",
     "marked": "^2.0.0",
+    "mongoose": "^6.0.2",
     "multer": "^1.4.3",
     "node-osc": "^6.0.10",
     "nodemon": "^2.0.12",
