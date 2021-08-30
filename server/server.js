@@ -32,20 +32,20 @@ var s3 = new aws.S3({
 });
 
 
-/* -------------------------------------------------
-MongoDB
----------------------------------------------------*/
-const mongoUri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOSTNAME}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`;
-var mongoConnected = false
+  /* -------------------------------------------------
+  MongoDB
+  ---------------------------------------------------*/
+  const mongoUri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOSTNAME}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`;
+  var mongoConnected = false
 
-mongoose.connect(mongoUri, { useNewUrlParser: true }, function (err, res) {
-  if (err) {
-    console.error(err)
-    throw err
-  }
-  mongoConnected = true
-  console.log(`[MongoDB] Connected to database "${process.env.MONGODB_DATABASE}"`)
-})
+  mongoose.connect(mongoUri, { useNewUrlParser: true }, function (err, res) {
+    if (err) {
+      console.error(err)
+      throw err
+    }
+    mongoConnected = true
+    console.log(`[MongoDB] Connected to database "${process.env.MONGODB_DATABASE}"`)
+  })
 
 const Audio = mongoose.model('Audio', mongoose.Schema({
     id: String,
@@ -255,15 +255,16 @@ app.post('/api/audio', upload.none(), function (req, res) {
             }).save(function (err) {
                 if (err) return console.error(err);
                 console.log(`[MongoDB] saved to ${audio_id} database!`,)
+                // emit socket io to max folder updater
+                setTimeout(()=> {
+                  io.emit("update", {id: audio_id});
+                }, 500)
             });
           })
         }
         
         // upload audio file to amazon s3
         uploadS3(audio_id, user_id, filepath).then(onAudioUploaded)
-        
-        // emit socket io to max folder updater
-        io.emit("update");
 
         res.end('{"success" : "Submited new audio", "status" : 200}');
       }
