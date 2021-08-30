@@ -123,8 +123,17 @@ server.listen(port, (err) => {
 Router
 ---------------------------------------------------*/
 app.get('/api/data', function (req, res) {
-  let obj = JSON.parse(db_json);
-  res.json(obj);
+  Audio.find({}, function (err, audios) {
+    if (err) console.error(err)
+    User.find({}, function (err, users) {
+      if (err) console.error(err)
+      console.log("object", audios, users)
+      res.json({
+        audios,
+        users
+      });
+    })
+  })
 })
 
 app.get('/api/speakers', function (req, res) {
@@ -247,6 +256,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
               text: text,
               user_id: user_id + "",
               duration: duration,
+              test: true,
               lang: {
                 name: lang_other,
                 code: lang_code,
@@ -261,8 +271,19 @@ app.post('/api/audio', upload.none(), function (req, res) {
                 }, 500)
             });
 
-            User.findOne({id: user_id}, function (err, audio) {
-              
+            User.findOne({id: user_id}, function (err, user) {
+              if (user === null) {
+                // new user 
+                new User({
+                  id: user_id,
+                  name: ""
+                }).save(function (err) {
+                  if (err) return console.error(err);
+                  console.log('[MongoDB] saved user in database')
+                })
+              } else {
+                console.log('[MongoDB] user already in database')
+              }
             })
           })
         }
