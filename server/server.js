@@ -74,21 +74,6 @@ if (process.env.LOCAL === '1') {
 }
 
 /* -------------------------------------------------
-Certificates
-var privateKey = fs.readFileSync( 'privatekey.pem' );
-var certificate = fs.readFileSync( 'certificate.pem' );
----------------------------------------------------*/
-
-/* -------------------------------------------------
-Start OSC Client
-var oscClient = new Client(process.env.SYNC_OSC_IP, process.env.SYNC_OSC_PORT);
-oscClient.send('/hello', 200, () => {
-  console.log('sent osc message')
-})
----------------------------------------------------*/
-
-
-/* -------------------------------------------------
 Generate README html 
 ---------------------------------------------------*/
 var readMe = fs.readFileSync('README.md', 'utf-8');
