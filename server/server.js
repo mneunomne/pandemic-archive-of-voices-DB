@@ -32,20 +32,20 @@ var s3 = new aws.S3({
 });
 
 
-  /* -------------------------------------------------
-  MongoDB
-  ---------------------------------------------------*/
-  const mongoUri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOSTNAME}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`;
-  var mongoConnected = false
+/* -------------------------------------------------
+MongoDB
+---------------------------------------------------*/
+const mongoUri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOSTNAME}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`;
+var mongoConnected = false
 
-  mongoose.connect(mongoUri, { useNewUrlParser: true }, function (err, res) {
-    if (err) {
-      console.error(err)
-      throw err
-    }
-    mongoConnected = true
-    console.log(`[MongoDB] Connected to database "${process.env.MONGODB_DATABASE}"`)
-  })
+mongoose.connect(mongoUri, { useNewUrlParser: true }, function (err, res) {
+  if (err) {
+    console.error(err)
+    throw err
+  }
+  mongoConnected = true
+  console.log(`[MongoDB] Connected to database "${process.env.MONGODB_DATABASE}"`)
+})
 
 const Audio = mongoose.model('Audio', mongoose.Schema({
     id: String,
