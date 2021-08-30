@@ -8,7 +8,7 @@ var db_data = JSON.parse(db_json)
 
 const mongoUri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOSTNAME}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`;
 
-const Audio = mongoose.model('Audio', mongoose.Schema({
+const Audio = mongoose.model('Audio_test', mongoose.Schema({
     id: String,
     name: String,
     path: String,
@@ -18,7 +18,7 @@ const Audio = mongoose.model('Audio', mongoose.Schema({
     lang: Object
 }));
 
-const User = mongoose.model('User', mongoose.Schema({
+const User = mongoose.model('User_test', mongoose.Schema({
     name: String,
     id: String
 }));

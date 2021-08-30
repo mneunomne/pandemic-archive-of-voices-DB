@@ -11,6 +11,7 @@ const app = express()
 const { Client } = require('node-osc');
 const http = require('http')
 const https = require('https')
+const mongoose = require ("mongoose")
 var aws = require('aws-sdk');
 
 /* -------------------------------------------------
@@ -26,9 +27,40 @@ Amazon S3
 ---------------------------------------------------*/
 aws.config.region = 'eu-west-1';
 var s3 = new aws.S3({
-  accessKeyId: env.process.AWS_ACCESS_KEY_ID,
-  secretAccessKey: env.process.AWS_SECRET_ACCESS_KEY
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
+
+
+/* -------------------------------------------------
+MongoDB
+---------------------------------------------------*/
+const mongoUri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOSTNAME}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`;
+var mongoConnected = false
+
+mongoose.connect(mongoUri, { useNewUrlParser: true }, function (err, res) {
+  if (err) {
+    console.error(err)
+    throw err
+  }
+  mongoConnected = true
+  console.log(`[MongoDB] Connected to database "${process.env.MONGODB_DATABASE}"`)
+})
+
+const Audio = mongoose.model('Audio', mongoose.Schema({
+    id: String,
+    name: String,
+    path: String,
+    text: String,
+    user_id: String,
+    duration: Number,
+    lang: Object
+}));
+
+const User = mongoose.model('User', mongoose.Schema({
+    name: String,
+    id: String
+}));
 
 /* -------------------------------------------------
 Start http(s) server
@@ -164,7 +196,7 @@ POST
 ---------------------------------------------------*/
 app.post('/api/audio', upload.none(), function (req, res) {
   // console.log("request body", req.body)
-  var userId = req.body.id
+  var user_id = req.body.id
   var audioBlob = req.body.data
   var lang_code = req.body.languageInput === 'null' ? '' : req.body.languageInput
   var lang_other = req.body.otherLanguage === 'null' ? '' : req.body.otherLanguage
@@ -176,9 +208,9 @@ app.post('/api/audio', upload.none(), function (req, res) {
     res.end('{"error" : "error in audio blob", "status" : 400}');
     return
   }
-  if (userId === '' || userId === null || userId === undefined) {
-    // error in userId
-    res.end('{"error" : "error in userId", "status" : 400}');
+  if (user_id === '' || user_id === null || user_id === undefined) {
+    // error in user_id
+    res.end('{"error" : "error in user_id", "status" : 400}');
     return
   }
   if ((lang_code === null || lang_code === undefined || lang_code === '') && (lang_other === null || lang_other === undefined || lang_other === '')) {
@@ -194,7 +226,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
   var dest_folder = 'public/db_test'
   var base64data = audioBlob.split(",")[1]
   var timestamp = Date.now()
-  var userFolder = `${dest_folder}/audios/${userId}`
+  var userFolder = `${dest_folder}/audios/${user_id}`
   // Create the user folder if needed
   if (!fs.existsSync(userFolder)) {
     fs.mkdirSync(userFolder);
@@ -214,45 +246,64 @@ app.post('/api/audio', upload.none(), function (req, res) {
       if (stderr) {
         // delete tmp file
         fs.unlinkSync(filepath_tmp)
-        console.log(`conversion stderr: ${stderr}`)
 
-        getAudioDurationInSeconds(filepath).then((duration) => {
-          var fileStream = fs.createReadStream(filepath);
-          var uploadParams = {
-            Bucket: S3_BUCKET || "archive-of-voices", 
-            Key: `audios/${userId}/${audio_id}.wav`, 
-            Body: fileStream
+        // after s3 upload
+        const onAudioUploaded = (path) => {
+          if (!mongoConnected) {
+            console.warn("[MongoDB] MongoDB not connected, can't update db.")
+            return
           }
-          // upload to S3
-          s3.upload(uploadParams, function(err, data) {
-            if (err) {
-                throw err;
-            }
-            console.log(`File uploaded successfully`, data);
-          });
+          console.log(`[S3] File uploaded successfully`, path);
+          getAudioDurationInSeconds(filepath).then((duration) => {
+            new Audio({
+              id: audio_id + "",
+              name: "",
+              path: path,
+              text: text,
+              user_id: user_id + "",
+              duration: duration,
+              lang: {
+                name: lang_other,
+                code: lang_code,
+                standard: ""
+              }
+            }).save(function (err) {
+                if (err) return console.error(err);
+                console.log(`[MongoDB] saved to ${audio_id} database!`,)
+            });
+          })
+        }
+        
+        // upload audio file to amazon s3
+        uploadS3(audio_id, user_id, filepath).then(onAudioUploaded)
+        
+        // emit socket io to max folder updater
+        io.emit("update");
 
-          /*
-          let audio_data = {
-            name: "",
-            user_id: userId,
-            filepath: path,
-            id: audio_id,
-            text: text,
-            duration_seconds: duration,
-            lang_code: lang_code,
-            lang_other: lang_other,
-            timestamp: timestamp 
-          }
-          // write on json file
-          writeData(audio_data)
-          
-          io.emit("update", JSON.stringify(audio_data));
-          */
-
-          res.end('{"success" : "Submited new audio", "status" : 200}');
-        });
+        res.end('{"success" : "Submited new audio", "status" : 200}');
       }
     })
+  });
+})
+
+/* -------------------------------------------------
+Upload to Amazon S3 storage
+---------------------------------------------------*/
+const uploadS3 = (audio_id, user_id, filepath) => new Promise((resolve, reject) => {
+  var fileStream = fs.createReadStream(filepath);
+  var uploadParams = {
+    Bucket: S3_BUCKET, 
+    Key: `audios/${user_id}/${audio_id}.wav`, 
+    Body: fileStream
+  }
+  // upload to S3
+  s3.upload(uploadParams, function(err, data) {
+    if (err) {
+        reject(err)
+        return
+    }
+    console.log('data', data, err)
+    resolve(data.Location)
   });
 })
 
