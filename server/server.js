@@ -18,7 +18,7 @@ var aws = require('aws-sdk');
 Global vars
 ---------------------------------------------------*/
 const port = process.env.PORT || 3000
-const dest_folder = `public/${process.env.DEST_FOLDER}`
+const dest_folder = `public/db`
 var server = null
 const S3_BUCKET = process.env.S3_BUCKET;
 
@@ -120,7 +120,7 @@ server.listen(port, (err) => {
 })
 
 /* -------------------------------------------------
-Router
+Routes
 ---------------------------------------------------*/
 app.get('/api/data', function (req, res) {
   Audio.find({}, function (err, audios) {
