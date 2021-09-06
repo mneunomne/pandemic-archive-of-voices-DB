@@ -1,35 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Db Manager</title>
+    <title>archive of voices - db Manager</title>
+	<meta name="description" content="Database manager for the Pandemic Archive of Voices">
+	<link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon"/>
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-		integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
-		crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-		integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        
     <script src="../lib/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .bd-example-modal-lg .modal-dialog {
+            display: table;
+            position: relative;
+            margin: 0 auto;
+            top: calc(50% - 24px);
+        }
+
+        .bd-example-modal-lg .modal-dialog .modal-content {
+            background-color: transparent;
+            border: none;
+        }
+    </style>
 </head>
+
 <body>
-    <table class="table table-responsive">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">filepath</th>
-            <th scope="col">id</th>
-            <th scope="col">user_id</th>
-            <th scope="col">text</th>
-            <th scope="col">duration</th>
-            <th scope="col">lang</th>
-            <th scope="col">action</th>
-            <th scope="col"></th>
-          </tr>
+    <table class="table table-responsive table-dark">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">filepath</th>
+                <th scope="col">id</th>
+                <th scope="col">user_id</th>
+                <th scope="col">text</th>
+                <th scope="col"></th>
+                <th scope="col">duration</th>
+                <th scope="col">lang</th>
+                <th scope="col">action</th>
+                <th scope="col"></th>
+            </tr>
         </thead>
         <tbody id="table_body">
         </tbody>
-      </table>
+    </table>
+    <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="width: 48px">
+                <span class="fa fa-spinner fa-spin fa-3x"></span>
+            </div>
+        </div>
+    </div>
+    </div>
 </body>
 <script src="script.js"></script>
+
 </html>
