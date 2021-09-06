@@ -54,6 +54,8 @@ const Audio = mongoose.model('Audio', mongoose.Schema({
     text: String,
     user_id: String,
     duration: Number,
+    disabled: Boolean,
+    deleted: Boolean,
     lang: Object
 }));
 
@@ -123,7 +125,8 @@ server.listen(port, (err) => {
 Routes
 ---------------------------------------------------*/
 app.get('/api/data', function (req, res) {
-  Audio.find({}, function (err, audios) {
+  let query = { $or: [ { deleted: false }, { deleted: { $exists: false} } ] }
+  Audio.find(query, function (err, audios) {
     if (err) console.error(err)
     User.find({}, function (err, users) {
       if (err) console.error(err)
@@ -256,7 +259,8 @@ app.post('/api/audio', upload.none(), function (req, res) {
               text: text,
               user_id: user_id + "",
               duration: duration,
-              test: true,
+              disabled: true,
+              deleted: false,
               lang: {
                 name: lang_other,
                 code: lang_code,
@@ -296,6 +300,21 @@ app.post('/api/audio', upload.none(), function (req, res) {
     })
   });
 })
+// TO DO
+app.put('/api/audio', upload.none(), function (req, res) {
+  console.log("request body", req.body)
+  var audio_data = req.body
+  let change = {deleted: audio_data.deleted, disabled: audio_data.disabled, text: audio_data.text}
+  // var user_id = req.body.id
+  // var lang_code = req.body.languageInput === 'null' ? '' : req.body.languageInput
+  // var lang_other = req.body.otherLanguage === 'null' ? '' : req.body.otherLanguage
+  // var text = req.body.textInput
+  console.log("audio_data", audio_data)
+  Audio.findOneAndUpdate({id: audio_data.id}, change, function (err, new_audio_data) {    
+    res.json(new_audio_data);
+    // res.end('{"success" : "Submited new audio", "status" : 200}');
+  });
+})
 
 /* -------------------------------------------------
 Upload to Amazon S3 storage
@@ -317,36 +336,6 @@ const uploadS3 = (audio_id, user_id, filepath) => new Promise((resolve, reject) 
     resolve(data.Location)
   });
 })
-
-/* -------------------------------------------------
-Update data.json file
----------------------------------------------------*/
-const writeData = function (data) {
-  var audioObj = {
-    "from": data.name,
-    "file": data.filepath,
-    "id": data.id,
-    "text": data.text,
-    "from_id": data.user_id,
-    "duration_seconds": data.duration_seconds,
-    "lang": {
-      "name": data.lang_other,
-      "code": data.lang_code,
-      "standard": ""
-    }
-  }
-  db_data.audios.push(audioObj)
-  // check if user data is already in db
-  if (!db_data.speakers.some(s => s.id === data.user_id)) {
-    var userObj = {
-      "speaker": data.name,
-      "id": data.user_id
-    }
-    db_data.speakers.push(userObj)
-  }
-  // write file
-  fs.writeFileSync(`${dest_folder}/data.json`, JSON.stringify(db_data, null, 4))
-}
 
 function makeid(length) {
   var result           = '';
