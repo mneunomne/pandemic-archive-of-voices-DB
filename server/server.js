@@ -273,7 +273,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
                 console.log(`[MongoDB] saved to ${audio_id} database!`,)
                 // emit socket io to max folder updater
                 setTimeout(()=> {
-                  io.emit("update", {id: audio_id});
+                  io.emit("new_audio", {id: audio_id});
                 }, 500)
             });
 
@@ -309,6 +309,7 @@ app.put('/api/audio', upload.none(), function (req, res) {
   let change = {deleted: audio_data.deleted, disabled: audio_data.disabled, text: audio_data.text}
   console.log("audio_data", audio_data)
   Audio.findOneAndUpdate({id: audio_data.id}, change, function (err, new_audio_data) {    
+    io.emit("update_audio", {id: audio_id});
     res.json(new_audio_data);
   });
 })
