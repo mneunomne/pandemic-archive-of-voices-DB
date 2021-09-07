@@ -56,7 +56,8 @@ const Audio = mongoose.model('Audio', mongoose.Schema({
     duration: Number,
     disabled: Boolean,
     deleted: Boolean,
-    lang: Object
+    lang: Object,
+    timestamp: Number
 }));
 
 const User = mongoose.model('User', mongoose.Schema({
@@ -198,6 +199,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
   var lang_code = req.body.languageInput === 'null' ? '' : req.body.languageInput
   var lang_other = req.body.otherLanguage === 'null' ? '' : req.body.otherLanguage
   var text = req.body.textInput
+  var timestamp = req.body.timestamp
 
   // Validation
   if (audioBlob === undefined || audioBlob === null || !audioBlob.includes('data:audio/wav;base64')) {
@@ -222,7 +224,6 @@ app.post('/api/audio', upload.none(), function (req, res) {
   }
   var dest_folder = 'public/db'
   var base64data = audioBlob.split(",")[1]
-  var timestamp = Date.now()
   var userFolder = `${dest_folder}/audios/${user_id}`
   // Create the user folder if needed
   if (!fs.existsSync(userFolder)) {
@@ -261,6 +262,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
               duration: duration,
               disabled: true,
               deleted: false,
+              timestamp: timestamp,
               lang: {
                 name: lang_other,
                 code: lang_code,
@@ -300,19 +302,14 @@ app.post('/api/audio', upload.none(), function (req, res) {
     })
   });
 })
-// TO DO
+
 app.put('/api/audio', upload.none(), function (req, res) {
   console.log("request body", req.body)
   var audio_data = req.body
   let change = {deleted: audio_data.deleted, disabled: audio_data.disabled, text: audio_data.text}
-  // var user_id = req.body.id
-  // var lang_code = req.body.languageInput === 'null' ? '' : req.body.languageInput
-  // var lang_other = req.body.otherLanguage === 'null' ? '' : req.body.otherLanguage
-  // var text = req.body.textInput
   console.log("audio_data", audio_data)
   Audio.findOneAndUpdate({id: audio_data.id}, change, function (err, new_audio_data) {    
     res.json(new_audio_data);
-    // res.end('{"success" : "Submited new audio", "status" : 200}');
   });
 })
 

@@ -209,6 +209,8 @@ const onSubmit = function () {
         fd.append('textInput', textInput);
         fd.append('languageInput', languageInput);
         fd.append('otherLanguage', otherLanguage);
+        fd.append('timestamp', Date.now());
+
 
         $.ajax({
             type: "POST",
