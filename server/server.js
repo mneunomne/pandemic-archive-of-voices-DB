@@ -309,7 +309,7 @@ app.put('/api/audio', upload.none(), function (req, res) {
   let change = {deleted: audio_data.deleted, disabled: audio_data.disabled, text: audio_data.text}
   console.log("audio_data", audio_data)
   Audio.findOneAndUpdate({id: audio_data.id}, change, function (err, new_audio_data) {    
-    io.emit("update_audio", {id: audio_id});
+    io.emit("update_audio", {id: audio_data.id});
     res.json(new_audio_data);
   });
 })
