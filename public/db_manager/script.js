@@ -104,6 +104,7 @@ const updateAudio = (audio_data) => {
 const onPutSuccess = (res) => {
   console.log("Sucess!", res)
   $('.modal').modal('hide');
+  $('.modal-backdrop').click();
   getDatabaseData()
   // renderTable();
   // addActionEvents();
