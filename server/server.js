@@ -45,6 +45,8 @@ mongoose.connect(mongoUri, { useNewUrlParser: true }, function (err, res) {
   }
   mongoConnected = true
   console.log(`[MongoDB] Connected to database "${process.env.MONGODB_DATABASE}"`)
+
+
 })
 
 const Audio = mongoose.model('Audio', mongoose.Schema({
@@ -126,6 +128,8 @@ server.listen(port, (err) => {
 Routes
 ---------------------------------------------------*/
 app.get('/api/data', function (req, res) {
+  console.log("mongoConnected", mongoConnected)
+  if (!mongoConnected) res.status(503).send('Ufff: MongoDb not loaded yet');
   let query = { $or: [ { deleted: false }, { deleted: { $exists: false} } ] }
   Audio.find(query, function (err, audios) {
     if (err) console.error(err)
@@ -304,7 +308,6 @@ app.post('/api/audio', upload.none(), function (req, res) {
 })
 
 app.put('/api/audio', upload.none(), function (req, res) {
-  console.log("request body", req.body)
   var audio_data = req.body
   let change = {deleted: audio_data.deleted, disabled: audio_data.disabled, text: audio_data.text}
   console.log("audio_data", audio_data)
