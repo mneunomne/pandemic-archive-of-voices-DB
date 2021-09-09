@@ -129,7 +129,10 @@ Routes
 ---------------------------------------------------*/
 app.get('/api/data', function (req, res) {
   console.log("mongoConnected", mongoConnected)
-  if (!mongoConnected) res.status(503).send('Ufff: MongoDb not loaded yet');
+  if (!mongoConnected) {
+    res.status(503).send('Ufff: MongoDb not loaded yet');
+    return
+  }
   let query = { $or: [ { deleted: false }, { deleted: { $exists: false} } ] }
   Audio.find(query, function (err, audios) {
     if (err) console.error(err)
