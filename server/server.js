@@ -267,7 +267,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
               text: text,
               user_id: user_id + "",
               duration: duration,
-              disabled: true,
+              disabled: false,
               deleted: false,
               timestamp: timestamp,
               lang: {
