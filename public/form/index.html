@@ -25,6 +25,10 @@
 				height: 100vh;
 			}
 
+			h2 {
+				color: white;
+			}
+
 			.container {
 				height: 100%;
 			}
@@ -71,7 +75,16 @@
 
 			#submit-container button {
 				width: 100%;
-			} 
+			}
+
+			.input-description {
+				margin-top: 5px;
+				display: block;
+			}
+
+			#waveform-container {
+				min-height: 220px;
+			}
 
 		</style>
 </head>
@@ -79,7 +92,7 @@
 
 		<div class="container">
 			<header>
-				<h2 class="mt-5">Pandemic Archive of Voices </h2>
+				<h2 class="mt-5"><a target="_blank" href="https://mneunomne.github.io/pandemic-archive-installation/">Pandemic Archive of Voices</a></h2>
 				<p>Share a word/expression, in your own native language, that can translate a personal perspective on the current context we are living in. </p>	
 			</header>
 			
@@ -114,31 +127,28 @@
 				</div>
 				<!-- textual form -->
 				<div id="text-container" class="form-group mb-4 hidden">
-					<label for="textInput">Literal Text</label>
-					<input type="email" class="form-control" id="textInput" aria-describedby="textInputHelp" placeholder="Literal text" required>
+					<input type="email" class="form-control" id="textInput" placeholder="Transcript" required>
 	
-					<small id="textInputHelp" class="form-text text-muted">Write here the textual version of the contributed audio in its original language.</small>
+					<span class="input-description form-text text-muted">Write here the textual version of the contributed audio in its original language.</span>
 					<!--
 					<small id="textInputError" class="text-danger">
 						Please write the textual version of the submited audio.
 						</small>
 					-->     
 				</div>
-				<div  id="submit-container" class="submit row hidden">
-					<div class="col-12">
-						<button class="btn btn-dark disabled mb-4" type="button" id="submit">
-							<i class="glyphicon glyphicon-stop">Submit</i>
-						</button>
-						<button class="btn btn-success  mb-4" style="display: none;" type="button" id="success">
-							<i class="glyphicon glyphicon-stop">Success</i>
-						</button>
-						<button class="btn btn-error  mb-4" style="display: none;" type="button" id="error">
-							<i class="glyphicon glyphicon-stop">Error</i>
-						</button>
-						<button class="btn btn-dark mb-4" style="display: none;" type="button" id="clear-form">
-							<i class="glyphicon glyphicon-stop">Record Again</i>
-						</button>
-					</div>
+				<div  id="submit-container" class="submit form-group hidden">
+					<button class="btn btn-dark disabled mb-4" type="button" id="submit">
+						<i class="glyphicon glyphicon-stop">Submit</i>
+					</button>
+					<button class="btn btn-success  mb-4" style="display: none;" type="button" id="success">
+						<i class="glyphicon glyphicon-stop">Success</i>
+					</button>
+					<button class="btn btn-error  mb-4" style="display: none;" type="button" id="error">
+						<i class="glyphicon glyphicon-stop">Error</i>
+					</button>
+					<button class="btn btn-dark mb-4" style="display: none;" type="button" id="clear-form">
+						<i class="glyphicon glyphicon-stop">Record Again</i>
+					</button>
 				</div>
 			</div>
 				<!--<button class="btn btn-dark">Submit</button>-->
