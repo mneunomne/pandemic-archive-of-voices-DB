@@ -1,29 +1,10 @@
 
-var wavesurferMic = WaveSurfer.create({
-    container: '#waveformMic',
-    waveColor: '#ffffff',
-    progressColor: '#000000',
-    barHeight: 2,
-    barWidth: 2,
-    backgroundColor: 'black',
-    cursorWidth: 0,
-    interact: false,
-    plugins: [
-        WaveSurfer.microphone.create()
-      ]
-});
+var wavesurferMic;
 
-var wavesurferAudio = WaveSurfer.create({
-    container: '#waveformAudio',
-    waveColor: '#ffffff',
-    progressColor: 'red',
-    barHeight: 2,
-    barWidth: 2,
-    mediaControls: true
-});
+var wavesurferAudio;
 
-// const server_url = `https://pandemic-archive-of-voices-db.herokuapp.com`
-const server_url = (location.hostname.includes('127.0.0.1') || location.hostname.includes('localhost')) ? `http://localhost:7777` : `https://pandemic-archive-of-voices-db.herokuapp.com`
+const server_url = `https://pandemic-archive-of-voices-db.herokuapp.com`
+// const server_url = (location.hostname.includes('127.0.0.1') || location.hostname.includes('localhost')) ? `http://localhost:7777` : `https://pandemic-archive-of-voices-db.herokuapp.com`
 
 var $record = $("#record")
 var $stop = $("#stop")
@@ -34,6 +15,7 @@ var $submit = $("#submit")
 var $textInput = $("#textInput")
 var $languageInput = $("#languageInput")
 var $otherLanguage = $("#otherLanguage")
+var $start = $("#start")
 
 var mediaRecorder = null;
 var stream = false
@@ -44,12 +26,14 @@ var startRecordingTimestamp = null
 
 
 const init = function () {
-    start()
+    // start()
     addEvents()
 }
 
 const addEvents = function () {
+    $start.on('click', start)
     $record.on('click', startRecording)
+    $("#clear-form").on('click', clearForm)
     $stop.on('click', onStop)
     $again.on('click', function () {
         audioBlob = null
@@ -67,6 +51,9 @@ const addEvents = function () {
 
     $play.on('click', onPlay)
     $submit.on('click', onSubmit)
+}
+
+const addMicEvents = function () {
     wavesurferMic.microphone.on('deviceReady', function(s) {
         console.log('Device ready!');  
         stream = s
@@ -77,7 +64,51 @@ const addEvents = function () {
     });
 }
 
+const clearForm = function () {
+    $textInput.val("")
+    $record.show()
+    audioBlob = null
+    $submit.addClass("disabled")
+    $("#success").hide()
+    $("#error").hide()
+    $("#clear-form").hide()
+
+    $("#waveformMic").show()
+    $("#waveformAudio").hide()
+
+    $submit.show();
+}
+
 const start = function () {
+    wavesurferMic = WaveSurfer.create({
+        container: '#waveformMic',
+        waveColor: '#ffffff',
+        progressColor: '#000000',
+        barHeight: 2,
+        barWidth: 2,
+        backgroundColor: 'black',
+        cursorWidth: 0,
+        interact: false,
+        plugins: [
+            WaveSurfer.microphone.create()
+          ]
+    });
+    
+    wavesurferAudio = WaveSurfer.create({
+        container: '#waveformAudio',
+        waveColor: '#ffffff',
+        progressColor: 'red',
+        barHeight: 2,
+        barWidth: 2,
+        mediaControls: true
+    });
+
+    addMicEvents()
+    $("#waveform-container").removeClass("hidden")
+    $("#text-container").removeClass("hidden")
+    $("#submit-container").removeClass("hidden")
+    $("#start-container").addClass("get-rid")
+    // addMicEvents()
     wavesurferMic.microphone.start();
     $record.show()
 }
@@ -207,8 +238,8 @@ const onSubmit = function () {
         fd.append('data', event.target.result);
         fd.append('id', id);
         fd.append('textInput', textInput);
-        fd.append('languageInput', languageInput);
-        fd.append('otherLanguage', otherLanguage);
+        fd.append('languageInput', "no_language");
+        fd.append('otherLanguage', "no_language");
         fd.append('timestamp', Date.now());
 
 
@@ -229,9 +260,15 @@ const onSubmit = function () {
 
 const onPostSuccess = function (res) {
     console.log("Sucess!", res)
+    $submit.hide()
+    $("#success").show()
+    $("#clear-form").show()
 }
 const onPostError = function (res) {
     console.error("Error!", res)
+    $submit.hide()
+    $("#error").show()
+    $("#clear-form").show()
 }
 
 
