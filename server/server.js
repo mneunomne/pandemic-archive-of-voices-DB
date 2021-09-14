@@ -265,7 +265,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
               name: "",
               path: path,
               text: text,
-              user_id: user_id + "",
+              user_id: "dxUu2RI0", // user_id + "",
               duration: duration,
               disabled: false,
               deleted: false,
