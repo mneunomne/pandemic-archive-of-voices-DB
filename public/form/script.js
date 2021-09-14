@@ -65,6 +65,8 @@ const addMicEvents = function () {
 }
 
 const clearForm = function () {
+    $again.hide()
+    $play.hide()
     $textInput.val("")
     $record.show()
     audioBlob = null
