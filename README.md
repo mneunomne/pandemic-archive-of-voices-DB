@@ -4,10 +4,13 @@
 
 The Pandemic Archive of Voices is an audio archive constituted by 24 different speakers who contributed 185 audios in 18 different languages. Each of these audios represents a word or expression in the speaker's native language that would translate their own individual experience of the current context of the pandemic.
 
-This repository consists of:
+This repository was created especifically to manage the installation project based on this database, but not exclusivelly.
+
+It consists of:
 - Database API
 - Content Manager
 - Contribution Form
+- Local server to conntect with the installation API
 
 ## API URL
 
@@ -89,9 +92,15 @@ This repository consists of:
 
 Live update content manager
 
+![db_manager](https://user-images.githubusercontent.com/4967860/137624208-6598e592-0325-41b5-b965-273a0b5de319.PNG)
+
+
 ## Contribution Form
 
 Contribition form
+
+![photo_5](https://user-images.githubusercontent.com/4967860/137624225-b6dff4d3-d174-4f1d-bcfa-34f710e512ba.jpg)
+
 
 ## To Do
 
