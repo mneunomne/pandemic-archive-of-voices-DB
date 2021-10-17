@@ -67,6 +67,23 @@ This repository consists of:
 
   `/api/audio_lang_code/:lang_code`
 
+* **POST new audio**
+   
+  *Submits new audio to the database, restrited use*
+
+  `/api/audio`
+
+  ```Javascript
+  {
+    id: String,
+    data: Blob,
+    languageInput: String,
+    lang_other: String,
+    text: String,
+    timestamp: Int
+  }
+  ```
+
 
 ## Dowload zipped database of original audios
 
