@@ -1,11 +1,25 @@
 # The Pandemic Archive of Voices - Database & API
 
+## Description
+
+The Pandemic Archive of Voices is an audio archive constituted by 24 different speakers who contributed 185 audios in 18 different languages. Each of these audios represents a word or expression in the speaker's native language that would translate their own individual experience of the current context of the pandemic.
+
+This repository consists of:
+- Database API
+- Content Manager
+- Contribution Form
+
 ## API URL
 
 `https://pandemic-archive-of-voices.herokuapp.com/api/`
 
 ## Dependencies
 
+- [Mongoose](https://mongoosejs.com/docs/) Node library dealing with [MongoDB](https://www.mongodb.com/)
+- [Amazon S3](https://aws.amazon.com/s3/)
+- [Socket.io](https://socket.io/)
+- [node-osc](https://www.npmjs.com/package/node-osc)
+- [node-ffmpeg](https://www.npmjs.com/package/ffmpeg)
 - [SoX](http://sox.sourceforge.net/) for audio conversion from `.ogg` to `.wav` and `.wav`.
 - [opus-tools](https://opus-codec.org/downloads/) for Opus `.ogg` file conversion.
 
