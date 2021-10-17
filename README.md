@@ -85,9 +85,20 @@ This repository consists of:
   ```
 
 
-## Dowload zipped database of original audios
+## Content Manager
 
-[https://pandemic-archive-of-voices.herokuapp.com/db.zip](https://pandemic-archive-of-voices.herokuapp.com/db.zip)
+Live update content manager
+
+## Contribution Form
+
+Contribition form
+
+## To Do
+
+- Restricted use of content manager
+- Restricted use of contribution form
+- Clean old code
+- Fix contribution form errors on iPhone devices
 
 ## References
 
