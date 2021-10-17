@@ -54,7 +54,7 @@
   `/api/audio_lang_code/:lang_code`
 
 
-## Dowload zipped database 
+## Dowload zipped database of original audios
 
 [https://pandemic-archive-of-voices.herokuapp.com/db.zip](https://pandemic-archive-of-voices.herokuapp.com/db.zip)
 
