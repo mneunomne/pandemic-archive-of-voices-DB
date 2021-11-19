@@ -16,7 +16,8 @@ function convertAudios () {
   .map((m) => {
     // convert
     let src = m.file
-    let dest = m.file.substring(m.file.lastIndexOf('/') + 1).replace('.ogg', '.wav')
+    // let dest = m.file.substring(m.file.lastIndexOf('/') + 1).replace('.ogg', '.wav')
+    let dest = `${m.id}.wav`
     if (!fs.existsSync(`${dest_folder}/${m.from_id}`)){
       fs.mkdirSync(`${dest_folder}/${m.from_id}`);
     }

@@ -35,9 +35,10 @@ class Speaker extends Mover {
     let p1 = this.points[this.points.length-2]
     let p2 = this.points[this.points.length-1]
     push();
-      stroke(this.color)
-      if (window.showPoints) line(p1.x, p1.y, p2.x, p2.y)
+      // stroke(this.color)
       stroke(255)
+      if (window.showPoints) line(p1.x, p1.y, p2.x, p2.y)
+      // stroke(255)
       translate(p2.x, p2.y)    
       let a = atan2(p2.y - height/2, p2.x - width/2);
       // console.log('a ', a )
@@ -45,6 +46,8 @@ class Speaker extends Mover {
       rotate(a)
       let tw = textWidth(this.curText)
       translate(-tw/2, -8)
+      noStroke();
+      fill(255);
       if (window.drawText) text(this.curText, 0, 0)
       // rect(0, 0, 10, 10);
     pop();

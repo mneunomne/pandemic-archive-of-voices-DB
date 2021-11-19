@@ -21,6 +21,12 @@ function setup() {
     orchestration.playAudiosWithInterval(50, 1)
     orchestration.playAudiosWithInterval(50, 3)
     orchestration.playAudiosWithInterval(50, 5)
+    orchestration.playAudiosWithInterval(50, 1)
+    orchestration.playAudiosWithInterval(50, 3)
+    orchestration.playAudiosWithInterval(50, 5)
+    orchestration.playAudiosWithInterval(50, 1)
+    orchestration.playAudiosWithInterval(50, 3)
+    orchestration.playAudiosWithInterval(50, 5)
     background(0, 0, 0)
   })
   
@@ -49,4 +55,5 @@ function draw() {
   for (let i = 0; i < speakers.length; i++) {
     speakers[i].draw()
   }  
+  filter(BLUR, 1);
 }
