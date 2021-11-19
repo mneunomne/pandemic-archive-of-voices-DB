@@ -28,6 +28,8 @@ It consists of:
 
 ## API
 
+### GET 
+
 * **Get all database data**
 
   *Returns whole JSON Object containing all audio objects*  
@@ -69,6 +71,26 @@ It consists of:
   *Returns all audios that **contain** the `lang_code` in the `code` paramenter inside `lang` in audio object*
 
   `/api/audio_lang_code/:lang_code`
+
+* **Get sample array from audio id**
+  
+  *Returns the sample array of a particular audio in the database*
+
+  `/api/get_audio_samples/:audio_id/:bits/:sample_rate`
+
+* **Get generated audio file from sample array (untested)**
+  
+  *Returns a audio file from the designated sample array, with a specific bit depth and sample rate*
+
+  `/api/gen_audio_from_samples/:audio_id/:bits/:sample_rate`
+
+* **Get compressed audio file**
+  
+  *Compresses and return the audio file from the databse with a designated bit depth and sample rate*
+
+  `/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate`
+
+### POST
 
 * **POST new audio**
    
