@@ -78,13 +78,11 @@ const User = mongoose.model('User', mongoose.Schema({
 /* -------------------------------------------------
 Start http(s) server
 ---------------------------------------------------*/
-if (process.env.LOCAL === '1') {
-  // LOCAL ENV
-  server = http.Server(app)
-} else {
-  // REMOTE ENV
-  server = https.Server(app)
-}
+  
+// LOCAL ENV
+server = http.Server(app)
+// REMOTE ENV
+// server = https.Server(app)}
 
 /* -------------------------------------------------
 Generate README html 
