@@ -105,10 +105,28 @@ It consists of:
     languageInput: String,
     lang_other: String,
     text: String,
-    timestamp: Int
+    timestamp: Int,
+    deleted: Boolean,
+    disabled: Boolean
   }
   ```
 
+### PUT
+
+* **PUT audio data**
+
+ *Updates a audio object in the database, restrited use*
+
+ `/api/audio`
+ 
+ ```Javascript
+  {
+    id: String,
+    deleted: Boolean,
+    disabled: Boolean,
+    text: String
+  }
+  ```
 
 ## Content Manager
 
