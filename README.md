@@ -115,16 +115,16 @@ It consists of:
 
 * **PUT audio data**
 
- *Updates a audio object in the database, restrited use*
+  *Updates a audio object in the database, restrited use*
 
- `/api/audio`
- 
- ```Javascript
+  `/api/audio`
+
+  ```Javascript
   {
-    id: String,
-    deleted: Boolean,
-    disabled: Boolean,
-    text: String
+     id: String,
+     deleted: Boolean,
+     disabled: Boolean,
+     text: String
   }
   ```
 
