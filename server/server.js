@@ -1,3 +1,8 @@
+/* -------------------------------------------------
+Database API The Pandemic Archive of Voices
+Developed by Alberto Harres @ HfK Bremen, 2020-2021
+---------------------------------------------------*/
+
 const express = require('express')
 const fs = require('fs')
 const cors = require('cors')
@@ -8,7 +13,6 @@ const { getAudioDurationInSeconds } = require('get-audio-duration')
 require('dotenv').config()
 const upload = multer();
 const app = express()
-const { Client } = require('node-osc');
 const http = require('http')
 const https = require('https')
 const mongoose = require ("mongoose")
@@ -49,6 +53,7 @@ mongoose.connect(mongoUri, { useNewUrlParser: true }, function (err, res) {
 
 })
 
+// MongoDB Audio Schema 
 const Audio = mongoose.model('Audio', mongoose.Schema({
     id: String,
     name: String,
@@ -62,6 +67,7 @@ const Audio = mongoose.model('Audio', mongoose.Schema({
     timestamp: Number
 }));
 
+// MongoDB User Schema 
 const User = mongoose.model('User', mongoose.Schema({
     name: String,
     id: String
@@ -133,6 +139,7 @@ app.get('/api/data', function (req, res) {
     res.status(503).send('Ufff: MongoDb not loaded yet');
     return
   }
+  // dont return the audios with "deleted==true"
   let query = { $or: [ { deleted: false }, { deleted: { $exists: false} } ] }
   Audio.find(query, function (err, audios) {
     if (err) console.error(err)
@@ -228,8 +235,7 @@ app.post('/api/audio', upload.none(), function (req, res) {
     // error in text
     res.end('{"error" : "error in text", "status" : 400}');
     return
-  }
-  var dest_folder = 'public/db'
+  }  
   var base64data = audioBlob.split(",")[1]
   var userFolder = `${dest_folder}/audios/${user_id}`
   // Create the user folder if needed
@@ -310,10 +316,14 @@ app.post('/api/audio', upload.none(), function (req, res) {
   });
 })
 
+/* -------------------------------------------------
+upload new audio to the datase 
+---------------------------------------------------*/
 app.put('/api/audio', upload.none(), function (req, res) {
   var audio_data = req.body
   let change = {deleted: audio_data.deleted, disabled: audio_data.disabled, text: audio_data.text}
   console.log("audio_data", audio_data)
+  // update OR create audio in MongoDB 
   Audio.findOneAndUpdate({id: audio_data.id}, change, function (err, new_audio_data) {    
     io.emit("update_audio", {id: audio_data.id});
     res.json(new_audio_data);
