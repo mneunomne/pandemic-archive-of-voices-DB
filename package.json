@@ -9,8 +9,7 @@
     "start": "nodemon server/server.js",
     "post": "nodemon server/post.js",
     "compress": "cd public/ && zip -r db.zip db/",
-    "migrate": "nodemon server/migrate_to_mongodb.js",
-    "waveform": "nodemon server/read_waveform.js"
+    "migrate": "nodemon server/migrate_to_mongodb.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +36,5 @@
     "openssl-nodejs": "^1.0.5",
     "socket.io": "^4.1.3",
     "wavefile": "^11.0.0",
-    "waveform-data": "^4.3.0"
   }
 }

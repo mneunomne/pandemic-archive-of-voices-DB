@@ -22,6 +22,7 @@
 <li><a href="https://opus-codec.org/downloads/">opus-tools</a> for Opus <code>.ogg</code> file conversion.</li>
 </ul>
 <h2 id="api">API</h2>
+<h3 id="get">GET</h3>
 <ul>
 <li><p><strong>Get all database data</strong></p>
 <p><em>Returns whole JSON Object containing all audio objects</em>  </p>
@@ -51,6 +52,21 @@
 <p><em>Returns all audios that <strong>contain</strong> the <code>lang_code</code> in the <code>code</code> paramenter inside <code>lang</code> in audio object</em></p>
 <p><code>/api/audio_lang_code/:lang_code</code></p>
 </li>
+<li><p><strong>Get sample array from audio id</strong></p>
+<p><em>Returns the sample array of a particular audio in the database</em></p>
+<p><code>/api/get_audio_samples/:audio_id/:bits/:sample_rate</code></p>
+</li>
+<li><p><strong>Get generated audio file from sample array (untested)</strong></p>
+<p><em>Returns a audio file from the designated sample array, with a specific bit depth and sample rate</em></p>
+<p><code>/api/gen_audio_from_samples/:audio_id/:bits/:sample_rate</code></p>
+</li>
+<li><p><strong>Get compressed audio file</strong></p>
+<p><em>Compresses and return the audio file from the databse with a designated bit depth and sample rate</em></p>
+<p><code>/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate</code></p>
+</li>
+</ul>
+<h3 id="post">POST</h3>
+<ul>
 <li><p><strong>POST new audio</strong></p>
 <p><em>Submits new audio to the database, restrited use</em></p>
 <p><code>/api/audio</code></p>
@@ -60,7 +76,23 @@
   languageInput: String,
   lang_other: String,
   text: String,
-  timestamp: Int
+  timestamp: Int,
+  deleted: Boolean,
+  disabled: Boolean
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="put">PUT</h3>
+<ul>
+<li><p><strong>PUT audio data</strong></p>
+<p><em>Updates a audio object in the database, restrited use</em></p>
+<p><code>/api/audio</code></p>
+<pre><code class="language-Javascript">{
+   id: String,
+   deleted: Boolean,
+   disabled: Boolean,
+   text: String
 }
 </code></pre>
 </li>
