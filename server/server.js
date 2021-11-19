@@ -4,6 +4,7 @@ Developed by Alberto Harres @ HfK Bremen, 2020-2021
 ---------------------------------------------------*/
 
 const express = require('express')
+const path = require('path');
 const fs = require('fs')
 const cors = require('cors')
 const multer = require('multer')
@@ -17,6 +18,7 @@ const http = require('http')
 const https = require('https')
 const mongoose = require ("mongoose")
 var aws = require('aws-sdk');
+const WaveFile = require('wavefile').WaveFile;
 
 /* -------------------------------------------------
 Global vars
@@ -203,6 +205,83 @@ app.get('/api/audio_lang_code/:lang_code', function (req, res) {
   res.json(audios);
 })
 
+// Get sample array from audio id
+app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, res) {
+  var bits = req.params.bits || 8
+  var sample_rate = req.params.sample_rate || 8000  
+  var audio_id = req.params.audio_id
+  var audio_data = db_data.audios.find(a => a.id == audio_id)
+
+  if (audio_data == null || audio_data == undefined) {
+    res.status(400).send("Not a valid file id")
+    return
+  }
+
+  // read file
+  var buffer = fs.readFileSync(`public/${audio_data.file}`);
+  
+  // Load a wav file buffer as a WaveFile object
+  let wav = new WaveFile(buffer);
+
+  // set Sample rate and bit rate
+  wav.toSampleRate(sample_rate);
+  wav.toBitDepth(bits + "");
+  
+  // Check some of the file properties
+  console.log("chunkSize", wav.chunkSize);
+  
+  // Call toBuffer() to get the bytes of the file.
+  // You can write the output straight to disk:
+  let wavBuffer = wav.toBuffer();
+
+  // return
+  res.json(wavBuffer)
+})
+
+// generate audio file
+app.get('/api/gen_audio_from_samples/:audio_id/:bits/:sample_rate', function (req, res) {
+  var samples = req.params.samples || [0, 0, 0, 0]
+  var bits = (req.params.bits || "8") + ""
+  var sample_rate = req.params.sample_rate || 8000 
+
+  var wav2 = new WaveFile();
+  // Create a WaveFile using the samples
+  wav2.fromScratch(1, sample_rate, bits, samples);
+  
+  fs.writeFileSync("temp/audio.wav", wav2.toBuffer());
+  res.setHeader('Content-type', "audio/wav");
+  res.sendFile(path.resolve('temp/audio.wav'), function() {
+    fs.unlinkSync("temp/audio.wav");
+  });
+})
+
+// get compressed audio file
+app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function (req, res) {
+  var bits = req.params.bits || 8
+  var sample_rate = req.params.sample_rate || 8000  
+  var audio_id = req.params.audio_id
+  var audio_data = db_data.audios.find(a => a.id == audio_id)
+  
+  if (audio_data == null || audio_data == undefined) {
+    res.status(400).send("Not a valid file id")
+    return
+  }
+
+  // read file
+  var buffer = fs.readFileSync(`public/${audio_data.file}`);
+  
+  // Load a wav file buffer as a WaveFile object
+  let wav = new WaveFile(buffer);
+
+  // set Sample rate and bit rate
+  wav.toSampleRate(sample_rate);
+  wav.toBitDepth(bits + "");
+
+  fs.writeFileSync("temp/audio.wav", wav.toBuffer());
+  res.setHeader('Content-type', "audio/wav");
+  res.sendFile(path.resolve('temp/audio.wav'));
+  //fs.unlinkSync("temp/audio.wav");
+})
 /* -------------------------------------------------
 POST
 ---------------------------------------------------*/

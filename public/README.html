@@ -1,8 +1,23 @@
 <h1 id="the-pandemic-archive-of-voices---database--api">The Pandemic Archive of Voices - Database &amp; API</h1>
+<h2 id="description">Description</h2>
+<p>The Pandemic Archive of Voices is an audio archive constituted by 24 different speakers who contributed 185 audios in 18 different languages. Each of these audios represents a word or expression in the speaker&#39;s native language that would translate their own individual experience of the current context of the pandemic.</p>
+<p>This repository was created especifically to manage the installation project based on this database, but not exclusivelly.</p>
+<p>It consists of:</p>
+<ul>
+<li>Database API</li>
+<li>Content Manager</li>
+<li>Contribution Form</li>
+<li>Local server to conntect with the installation API</li>
+</ul>
 <h2 id="api-url">API URL</h2>
 <p><code>https://pandemic-archive-of-voices.herokuapp.com/api/</code></p>
 <h2 id="dependencies">Dependencies</h2>
 <ul>
+<li><a href="https://mongoosejs.com/docs/">Mongoose</a> Node library dealing with <a href="https://www.mongodb.com/">MongoDB</a></li>
+<li><a href="https://aws.amazon.com/s3/">Amazon S3</a></li>
+<li><a href="https://socket.io/">Socket.io</a></li>
+<li><a href="https://www.npmjs.com/package/node-osc">node-osc</a></li>
+<li><a href="https://www.npmjs.com/package/ffmpeg">node-ffmpeg</a></li>
 <li><a href="http://sox.sourceforge.net/">SoX</a> for audio conversion from <code>.ogg</code> to <code>.wav</code> and <code>.wav</code>.</li>
 <li><a href="https://opus-codec.org/downloads/">opus-tools</a> for Opus <code>.ogg</code> file conversion.</li>
 </ul>
@@ -36,59 +51,33 @@
 <p><em>Returns all audios that <strong>contain</strong> the <code>lang_code</code> in the <code>code</code> paramenter inside <code>lang</code> in audio object</em></p>
 <p><code>/api/audio_lang_code/:lang_code</code></p>
 </li>
-</ul>
-<h2 id="dowload-zipped-database">Dowload zipped database</h2>
-<p><a href="https://pandemic-archive-of-voices.herokuapp.com/db.zip">https://pandemic-archive-of-voices.herokuapp.com/db.zip</a></p>
-<h2 id="step-by-step-to-extract-audios-from-telegram-and-create-json-file">Step-by-step to extract audios from telegram and create json file</h2>
-<p>A bit of the process on how to extract and later convert the telegram audios and transform them into the comprehensive json file with converted files paths, sender id, audio length, text transcription, etc.</p>
-<h3 id="download-telegram-data">Download Telegram Data</h3>
-<ul>
-<li><p>Download telegram data from groups, downloading only the voice messages</p>
-</li>
-<li><p>Clean DataExport folder, excluding data other groups</p>
-</li>
-</ul>
-<h3 id="clean-json-file">Clean JSON file</h3>
-<ul>
-<li><p>Clean <code>result.json</code> file, leaving only the array of messages from Archive of Voices group</p>
-</li>
-<li><p>Exclude pined message and other actions from message array</p>
-</li>
-<li><p>Reorder messages to make sure that all audios have the text version following the audio message right away. </p>
-</li>
-</ul>
-<h3 id="convert-to-wav">Convert to .wav</h3>
-<ul>
-<li>Convert <code>.ogg</code> audio files to <code>.wav</code> files, copying them to the <code>data/</code> folder using <code>npm run convert</code> command. The files are exported in the following folder structure: <code>db/audios/${speaker_id}/</code>.</li>
-</ul>
-<h3 id="generate-final-json-file">Generate final json file</h3>
-<ul>
-<li>Extract <code>results.json</code> with <code>npm run extract</code>, generating, among other data, audio data elements with the folowing values:<pre><code>{
-  &quot;from&quot;: &quot;alberto harres&quot;,           // speaker name
-  &quot;id&quot;: 0,                            // audio file id
-  &quot;file&quot;: &quot;db/audios/filename.wav&quot;,   // path to audio file
-  &quot;text&quot;: &quot;audio text&quot;                // audio text
-  &quot;from_id&quot;: 0,                       // speaker id
-  &quot;duration_seconds&quot;: 2               // audio duration in seconds
-  &quot;lang&quot;: {                           // language of the audio
-      &quot;name&quot;: &quot;brazilian portuguese&quot;, // name of the language or dialect in english 
-      &quot;code&quot;: &quot;pt-br&quot;,                // language or dialect code
-      &quot;standard&quot;: &quot;ISO 639-1&quot;         // standard used for code, since some dialects are not in the ISO 639-1 standard
-  }
+<li><p><strong>POST new audio</strong></p>
+<p><em>Submits new audio to the database, restrited use</em></p>
+<p><code>/api/audio</code></p>
+<pre><code class="language-Javascript">{
+  id: String,
+  data: Blob,
+  languageInput: String,
+  lang_other: String,
+  text: String,
+  timestamp: Int
 }
 </code></pre>
 </li>
 </ul>
-<h2 id="speakers">Speakers</h2>
-<p><em>I thank all collaborators that contributed with audios:</em></p>
-<pre><code>  [&quot;nilya musaeva&quot;,&quot;S. C.&quot;,&quot;ruoxi&quot;,&quot;Kazuki&quot;,
-  &quot;Hem&quot;,&quot;Antônio&quot;,&quot;Chi Him&quot;,&quot;Sangbong&quot;,
-  &quot;Alberto Harres&quot;,&quot;Josh&quot;,&quot;Bojana&quot;,&quot;Victor&quot;,
-  &quot;Debaditya&quot;,&quot;Julia&quot;,&quot;Ayse Seyhan&quot;,&quot;Anna&quot;,
-  &quot;Abdulghaffar&quot;,&quot;Pelin&quot;,&quot;Bruno&quot;,&quot;Ivett K.&quot;,
-  &quot;Slava Romanov&quot;,&quot;Marcela DM&quot;,&quot;Lucca&quot;,&quot;Bonasladybug&quot;, 
-  &quot;Soumya&quot;]
-</code></pre>
+<h2 id="content-manager">Content Manager</h2>
+<p>Live update content manager</p>
+<p><img src="https://user-images.githubusercontent.com/4967860/137624208-6598e592-0325-41b5-b965-273a0b5de319.PNG" alt="db_manager"></p>
+<h2 id="contribution-form">Contribution Form</h2>
+<p>Contribition form</p>
+<p><img src="https://user-images.githubusercontent.com/4967860/137624225-b6dff4d3-d174-4f1d-bcfa-34f710e512ba.jpg" alt="photo_5"></p>
+<h2 id="to-do">To Do</h2>
+<ul>
+<li>Restricted use of content manager</li>
+<li>Restricted use of contribution form</li>
+<li>Clean old code</li>
+<li>Fix contribution form errors on iPhone devices</li>
+</ul>
 <h2 id="references">References</h2>
 <ul>
 <li><p>About converting Opus <code>.ogg</code> files used by telegram voice messages: <a href="https://stackoverflow.com/questions/22322372/sox-doesnt-work-with-opus-audio-files">SoX doesn&#39;t work with Opus Audio files</a></p>
