@@ -28,6 +28,8 @@ const dest_folder = `public/db`
 var server = null
 const S3_BUCKET = process.env.S3_BUCKET;
 
+const alphabet = "撒健億媒間増感察総負街時哭병体封列効你老呆安发は切짜확로감外年와모ゼДが占乜산今もれすRビコたテパアEスどバウПm가бうクん스РりwАêãХйてシжغõ小éजভकöলレ入धबलخFসeवমوযиथशkحくúoनবएদYンदnuনمッьノкتبهtт一ادіاгرزरjvةзنLxっzэTपнлçşčतلイयしяトüषখথhцहیরこñóহリअعसमペيフdォドрごыСいگдとナZকইм三ョ나gшマで시Sقに口س介Иظ뉴そキやズВ자ص兮ض코격ダるなф리Юめき宅お世吃ま来店呼설진음염론波密怪殺第断態閉粛遇罩孽關警"
+
 /* -------------------------------------------------
 Amazon S3
 ---------------------------------------------------*/
@@ -235,6 +237,46 @@ app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, re
   // return
   res.json(wavBuffer)
 })
+
+
+// Get sample array from audio id
+app.get('/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate', function (req, res) {
+  var bits = req.params.bits || 8
+  var sample_rate = req.params.sample_rate || 8000  
+  var audio_id = req.params.audio_id
+  var audio_data = db_data.audios.find(a => a.id == audio_id)
+
+  if (audio_data == null || audio_data == undefined) {
+    res.status(400).send("Not a valid file id")
+    return
+  }
+
+  // read file
+  var buffer = fs.readFileSync(`public/${audio_data.file}`);
+  
+  // Load a wav file buffer as a WaveFile object
+  let wav = new WaveFile(buffer);
+
+  // set Sample rate and bit rate
+  wav.toSampleRate(sample_rate);
+  wav.toBitDepth(bits + "");
+  
+  // Check some of the file properties
+  console.log("chunkSize", wav.chunkSize);
+  
+  // Call toBuffer() to get the bytes of the file.
+  // You can write the output straight to disk:
+  let wavBuffer = wav.toBuffer();
+
+  var characters = ""
+  for (var i in wavBuffer) {
+    characters += alphabet.charAt(wavBuffer[i])
+  }
+
+  // return
+  res.send(characters)
+})
+
 
 // generate audio file
 app.get('/api/gen_audio_from_samples/:audio_id/:bits/:sample_rate', function (req, res) {
