@@ -205,7 +205,7 @@ app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, re
   // get audio data from MongoDB
   const query = { "id": audio_id }
   Audio.findOne(query, function (err, audio) {
-    if (err) {
+    if (err || audio == null) {
       console.error(err)
       res.status(400).send("Audio not found")
     }
@@ -234,7 +234,7 @@ app.get('/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate', functi
 
   const query = { "id": audio_id }
   Audio.findOne(query, function (err, audio) {
-    if (err) {
+    if (err || audio == null) {
       console.error(err)
       res.status(400).send("Audio not found")
     }
@@ -266,7 +266,7 @@ app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function 
   
   const query = { "id": audio_id }
   Audio.findOne(query, function (err, audio) {
-    if (err) {
+    if (err || audio == null) {
       console.error(err)
       res.status(400).send("Audio not found")
     }
