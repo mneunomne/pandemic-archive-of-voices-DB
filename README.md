@@ -66,23 +66,25 @@ It consists of:
 
   `/api/get_audio_samples/:audio_id/:bits/:sample_rate`
 
-* **Get generated audio file from sample array (untested)**
-  
-  *Returns a audio file from the designated sample array, with a specific bit depth and sample rate*
-
-  `/api/gen_audio_from_samples/:audio_id/:bits/:sample_rate`
-
 * **Get compressed audio file**
   
   *Compresses and return the audio file from the databse with a designated bit depth and sample rate*
 
   `/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate`
 
-* **Get encrypted text from audio id **
+* **Get encrypted text from audio id**
    
    *Returns the audio waveform data converted into text based on "alphabet" encryption*
    
    `/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate`
+
+* **Get generated audio file from text string**
+  
+  *Returns an audio file from a character string, translating the characters into numbers, and then waveform*
+
+  `/api/get_audio_samples_characters/:text`
+
+
 
 ### POST
 

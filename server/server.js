@@ -31,6 +31,9 @@ const S3_BUCKET = process.env.S3_BUCKET;
 
 const alphabet = "撒健億媒間増感察総負街時哭병体封列効你老呆安发は切짜확로감外年와모ゼДが占乜산今もれすRビコたテパアEスどバウПm가бうクん스РりwАêãХйてシжغõ小éजভकöলレ入धबलخFসeवমوযиथशkحくúoनবएদYンदnuনمッьノкتبهtт一ادіاгرزरjvةзنLxっzэTपнлçşčतلイयしяトüषখথhцहیরこñóহリअعसमペيフdォドрごыСいگдとナZকইм三ョ나gшマで시Sقに口س介Иظ뉴そキやズВ자ص兮ض코격ダるなф리Юめき宅お世吃ま来店呼설진음염론波密怪殺第断態閉粛遇罩孽關警"
 
+const default_sample_rate = 8000
+const default_bits = "8"
+
 /* -------------------------------------------------
 Amazon S3
 ---------------------------------------------------*/
@@ -200,7 +203,7 @@ app.get('/api/audio_text/:text', function (req, res) {
 // Get sample array from audio id
 app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, res) {
   var bits = req.params.bits || 8
-  var sample_rate = req.params.sample_rate || 8000  
+  var sample_rate = req.params.sample_rate || default_sample_rate  
   var audio_id = req.params.audio_id
   // get audio data from MongoDB
   const query = { "id": audio_id }
@@ -229,7 +232,7 @@ app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, re
 // Get sample array from audio id as text based on alphabet encryption
 app.get('/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate', function (req, res) {
   var bits = req.params.bits || 8
-  var sample_rate = req.params.sample_rate || 8000  
+  var sample_rate = req.params.sample_rate || default_sample_rate  
   var audio_id = req.params.audio_id
 
   const query = { "id": audio_id }
@@ -261,7 +264,7 @@ app.get('/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate', functi
 // get compressed audio file
 app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function (req, res) {
   var bits = req.params.bits || 8
-  var sample_rate = req.params.sample_rate || 8000  
+  var sample_rate = req.params.sample_rate || default_sample_rate  
   var audio_id = req.params.audio_id
   
   const query = { "id": audio_id }
@@ -292,8 +295,8 @@ app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function 
 // generate audio file from int array 
 app.get('/api/gen_audio_from_samples/:bits/:sample_rate', function (req, res) {
   var samples = req.params.samples || [128]
-  var bits = (req.params.bits || "8") + ""
-  var sample_rate = req.params.sample_rate || 8000 
+  var bits = (req.params.bits || default_bits) + ""
+  var sample_rate = req.params.sample_rate || default_sample_rate 
 
   var wav = new WaveFile();
   // Create a WaveFile using the samples
@@ -307,19 +310,15 @@ app.get('/api/gen_audio_from_samples/:bits/:sample_rate', function (req, res) {
 })
 
 // generate audio file from string array 
-app.get('/api/gen_audio_from_text/:bits/:sample_rate/:text', function (req, res) {
-  var bits = (req.params.bits || "8") + ""
-  var sample_rate = req.params.sample_rate || 8000 
+app.get('/api/gen_audio_from_text/:text', function (req, res) {
   var text = req.params.text || "" 
-
   var samples = text.split("").map(c => alphabet.indexOf(c))
-  console.log("samples", samples)
-
   var wav = new WaveFile();
   // Create a WaveFile using the samples
-  wav.fromScratch(1, sample_rate, bits, samples);
-  
+  wav.fromScratch(1, default_sample_rate, default_bits, samples);
+  // write temp file
   fs.writeFileSync("temp/audio.wav", wav.toBuffer());
+  // send file back
   res.setHeader('Content-type', "audio/wav");
   res.sendFile(path.resolve('temp/audio.wav'), function() {
     fs.unlinkSync("temp/audio.wav");
