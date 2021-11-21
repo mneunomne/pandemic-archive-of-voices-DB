@@ -215,56 +215,19 @@ app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, re
       console.error(err)
       res.status(400).send("Audio not found")
     }
-
-    console.log("audio.path", audio.path)
-    // res.json(audio)
+    // download audio file from S3 Amazon
     https.get(audio.path, (result) => {
-      console.log('statusCode:', result.statusCode);
-      console.log('headers:', result.headers);
       var data = [];
       result.on('data', (chunk) => {
         data.push(chunk);
       }).on('end', function() {
-        var buffer = Buffer.concat(data);
-        // Load a wav file buffer as a WaveFile object
-        let wav = new WaveFile(buffer);
-        // set Sample rate and bit rate
-        wav.toSampleRate(sample_rate);
-        wav.toBitDepth(bits + "");
-        // Check some of the file properties
-        console.log("chunkSize", wav.chunkSize);
-        // Call toBuffer() to get the bytes of the file.
-        // You can write the output straight to disk:
-        let wavBuffer = wav.toBuffer();
-        // return
+        let wavBuffer = getWavBufferFromAudioData(data, bits, sample_rate) 
         res.json(wavBuffer)
-    });
+      });
     }).on('error', (e) => {
       console.error(e);
       res.status(500)
     });
-
-    /*
-
-    if (err) {
-        console.error(err)
-        res.status(500).send("error on download file")
-      }
-      const buffer = Buffer.from(_req.data, "utf-8")
-      // Load a wav file buffer as a WaveFile object
-      let wav = new WaveFile(buffer);
-      // set Sample rate and bit rate
-      wav.toSampleRate(sample_rate);
-      wav.toBitDepth(bits + "");
-      // Check some of the file properties
-      console.log("chunkSize", wav.chunkSize);
-      // Call toBuffer() to get the bytes of the file.
-      // You can write the output straight to disk:
-      let wavBuffer = wav.toBuffer();
-      // return
-      res.json(wavBuffer)
-
-      */
   })
 })
 
@@ -274,37 +237,62 @@ app.get('/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate', functi
   var bits = req.params.bits || 8
   var sample_rate = req.params.sample_rate || 8000  
   var audio_id = req.params.audio_id
-  var audio_data = db_data.audios.find(a => a.id == audio_id)
 
-  if (audio_data == null || audio_data == undefined) {
-    res.status(400).send("Not a valid file id")
-    return
-  }
+  const query = { "id": audio_id }
+  Audio.findOne(query, function (err, audio) {
+    if (err) {
+      console.error(err)
+      res.status(400).send("Audio not found")
+    }
+    // download audio file from S3 Amazon
+    https.get(audio.path, (result) => {
+      var data = [];
+      result.on('data', (chunk) => {
+        data.push(chunk);
+      }).on('end', function() {
+        let wavBuffer = getWavBufferFromAudioData(data, bits, sample_rate) 
+        var characters = ""
+        for (var i in wavBuffer) {
+          characters += alphabet.charAt(wavBuffer[i])
+        }
+        res.json(characters)
+      });
+    }).on('error', (e) => {
+      console.error(e);
+      res.status(500)
+    });
+  })
+})
 
-  // read file
-  var buffer = fs.readFileSync(`public/${audio_data.file}`);
+// get compressed audio file
+app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function (req, res) {
+  var bits = req.params.bits || 8
+  var sample_rate = req.params.sample_rate || 8000  
+  var audio_id = req.params.audio_id
   
-  // Load a wav file buffer as a WaveFile object
-  let wav = new WaveFile(buffer);
-
-  // set Sample rate and bit rate
-  wav.toSampleRate(sample_rate);
-  wav.toBitDepth(bits + "");
-  
-  // Check some of the file properties
-  console.log("chunkSize", wav.chunkSize);
-  
-  // Call toBuffer() to get the bytes of the file.
-  // You can write the output straight to disk:
-  let wavBuffer = wav.toBuffer();
-
-  var characters = ""
-  for (var i in wavBuffer) {
-    characters += alphabet.charAt(wavBuffer[i])
-  }
-
-  // return
-  res.send(characters)
+  const query = { "id": audio_id }
+  Audio.findOne(query, function (err, audio) {
+    if (err) {
+      console.error(err)
+      res.status(400).send("Audio not found")
+    }
+    // download audio file from S3 Amazon
+    https.get(audio.path, (result) => {
+      var data = [];
+      result.on('data', (chunk) => {
+        data.push(chunk);
+      }).on('end', function() {
+        let wavBuffer = getWavBufferFromAudioData(data, bits, sample_rate) 
+        fs.writeFileSync("temp/audio.wav", wavBuffer);
+        res.setHeader('Content-type', "audio/wav");
+        res.sendFile(path.resolve('temp/audio.wav'));
+        res.json(wavBuffer)
+      });
+    }).on('error', (e) => {
+      console.error(e);
+      res.status(500)
+    });
+  })
 })
 
 
@@ -325,33 +313,20 @@ app.get('/api/gen_audio_from_samples/:audio_id/:bits/:sample_rate', function (re
   });
 })
 
-// get compressed audio file
-app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function (req, res) {
-  var bits = req.params.bits || 8
-  var sample_rate = req.params.sample_rate || 8000  
-  var audio_id = req.params.audio_id
-  var audio_data = db_data.audios.find(a => a.id == audio_id)
-  
-  if (audio_data == null || audio_data == undefined) {
-    res.status(400).send("Not a valid file id")
-    return
-  }
+/* -------------------------------------------------
+Helper functions for the waveform processing business
+---------------------------------------------------*/
 
-  // read file
-  var buffer = fs.readFileSync(`public/${audio_data.file}`);
-  
+const getWavBufferFromAudioData = (data, bits, sample_rate) => {
+  var buffer = Buffer.concat(data);
   // Load a wav file buffer as a WaveFile object
   let wav = new WaveFile(buffer);
-
   // set Sample rate and bit rate
   wav.toSampleRate(sample_rate);
   wav.toBitDepth(bits + "");
-
-  fs.writeFileSync("temp/audio.wav", wav.toBuffer());
-  res.setHeader('Content-type', "audio/wav");
-  res.sendFile(path.resolve('temp/audio.wav'));
-  //fs.unlinkSync("temp/audio.wav");
-})
+  // Check some of the file properties
+  return wav.toBuffer();
+}
 /* -------------------------------------------------
 POST
 ---------------------------------------------------*/
