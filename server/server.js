@@ -96,12 +96,6 @@ markdownReadMe = markdownReadMe.concat(`<style>body { font-family: 'Courier New'
 fs.writeFileSync('./public/README.html', markdownReadMe);
 
 /* -------------------------------------------------
-Read data.json file
----------------------------------------------------*/
-var db_json = fs.readFileSync('public/db/data.json')
-var db_data = JSON.parse(db_json)
-
-/* -------------------------------------------------
 Express configs
 ---------------------------------------------------*/
 app.use(express.urlencoded({ extended: true }))
@@ -286,7 +280,6 @@ app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function 
         fs.writeFileSync("temp/audio.wav", wavBuffer);
         res.setHeader('Content-type', "audio/wav");
         res.sendFile(path.resolve('temp/audio.wav'));
-        res.json(wavBuffer)
       });
     }).on('error', (e) => {
       console.error(e);
@@ -296,17 +289,37 @@ app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function 
 })
 
 
-// generate audio file
-app.get('/api/gen_audio_from_samples/:audio_id/:bits/:sample_rate', function (req, res) {
-  var samples = req.params.samples || [0, 0, 0, 0]
+// generate audio file from int array 
+app.get('/api/gen_audio_from_samples/:bits/:sample_rate', function (req, res) {
+  var samples = req.params.samples || [128]
   var bits = (req.params.bits || "8") + ""
   var sample_rate = req.params.sample_rate || 8000 
 
-  var wav2 = new WaveFile();
+  var wav = new WaveFile();
   // Create a WaveFile using the samples
-  wav2.fromScratch(1, sample_rate, bits, samples);
+  wav.fromScratch(1, sample_rate, bits, samples);
   
-  fs.writeFileSync("temp/audio.wav", wav2.toBuffer());
+  fs.writeFileSync("temp/audio.wav", wav.toBuffer());
+  res.setHeader('Content-type', "audio/wav");
+  res.sendFile(path.resolve('temp/audio.wav'), function() {
+    fs.unlinkSync("temp/audio.wav");
+  });
+})
+
+// generate audio file from string array 
+app.get('/api/gen_audio_from_text/:bits/:sample_rate/:text', function (req, res) {
+  var bits = (req.params.bits || "8") + ""
+  var sample_rate = req.params.sample_rate || 8000 
+  var text = req.params.text || "" 
+
+  var samples = text.split("").map(c => alphabet.indexOf(c))
+  console.log("samples", samples)
+
+  var wav = new WaveFile();
+  // Create a WaveFile using the samples
+  wav.fromScratch(1, sample_rate, bits, samples);
+  
+  fs.writeFileSync("temp/audio.wav", wav.toBuffer());
   res.setHeader('Content-type', "audio/wav");
   res.sendFile(path.resolve('temp/audio.wav'), function() {
     fs.unlinkSync("temp/audio.wav");
