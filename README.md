@@ -90,6 +90,12 @@ It consists of:
 
   `/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate`
 
+* **Get encrypted text from audio id **
+   
+   *Returns the audio waveform data converted into text based on "alphabet" encryption*
+   
+   `/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate`
+
 ### POST
 
 * **POST new audio**
