@@ -82,9 +82,9 @@ Start http(s) server
 ---------------------------------------------------*/
   
 // LOCAL ENV
-server = http.Server(app)
+// server = http.Server(app)
 // REMOTE ENV
-// server = https.Server(app)}
+server = https.Server(app)
 
 /* -------------------------------------------------
 Generate README html 
