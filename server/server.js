@@ -239,7 +239,7 @@ app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, re
 })
 
 
-// Get sample array from audio id
+// Get sample array from audio id as text based on alphabet encryption
 app.get('/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate', function (req, res) {
   var bits = req.params.bits || 8
   var sample_rate = req.params.sample_rate || 8000  
