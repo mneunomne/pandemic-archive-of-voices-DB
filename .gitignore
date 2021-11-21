@@ -1,5 +1,5 @@
 public/db_test
-public/db/audios
+public/db
 node_modules
 package-lock.json
 .DS_Store
