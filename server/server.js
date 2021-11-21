@@ -19,6 +19,7 @@ const https = require('https')
 const mongoose = require ("mongoose")
 var aws = require('aws-sdk');
 const WaveFile = require('wavefile').WaveFile;
+const request = require('request');
 
 /* -------------------------------------------------
 Global vars
@@ -82,9 +83,9 @@ Start http(s) server
 ---------------------------------------------------*/
   
 // LOCAL ENV
-// server = http.Server(app)
+server = http.Server(app)
 // REMOTE ENV
-server = https.Server(app)
+// server = https.Server(app)
 
 /* -------------------------------------------------
 Generate README html 
@@ -157,52 +158,49 @@ app.get('/api/data', function (req, res) {
 })
 
 app.get('/api/speakers', function (req, res) {
-  let obj = JSON.parse(db_json);
-  res.json(obj.speakers);
-})
-
-app.get('/speaker_id/:id', function (req, res) {
-  let id = parseInt(req.params.id)
-  let obj = JSON.parse(db_json);
-  let audios = obj.audios.filter(a => {
-    return a.from_id === id
+  User.find({}, function (err, users) {
+    if (err) console.error(err)
+    res.json(users)
   })
-  res.json(audios);
 })
 
+// get audios from speaker id
+app.get('/speaker_id/:id', function (req, res) {
+  let user_id = req.params.id
+  const query = { 'user_id': user_id };
+  Audio.find(query, function (err, audios) {
+    if (err) console.error(err)
+    res.json(audios)
+  })
+})
+
+// get audios from speaker from speaker name (contains)
 app.get('/api/speaker/:name', function (req, res) {
   let name = req.params.name.toLowerCase()
-  let obj = JSON.parse(db_json);
-  let audios = obj.audios.filter(a => a.from.toLowerCase().includes(name))
-  res.json(audios);
+  const query = { "name": new RegExp(name, 'i') }
+  Audio.find(query, function (err, audios) {
+    if (err) console.error(err)
+    res.json(audios)
+  })
 })
 
+// get single audio from audio id
 app.get('/api/audio_id/:id', function (req, res) {
-  let id = req.params.id
-  let obj = JSON.parse(db_json);
-  let audio = obj.audios.find(a => a.id === id)
-  res.json(audio);
+  let audio_id = req.params.id
+  const query = { "id": audio_id }
+  Audio.findOne(query, function (err, audio) {
+    if (err) console.error(err)
+    res.json(audio)
+  })
 })
 
 app.get('/api/audio_text/:text', function (req, res) {
   let text = req.params.text
-  let obj = JSON.parse(db_json);
-  let audios = obj.audios.filter(a => a.text.toLowerCase().includes(text))
-  res.json(audios);
-})
-
-app.get('/api/audio_lang_name/:lang_name', function (req, res) {
-  let lang_name = req.params.lang_name
-  let obj = JSON.parse(db_json);
-  let audios = obj.audios.filter(a => a.lang.name.toLowerCase().includes(lang_name))
-  res.json(audios);
-})
-
-app.get('/api/audio_lang_code/:lang_code', function (req, res) {
-  let lang_code = req.params.lang_code
-  let obj = JSON.parse(db_json);
-  let audios = obj.audios.filter(a => a.lang.code.toLowerCase().includes(lang_code))
-  res.json(audios);
+  const query = { "name": new RegExp(text, 'i') }
+  Audio.find(query, function (err, audios) {
+    if (err) console.error(err)
+    res.json(audios)
+  })
 })
 
 // Get sample array from audio id
@@ -210,32 +208,64 @@ app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, re
   var bits = req.params.bits || 8
   var sample_rate = req.params.sample_rate || 8000  
   var audio_id = req.params.audio_id
-  var audio_data = db_data.audios.find(a => a.id == audio_id)
+  // get audio data from MongoDB
+  const query = { "id": audio_id }
+  Audio.findOne(query, function (err, audio) {
+    if (err) {
+      console.error(err)
+      res.status(400).send("Audio not found")
+    }
 
-  if (audio_data == null || audio_data == undefined) {
-    res.status(400).send("Not a valid file id")
-    return
-  }
+    console.log("audio.path", audio.path)
+    // res.json(audio)
+    https.get(audio.path, (result) => {
+      console.log('statusCode:', result.statusCode);
+      console.log('headers:', result.headers);
+      var data = [];
+      result.on('data', (chunk) => {
+        data.push(chunk);
+      }).on('end', function() {
+        var buffer = Buffer.concat(data);
+        // Load a wav file buffer as a WaveFile object
+        let wav = new WaveFile(buffer);
+        // set Sample rate and bit rate
+        wav.toSampleRate(sample_rate);
+        wav.toBitDepth(bits + "");
+        // Check some of the file properties
+        console.log("chunkSize", wav.chunkSize);
+        // Call toBuffer() to get the bytes of the file.
+        // You can write the output straight to disk:
+        let wavBuffer = wav.toBuffer();
+        // return
+        res.json(wavBuffer)
+    });
+    }).on('error', (e) => {
+      console.error(e);
+      res.status(500)
+    });
 
-  // read file
-  var buffer = fs.readFileSync(`public/${audio_data.file}`);
-  
-  // Load a wav file buffer as a WaveFile object
-  let wav = new WaveFile(buffer);
+    /*
 
-  // set Sample rate and bit rate
-  wav.toSampleRate(sample_rate);
-  wav.toBitDepth(bits + "");
-  
-  // Check some of the file properties
-  console.log("chunkSize", wav.chunkSize);
-  
-  // Call toBuffer() to get the bytes of the file.
-  // You can write the output straight to disk:
-  let wavBuffer = wav.toBuffer();
+    if (err) {
+        console.error(err)
+        res.status(500).send("error on download file")
+      }
+      const buffer = Buffer.from(_req.data, "utf-8")
+      // Load a wav file buffer as a WaveFile object
+      let wav = new WaveFile(buffer);
+      // set Sample rate and bit rate
+      wav.toSampleRate(sample_rate);
+      wav.toBitDepth(bits + "");
+      // Check some of the file properties
+      console.log("chunkSize", wav.chunkSize);
+      // Call toBuffer() to get the bytes of the file.
+      // You can write the output straight to disk:
+      let wavBuffer = wav.toBuffer();
+      // return
+      res.json(wavBuffer)
 
-  // return
-  res.json(wavBuffer)
+      */
+  })
 })
 
 

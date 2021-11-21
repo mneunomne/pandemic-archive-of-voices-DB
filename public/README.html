@@ -44,14 +44,6 @@
 <p><em>Returns all audios that <strong>contain</strong> the <code>text</code> in the transcription value <code>text</code> in audio object</em></p>
 <p><code>/api/audio_id/:text</code></p>
 </li>
-<li><p><strong>Get audios by language name</strong></p>
-<p><em>Returns all audios that <strong>contain</strong> the <code>lang_name</code> in the <code>name</code> paramenter inside <code>lang</code> in audio object</em></p>
-<p><code>/api/audio_lang_name/:lang_name</code></p>
-</li>
-<li><p><strong>Get audios by audio text</strong></p>
-<p><em>Returns all audios that <strong>contain</strong> the <code>lang_code</code> in the <code>code</code> paramenter inside <code>lang</code> in audio object</em></p>
-<p><code>/api/audio_lang_code/:lang_code</code></p>
-</li>
 <li><p><strong>Get sample array from audio id</strong></p>
 <p><em>Returns the sample array of a particular audio in the database</em></p>
 <p><code>/api/get_audio_samples/:audio_id/:bits/:sample_rate</code></p>
@@ -63,6 +55,10 @@
 <li><p><strong>Get compressed audio file</strong></p>
 <p><em>Compresses and return the audio file from the databse with a designated bit depth and sample rate</em></p>
 <p><code>/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate</code></p>
+</li>
+<li><p>**Get encrypted text from audio id **</p>
+<p> <em>Returns the audio waveform data converted into text based on &quot;alphabet&quot; encryption</em></p>
+<p> <code>/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate</code></p>
 </li>
 </ul>
 <h3 id="post">POST</h3>

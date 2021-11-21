@@ -60,18 +60,6 @@ It consists of:
 
   `/api/audio_id/:text`
 
-* **Get audios by language name**
-  
-  *Returns all audios that **contain** the `lang_name` in the `name` paramenter inside `lang` in audio object*
-
-  `/api/audio_lang_name/:lang_name`
-
-* **Get audios by audio text**
-  
-  *Returns all audios that **contain** the `lang_code` in the `code` paramenter inside `lang` in audio object*
-
-  `/api/audio_lang_code/:lang_code`
-
 * **Get sample array from audio id**
   
   *Returns the sample array of a particular audio in the database*
