@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sound Writing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="stylesheet" href="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400&display=swap" rel="stylesheet">
+    <script src="../lib/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/wavefile"></script>
+
+    <style>
+      body{
+        margin: 0px; 
+        padding:0px;
+        overflow: hidden;
+        height: 100vh;
+      }
+      #textarea {
+        font-family: 'Arial', monospace;
+        font-size: 12px;
+        width: 100%;
+        height: 100%;
+        color: #111111;
+        resize: none;
+        border: none;
+      }
+      #audio {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="audio" controls><source id="source" src="" type="audio/wav"/></audio>
+    <textarea id="textarea"></textarea>
+    <script src="script.js" ></script>
+  </body>
+</html>

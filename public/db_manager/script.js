@@ -1,4 +1,4 @@
-const server_url = (location.hostname.includes('127.0.0.1') || location.hostname.includes('localhost')) ? `http://localhost:7777` : `https://pandemic-archive-of-voices-db.herokuapp.com`
+const server_url = (location.hostname.includes('127.0.0.1') || location.hostname.includes('localhost')) ? `http://localhost:3000` : `https://pandemic-archive-of-voices-db.herokuapp.com`
 
 var json_data;
 

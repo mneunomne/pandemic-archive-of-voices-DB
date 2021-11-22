@@ -6,7 +6,7 @@
   "scripts": {
     "convert": "nodemon server/convert_audios.js",
     "extract": "nodemon server/extract_data.js",
-    "start": "nodemon server/server.js",
+    "start": "nodemon --max-http-header-size 15000 server/server.js",
     "post": "nodemon server/post.js",
     "compress": "cd public/ && zip -r db.zip db/",
     "migrate": "nodemon server/migrate_to_mongodb.js"

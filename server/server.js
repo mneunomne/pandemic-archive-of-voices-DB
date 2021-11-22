@@ -87,13 +87,13 @@ Start http(s) server
 
 if (process.env.LOCAL == "1") {
   // LOCAL ENV
-  server = http.Server(app)
+  server = http.Server({maxHeaderSize: 16384}, app)
   console.log("Created HTTP Server!", process.env.LOCAL)
 } else {
   // REMOTE ENV
-  server = http.Server(app)
+  server = http.Server({maxHeaderSize: 16384}, app)
   // server = https.Server(app)
-  console.log("Created HTTPS Server!", process.env.LOCAL)
+  //console.log("Created HTTPS Server!", process.env.LOCAL)
 }
 
 /* -------------------------------------------------
@@ -308,27 +308,22 @@ app.get('/api/gen_audio_from_samples/:bits/:sample_rate', function (req, res) {
   // Create a WaveFile using the samples
   wav.fromScratch(1, sample_rate, bits, samples);
   
-  fs.writeFileSync("temp/audio.wav", wav.toBuffer());
+  fs.writeFileSync("public/temp/audio.wav", wav.toBuffer());
   res.setHeader('Content-type', "audio/wav");
-  res.sendFile(path.resolve('temp/audio.wav'), function() {
-    fs.unlinkSync("temp/audio.wav");
-  });
+  res.sendFile(path.resolve('public/temp/audio.wav'));
 })
 
 // generate audio file from string array 
-app.get('/api/gen_audio_from_text/:text', function (req, res) {
-  var text = req.params.text || "" 
+app.get('/api/gen_audio_from_text', function (req, res) {
+  var text = req.body.text || "" 
   var samples = text.split("").map(c => alphabet.indexOf(c))
   var wav = new WaveFile();
   // Create a WaveFile using the samples
   wav.fromScratch(1, default_sample_rate, default_bits, samples);
-  // write temp file
-  fs.writeFileSync("temp/audio.wav", wav.toBuffer());
   // send file back
+  fs.writeFileSync("public/temp/audio.wav", wav.toBuffer());
   res.setHeader('Content-type', "audio/wav");
-  res.sendFile(path.resolve('temp/audio.wav'), function() {
-    fs.unlinkSync("temp/audio.wav");
-  });
+  res.sendFile(path.resolve('public/temp/audio.wav'));
 })
 
 /* -------------------------------------------------
