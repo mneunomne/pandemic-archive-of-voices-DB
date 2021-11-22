@@ -48,17 +48,17 @@
 <p><em>Returns the sample array of a particular audio in the database</em></p>
 <p><code>/api/get_audio_samples/:audio_id/:bits/:sample_rate</code></p>
 </li>
-<li><p><strong>Get generated audio file from sample array (untested)</strong></p>
-<p><em>Returns a audio file from the designated sample array, with a specific bit depth and sample rate</em></p>
-<p><code>/api/gen_audio_from_samples/:audio_id/:bits/:sample_rate</code></p>
-</li>
 <li><p><strong>Get compressed audio file</strong></p>
 <p><em>Compresses and return the audio file from the databse with a designated bit depth and sample rate</em></p>
 <p><code>/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate</code></p>
 </li>
-<li><p>**Get encrypted text from audio id **</p>
+<li><p><strong>Get encrypted text from audio id</strong></p>
 <p> <em>Returns the audio waveform data converted into text based on &quot;alphabet&quot; encryption</em></p>
 <p> <code>/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate</code></p>
+</li>
+<li><p><strong>Get generated audio file from text string</strong></p>
+<p><em>Returns an audio file from a character string, translating the characters into numbers, and then waveform</em></p>
+<p><code>/api/get_audio_samples_characters/:text</code></p>
 </li>
 </ul>
 <h3 id="post">POST</h3>
