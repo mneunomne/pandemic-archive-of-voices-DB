@@ -91,7 +91,8 @@ if (process.env.LOCAL == "1") {
   console.log("Created HTTP Server!", process.env.LOCAL)
 } else {
   // REMOTE ENV
-  server = https.Server(app)
+  server = http.Server(app)
+  // server = https.Server(app)
   console.log("Created HTTPS Server!", process.env.LOCAL)
 }
 
