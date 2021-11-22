@@ -84,11 +84,14 @@ const User = mongoose.model('User', mongoose.Schema({
 /* -------------------------------------------------
 Start http(s) server
 ---------------------------------------------------*/
-  
-// LOCAL ENV
-server = http.Server(app)
-// REMOTE ENV
-// server = https.Server(app)
+
+if (process.env.LOCAL == "1") {
+  // LOCAL ENV
+  server = http.Server(app)
+} else {
+  // REMOTE ENV
+  server = https.Server(app)
+}
 
 /* -------------------------------------------------
 Generate README html 
@@ -231,7 +234,7 @@ app.get('/api/get_audio_samples/:audio_id/:bits/:sample_rate', function (req, re
 
 // Get sample array from audio id as text based on alphabet encryption
 app.get('/api/get_audio_samples_characters/:audio_id/:bits/:sample_rate', function (req, res) {
-  var bits = req.params.bits || 8
+  var bits = req.params.bits || default_bits
   var sample_rate = req.params.sample_rate || default_sample_rate  
   var audio_id = req.params.audio_id
 
