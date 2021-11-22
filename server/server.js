@@ -88,9 +88,11 @@ Start http(s) server
 if (process.env.LOCAL == "1") {
   // LOCAL ENV
   server = http.Server(app)
+  console.log("Created HTTP Server")
 } else {
   // REMOTE ENV
   server = https.Server(app)
+  console.log("Created HTTPS Server")
 }
 
 /* -------------------------------------------------
