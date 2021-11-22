@@ -142,7 +142,6 @@ Contribition form
 
 - Restricted use of content manager
 - Restricted use of contribution form
-- Clean old code
 - Fix contribution form errors on iPhone devices
 
 ## References
