@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platten Gestaltung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../lib/jquery-3.6.0.min.js"></script>
+  <script src="./script.js"></script>
+  <style>
+    body {
+      font-family: 'Roboto Mono';
+    }
+
+    label {
+      font-size: 12px;
+    }
+    .col-50 {
+      position: fixed;
+      width: 50%;
+      height: 100%;
+    }
+    .col-50_content {
+      padding: 1em;
+    }
+    #l-side {
+      left: 0;
+      top:0;
+      bottom: 0;
+    }
+    #r-side {
+      right: 0;
+      top:0;
+      bottom: 0;
+    }
+
+    #content {
+      width: 100%;
+      height: 300px;
+      font-size: 9px;
+      font-family: 'Arial Unicode MS';
+    }
+
+    p, span {
+      font-size: 11px;
+    }
+
+    .input_section {
+      margin-top: 1em;
+    }
+
+    #canvas svg {
+      left: 50%;
+      top: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: beige;
+      filter: drop-shadow( 0px 0px 14px rgba(0, 0, 0, .7));
+    }
+
+    .warning {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="col-50" id="l-side">
+    <div class="col-50_content">
+      <h1>Platten Gestaltung</h1>
+
+      <h3>Piece Dimentions</h3>
+      <div class="input_section">
+        <!-- piece width -->
+        <label for="width">Width (mm)</label>
+        <input type="number" id="width" name="width" min="50" max="1000"/>
+        <!-- piece height -->
+        <label for="height">Height (mm)</label>
+        <input type="number" id="height" name="height" min="50" max="100"/>
+        <!-- margin -->
+        <label for="margin">Margin (mm)</label>
+        <input type="number" id="margin" name="margin" min="1" max="100"/>
+      </div>
+      <h3>Lettering</h3>
+      <div class="input_section">
+        <!-- font size -->
+        <label for="font_size">Font-size (px)</label>
+        <input type="number" id="font_size" name="font_size" min="5" max="100"/>
+      </div>
+      <div class="input_section">
+        <!-- letter spacing X -->
+        <label for="letter_spacing_x">Letter-spacing X (mm)</label>
+        <input type="number" id="letter_spacing_x" name="letter_spacing_x" min="1" max="100"/>
+
+        <!-- letter spacing Y -->
+        <label for="letter_spacing_y">Letter-spacing Y (mm)</label>
+        <input type="number" id="letter_spacing_y" name="letter_spacing_y" min="1" max="100"/>
+        
+      </div>
+      <h3>Content</h3>
+      <div class="input_section">
+        <!-- text area -->
+        <textarea id="content"></textarea>
+        <p>length: <span id="content_length"></span> <span class="warning" style="display: none;">overflow!</span></p>
+      </div>
+      <div class="input_section">
+        <button id="download">download svg</button>
+        <a download="download.svg" href="" id="link"></a>
+      </div>
+      <h3>Data</h3>
+      <div class="input_section">
+        <!-- audio id -->
+        <label for="audio_id">Audio Id</label>
+        <input type="text" id="audio_id" name="audio_id" min="10" max="100"/>
+      </div>
+      <div class="input_section">
+        <button>save to database</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-50" id="r-side">
+    <div id="canvas">
+      <svg font-family="Arial Unicode MS" preserveAspectRatio="xMinYMin" width="100" height="100"></svg>
+    </div>
+  </div>
+</body>
+</html>

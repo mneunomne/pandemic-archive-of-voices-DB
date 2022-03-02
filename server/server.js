@@ -272,7 +272,6 @@ app.get('/api/get_compressed_audio_file/:audio_id/:bits/:sample_rate', function 
   var bits = req.params.bits || 8
   var sample_rate = req.params.sample_rate || default_sample_rate  
   var audio_id = req.params.audio_id
-  
   const query = { "id": audio_id }
   Audio.findOne(query, function (err, audio) {
     if (err || audio == null) {
@@ -316,6 +315,7 @@ app.get('/api/gen_audio_from_samples/:bits/:sample_rate', function (req, res) {
 // generate audio file from string array 
 app.get('/api/gen_audio_from_text', function (req, res) {
   var text = req.body.text || "" 
+  console.log("text", text)
   var samples = text.split("").map(c => alphabet.indexOf(c))
   var wav = new WaveFile();
   // Create a WaveFile using the samples

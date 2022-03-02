@@ -25,7 +25,7 @@ const onTextChange = function () {
 // var wav = new wavefile.WaveFile();
 
 var submitText = function (text) {
-  console.log("submitText", text)
+  console.log("submitText", text.length)
   var samples = text.split("").map(c => alphabet.indexOf(c))
   var wav = new wavefile.WaveFile();
   // Create a WaveFile using the samples
