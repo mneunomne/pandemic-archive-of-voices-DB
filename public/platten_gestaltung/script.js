@@ -119,7 +119,13 @@ $(document).ready(() => {
 
     $("#download").click(downloadSvg)
 
-    $(window).resize(updateSize())
+    $("#play_audio").click(playSound)
+
+    $(window).on('resize', updateSize)
+  }
+
+  const playSound = function () {
+    text2Audio(current_data['content'], false)
   }
 
   const downloadSvg = function () {

@@ -14,53 +14,12 @@ var timeout = null
 const onTextChange = function () {
   if (timeout == null) {
     timeout = setTimeout(function () {
-      submitText(textarea.val())
+      text2Audio(textarea.val(), true)
     }, 1000)  
   } else {
     clearTimeout(timeout)
     timeout = null
   }
-}
-
-// var wav = new wavefile.WaveFile();
-
-var submitText = function (text) {
-  console.log("submitText", text.length)
-  var samples = text.split("").map(c => alphabet.indexOf(c))
-  var wav = new wavefile.WaveFile();
-  // Create a WaveFile using the samples
-  wav.fromScratch(1, default_sample_rate, default_bits, samples);
-  let wavDataURI = wav.toDataURI();
-  console.log("wavDataURI", wavDataURI)
-  source.src = wavDataURI;
-  audio.load();
-  audio.loop = true;
-  audio.play();
-
-  /*
-  $.ajax({
-    url: `${server_url}/api/gen_audio_from_text`,
-    type: "POST",
-    data: {text: text},
-    success: function(data){
-      console.log("data", data);
-      
-      //var blob = new Blob(data, {type: "audio/wav"});
-      const url = data
-
-      console.log("url", url)
-      
-      // Insert blob object URL into audio element & play.
-      source.src = url;
-      audio.load();
-      // audio.loop = true;
-      audio.play();
-    },
-    error: function(err){
-      console.err("err",err);
-    }
-  })
-  */
 }
 
 textarea.focus()

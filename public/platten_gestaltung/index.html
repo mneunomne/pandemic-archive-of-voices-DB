@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400&display=swap" rel="stylesheet">
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../lib/jquery-3.6.0.min.js"></script>
-  <script src="./script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/wavefile"></script>
+  <script src="../js/text2audio.js"></script>
   <style>
     body {
       font-family: 'Roboto Mono';
@@ -20,7 +21,6 @@
       font-size: 12px;
     }
     .col-50 {
-      position: fixed;
       width: 50%;
       height: 100%;
     }
@@ -28,11 +28,13 @@
       padding: 1em;
     }
     #l-side {
+      position: absolute;
       left: 0;
       top:0;
       bottom: 0;
     }
     #r-side {
+      position: fixed;
       right: 0;
       top:0;
       bottom: 0;
@@ -107,14 +109,20 @@
         <p>length: <span id="content_length"></span> <span class="warning" style="display: none;">overflow!</span></p>
       </div>
       <div class="input_section">
-        <button id="download">download svg</button>
-        <a download="download.svg" href="" id="link"></a>
+        <button id="play_audio">play audio</button>
       </div>
       <h3>Data</h3>
       <div class="input_section">
-        <!-- audio id -->
-        <label for="audio_id">Audio Id</label>
-        <input type="text" id="audio_id" name="audio_id" min="10" max="100"/>
+        <!-- download .svg file-->
+        <div class="input_section">
+          <button id="download">download svg</button>
+          <a download="download.svg" href="" id="link"></a>
+        </div>
+        <div class="input_section">
+          <!-- audio id -->
+          <label for="audio_id">Audio Id</label>
+          <input type="text" id="audio_id" name="audio_id" min="10" max="100"/>
+        </div>
       </div>
       <div class="input_section">
         <button>save to database</button>
@@ -127,5 +135,6 @@
       <svg font-family="Arial Unicode MS" preserveAspectRatio="xMinYMin" width="100" height="100"></svg>
     </div>
   </div>
+  <script src="./script.js"></script>
 </body>
 </html>
