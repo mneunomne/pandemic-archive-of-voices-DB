@@ -5,7 +5,7 @@ $(document).ready(() => {
     width: 320,
     height: 450,
     margin: 15.0,
-    font_size: 18,
+    font_size: 5,
     letter_spacing_x: 5.0,
     letter_spacing_y: 7.0,
     content: '',
@@ -21,6 +21,8 @@ $(document).ready(() => {
     letter_spacing_y: $("#letter_spacing_y"),
     content: $("#content"),
   }
+
+  var json_data = {}
   
   var current_data = default_data
 
@@ -54,6 +56,7 @@ $(document).ready(() => {
 
   const updateText = function (text) {
     if (text == undefined || text.length == 0) return;
+    var positions = []
     console.log("updateText", text, text.length)
     // clear svg file
     svg.selectAll("*").remove()
@@ -72,20 +75,48 @@ $(document).ready(() => {
     var letter_spacing_y = parseFloat(current_data['letter_spacing_y'])
     // if text overflow, show a warning
     var overflow = false
+    var index = 0
     for (var c in chars) {
       if (x >= width-margin) {
         x = margin
         y += letter_spacing_y
       }
-      if (y > height) overflow = true 
+      if (y > height) overflow = true
       svg.append("text")
       .attr("x", x + 'mm')
-      .attr("y", y + 'mm')
-      .style("font-size", `${font_size}px`)
+      .attr("y", y + font_size/1.8 + 'mm')
+      .style("font-size", `${font_size}mm`)
       .style("text-anchor", "middle")
+      .style("dominant-baseline", "middle")
       .text(chars[c]);
+      svg.append("rect")
+      .attr("x", x - font_size/2 + 'mm')
+      .attr("y", y + 'mm')
+      .attr("width", font_size + 'mm')
+      .attr("height", font_size + 'mm')
+      .attr("stroke", "red")
+      .attr("fill", "transparent")
+      positions.push({
+        "char": chars[c],
+        "x": x/width,
+        "y": y/height,
+        "w": font_size/width,
+        "h": font_size/height,
+        "index": index
+      })
+      index++
       x+= letter_spacing_x
     }
+    // current_positions = positions
+    json_data = JSON.stringify({
+      width,
+      height,
+      margin,
+      letter_spacing_x,
+      letter_spacing_y,
+      positions
+    })
+    // console.log('current_positions', current_positions)
     if (overflow) {
       $(".warning").show()
     } else {
@@ -117,7 +148,8 @@ $(document).ready(() => {
       })
     }
 
-    $("#download").click(downloadSvg)
+    $("#download-svg").click(downloadSvg)
+    $("#download-json").click(downloadJson)
 
     $("#play_audio").click(playSound)
 
@@ -156,9 +188,17 @@ $(document).ready(() => {
     var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
 
     //set url value to a element's href attribute.
-    document.getElementById("link").href = url;
-    document.getElementById("link").textContent = "download"
+    document.getElementById("link-svg").href = url;
+    document.getElementById("link-svg").textContent = "download"
     //you can download svg file by right click menu.
+  }
+
+  const downloadJson = function () {
+    console.log("current_data", json_data)
+    var url = "data:application/json;charset=utf-8,"+json_data;
+     //set url value to a element's href attribute.
+     document.getElementById("link-json").href = url;
+     document.getElementById("link-json").textContent = "download"
   }
 
   init()
