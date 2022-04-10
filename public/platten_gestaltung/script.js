@@ -9,6 +9,8 @@ $(document).ready(() => {
     letter_spacing_x: 1,
     letter_spacing_y: 1,
     content: '',
+    cols: 0,
+    rows: 0,
     audio_id: 500+Math.floor(Math.random()*499)
   }
 
@@ -23,6 +25,9 @@ $(document).ready(() => {
     letter_spacing_x: $("#letter_spacing_x"),
     letter_spacing_y: $("#letter_spacing_y"),
     content: $("#content"),
+    cols: $("#content_cols"),
+    rows: $("#content_rows"),
+    audio_id: $("#audio_id"),
   }
 
   // fiducial marker info
@@ -42,6 +47,8 @@ $(document).ready(() => {
   const $right_side = $("#r-side")
   const svg = d3.select("svg")
   const content_length = $("#content_length")
+  const content_rows = $("#content_rows")
+  const content_cols = $("#content_cols")
 
   const init = function () {
     // Fetch markers dict
@@ -157,13 +164,13 @@ $(document).ready(() => {
     generateMarker(4, markerCornerDict, `${current_data['width']-markerSize}mm`, `${current_data['height']-markerSize}mm`)
 
     // DATA
-    // data-width
+    // data-width - Top mid
     generateMarker(current_data['width'], markerCornerDict, `${current_data['width']/2-markerSize/2}mm`, 0)
-    // data-height
+    // data-height - Mid right 
     generateMarker(current_data['height'], markerCornerDict, `${current_data['width']-markerSize}mm`, `${current_data['height']/2-markerSize/2}mm`)
-    // data-font-size
+    // data-font-size - Mid left
     generateMarker(Math.floor(current_data['font_size']*100), markerCornerDict, 0, `${current_data['height']/2-markerSize/2}mm`)
-    // data-id
+    // data-id - bottom mid
     generateMarker(current_data['audio_id'], markerCornerDict, `${current_data['width']/2-markerSize/2}mm`, `${current_data['height']-markerSize}mm`)
 
     drawDecorationRects()
@@ -242,7 +249,9 @@ $(document).ready(() => {
     if (text == undefined || text.length == 0) return;
     var positions = []
     // show text length
-    content_length.text( text.length)
+    //content_length.text(text.length)
+    var rows=0
+    var cols=0
     // chars from text
     var chars = text.split('')
     // variables for loop
@@ -257,6 +266,7 @@ $(document).ready(() => {
     // if text overflow, show a warning
     var overflow = false
     var index = 0
+    var length = 0
     for (var c in chars) {
       if (x >= width-margin) {
         x = margin
@@ -266,23 +276,31 @@ $(document).ready(() => {
       
       switch (renderMode) {
         case 'binary':
-          var index = alphabet.indexOf(chars[c]) || 0
+          var index = alphabet.indexOf(chars[c])
+          index = index == -1 ? 0 : index
           var bin = dec2bin(index).split('')
+          bin = zeroPad(bin.join(''), 8).split('')
           bin.map((b) => {
+            length++
             svg.append("rect")
               .attr("x", x + 'mm')
               .attr("y", y + 'mm')
               .attr("width", font_size + 'mm')
               .attr("height", font_size + 'mm')
               .attr("fill", b == 1 ? 'black' : 'transparent')
+              .attr('stroke', b == 1 ? 'black' : 'transparent')
+
             x+= letter_spacing_x
+            if (rows==0) cols++
             if (x >= width-margin) {
               x = margin
               y += letter_spacing_y
+              rows++
             }  
           })
           break;
         case 'text':
+          length++
           svg.append("text")
             .attr("x", x + 'mm')
             .attr("y", y + font_size/1.8 + 'mm')
@@ -302,19 +320,31 @@ $(document).ready(() => {
         "y": y/height,
         "w": font_size/width,
         "h": font_size/height,
-        "length": index
+        "index": index
       })
     }
     updateFrame(index)
+    content_length.text(length)
+    content_rows.text(rows)
+    content_cols.text(cols)
+
+    var id = current_data['audio_id']
     // current_positions = positions
     json_data = JSON.stringify({
+      id,
       width,
       height,
       margin,
       letter_spacing_x,
       letter_spacing_y,
-      positions
+      length,
+      rows,
+      cols,
+      length,
+      positions,
     })
+
+    
     // console.log('current_positions', current_positions)
     if (overflow) {
       $(".warning").show()
@@ -370,8 +400,6 @@ $(document).ready(() => {
     var serializer = new XMLSerializer();
     var source = serializer.serializeToString(svgDom);
 
-    console.log('source', source)
-
     //add name spaces.
     if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
         source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
@@ -387,6 +415,7 @@ $(document).ready(() => {
     var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
 
     //set url value to a element's href attribute.
+    $("#link-svg").attr("download", current_data['audio_id'])
     document.getElementById("link-svg").href = url;
     document.getElementById("link-svg").textContent = "download"
     //you can download svg file by right click menu.
@@ -396,6 +425,7 @@ $(document).ready(() => {
     console.log("current_data", json_data)
     var url = "data:application/json;charset=utf-8,"+json_data;
      //set url value to a element's href attribute.
+     $("#link-json").attr("download", current_data['audio_id'])
      document.getElementById("link-json").href = url;
      document.getElementById("link-json").textContent = "download"
   }
@@ -407,3 +437,19 @@ function dec2bin(dec) {
   return (dec >>> 0).toString(2);
 }
 
+
+var num = 0
+
+function tobin(n) {
+	var s = ""
+	for ( ; n >= 0; n /= 2) {
+		rem = n % 2
+		n -= rem
+		s = rem + s
+		if (n == 0)
+			break
+	}
+	return s
+}
+
+const zeroPad = (num, places) => String(num).padStart(places, '0')
