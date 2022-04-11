@@ -292,7 +292,7 @@ $(document).ready(() => {
 
             x+= letter_spacing_x
             if (rows==0) cols++
-            if (x >= width-margin) {
+            if (x >= width-margin-letter_spacing_x-font_size) {
               x = margin
               y += letter_spacing_y
               rows++
