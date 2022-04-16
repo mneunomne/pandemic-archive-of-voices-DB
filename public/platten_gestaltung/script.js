@@ -152,34 +152,41 @@ $(document).ready(() => {
   }
 
   const updateFrame = function (length) {
+    //console.log("current_data", current_data)
     svg.append("g").attr("id", "markers")
+    let w = parseInt(current_data['width'])
+    let h = parseInt(current_data['height'])
+    let cols = parseInt(current_data['cols'])
+    let rows = parseInt(current_data['rows'])
     // CORNERS
     // left top 
     generateMarker(1, markerCornerDict, 0, 0)
     // right top
-    generateMarker(2, markerCornerDict, `${current_data['width']-markerSize}mm`, 0)
+    generateMarker(2, markerCornerDict, `${w-markerSize}mm`, 0)
     // left bottom
-    generateMarker(3, markerCornerDict, 0, `${current_data['height']-markerSize}mm`)
+    generateMarker(3, markerCornerDict, 0, `${h-markerSize}mm`)
     // right bottom
-    generateMarker(4, markerCornerDict, `${current_data['width']-markerSize}mm`, `${current_data['height']-markerSize}mm`)
+    generateMarker(4, markerCornerDict, `${w-markerSize}mm`, `${h-markerSize}mm`)
 
     // DATA
     // data-width - Top mid
-    generateMarker(current_data['width'], markerCornerDict, `${current_data['width']/2-markerSize/2}mm`, 0)
+    generateMarker(cols, markerCornerDict, `${w/2-markerSize/2}mm`, 0)
     // data-height - Mid right 
-    generateMarker(current_data['height'], markerCornerDict, `${current_data['width']-markerSize}mm`, `${current_data['height']/2-markerSize/2}mm`)
+    generateMarker(rows, markerCornerDict, `${w-markerSize}mm`, `${h/2-markerSize/2}mm`)
     // data-font-size - Mid left
-    generateMarker(Math.floor(current_data['font_size']*100), markerCornerDict, 0, `${current_data['height']/2-markerSize/2}mm`)
+    generateMarker(Math.floor(current_data['font_size']*100), markerCornerDict, 0, `${h/2-markerSize/2}mm`)
     // data-id - bottom mid
-    generateMarker(current_data['audio_id'], markerCornerDict, `${current_data['width']/2-markerSize/2}mm`, `${current_data['height']-markerSize}mm`)
+    generateMarker(current_data['audio_id'], markerCornerDict, `${w/2-markerSize/2}mm`, `${h-markerSize}mm`)
 
     drawDecorationRects()
   }
 
   const drawDecorationRects = function () {
+    let w = parseInt(current_data['width'])
+    let h = parseInt(current_data['height'])
     // decorations rects
-    var rectWidth = `${current_data['width'] / 2 - markerSize*1.5 - 2*markerPixelSize}mm`
-    var rectHeight = `${current_data['height'] / 2 - markerSize*1.5 - 2*markerPixelSize}mm`
+    var rectWidth = `${w / 2 - markerSize*1.5 - 2*markerPixelSize}mm`
+    var rectHeight = `${h / 2 - markerSize*1.5 - 2*markerPixelSize}mm`
 
     var data = [
       {
@@ -191,20 +198,20 @@ $(document).ready(() => {
       {
         'width': rectWidth,
         'height': `${markerPixelSize}mm`,
-        'x': `${current_data['width'] / 2 + markerSize/2 + markerPixelSize}mm`,
+        'x': `${w / 2 + markerSize/2 + markerPixelSize}mm`,
         'y': `${markerSize/2 - markerPixelSize/2}mm`,
       },
       {
         'width': rectWidth,
         'height': `${markerPixelSize}mm`,
         'x': `${markerSize + markerPixelSize}mm`,
-        'y': `${current_data['height'] - markerSize/2 - markerPixelSize/2}mm`,
+        'y': `${h - markerSize/2 - markerPixelSize/2}mm`,
       },
       {
         'width': rectWidth,
         'height': `${markerPixelSize}mm`,
-        'x': `${current_data['width'] / 2 + markerSize/2 + markerPixelSize}mm`,
-        'y': `${current_data['height'] - markerSize/2 - markerPixelSize/2}mm`,
+        'x': `${w / 2 + markerSize/2 + markerPixelSize}mm`,
+        'y': `${h - markerSize/2 - markerPixelSize/2}mm`,
       },
       {
         'width': `${markerPixelSize}mm`,
@@ -216,19 +223,19 @@ $(document).ready(() => {
         'width': `${markerPixelSize}mm`,
         'height': rectHeight,
         'x': `${markerSize/2 - markerPixelSize/2}mm`,
-        'y': `${current_data['height'] / 2 + markerSize/2 + markerPixelSize}mm`,
+        'y': `${h / 2 + markerSize/2 + markerPixelSize}mm`,
       },
       {
         'width': `${markerPixelSize}mm`,
         'height': rectHeight,
-        'x': `${current_data['width'] - markerSize/2 - markerPixelSize/2}mm`,
+        'x': `${w - markerSize/2 - markerPixelSize/2}mm`,
         'y': `${markerSize + markerPixelSize}mm`,
       },
       {
         'width': `${markerPixelSize}mm`,
         'height': rectHeight,
-        'x': `${current_data['width'] - markerSize/2 - markerPixelSize/2}mm`,
-        'y': `${current_data['height'] / 2 + markerSize/2 + markerPixelSize}mm`,
+        'x': `${w - markerSize/2 - markerPixelSize/2}mm`,
+        'y': `${h / 2 + markerSize/2 + markerPixelSize}mm`,
       }
     ]
 
@@ -255,8 +262,8 @@ $(document).ready(() => {
     // chars from text
     var chars = text.split('')
     // variables for loop
-    var width = current_data['width']
-    var height = current_data['height']
+    var width = parseInt(current_data['width'])
+    var height = parseInt(current_data['height'])
     var margin = markerSize + 1
     var x = margin
     var y = margin
@@ -268,12 +275,6 @@ $(document).ready(() => {
     var index = 0
     var length = 0
     for (var c in chars) {
-      if (x >= width-margin) {
-        x = margin
-        y += letter_spacing_y
-      }
-      if (y > height) overflow = true
-      
       switch (renderMode) {
         case 'binary':
           var index = alphabet.indexOf(chars[c])
@@ -287,12 +288,12 @@ $(document).ready(() => {
               .attr("y", y + 'mm')
               .attr("width", font_size + 'mm')
               .attr("height", font_size + 'mm')
-              .attr("fill", b == 1 ? 'black' : 'transparent')
-              .attr('stroke', b == 1 ? 'black' : 'transparent')
+              .attr("fill", b == 1 ? 'black' : 'white')
+              .attr('stroke', b == 1 ? 'black' : 'white')
 
             x+= letter_spacing_x
             if (rows==0) cols++
-            if (x >= width-margin-letter_spacing_x-font_size) {
+            if (x > width-markerSize-2-font_size) {
               x = margin
               y += letter_spacing_y
               rows++
@@ -300,6 +301,12 @@ $(document).ready(() => {
           })
           break;
         case 'text':
+          if (x >= width-margin) {
+            x = margin
+            y += letter_spacing_y
+          }
+          if (y > height) overflow = true
+          
           length++
           svg.append("text")
             .attr("x", x + 'mm')
@@ -327,6 +334,8 @@ $(document).ready(() => {
     content_length.text(length)
     content_rows.text(rows)
     content_cols.text(cols)
+    current_data['rows']=rows
+    current_data['cols']=cols
 
     var id = current_data['audio_id']
     // current_positions = positions
@@ -369,7 +378,6 @@ $(document).ready(() => {
   const addEvents = function () {
     for (var field in form) {
       form[field].bind('input propertychange', function (evt) {
-        console.log("change", $(this).val())
         var key = $(this).attr('id')
         var val = $(this).val()
         setFieldData(key, val)
@@ -377,7 +385,6 @@ $(document).ready(() => {
     }
 
     $("input[name=renderMode]").change(function () {
-      console.log("changed", this.value)
       renderMode = this.value
       updateText(current_data['content'])
     })
@@ -422,7 +429,6 @@ $(document).ready(() => {
   }
 
   const downloadJson = function () {
-    console.log("current_data", json_data)
     var url = "data:application/json;charset=utf-8,"+json_data;
      //set url value to a element's href attribute.
      $("#link-json").attr("download", current_data['audio_id'])

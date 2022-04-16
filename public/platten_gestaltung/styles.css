@@ -1,5 +1,6 @@
 body {
   font-family: 'Roboto Mono';
+  background-color: beige;
 }
 
 label {
@@ -45,7 +46,7 @@ p, span {
   top: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  background: beige;
+  background: white;
   filter: drop-shadow( 0px 0px 14px rgba(0, 0, 0, .7));
 }
 
