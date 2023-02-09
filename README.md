@@ -143,12 +143,6 @@ Contribition form
 https://pandemic-archive-of-voices.herokuapp.com/soundWriting/
 
 
-## To Do
-
-- Restricted use of content manager
-- Restricted use of contribution form
-- Fix contribution form errors on iPhone devices
-
 ## References
 
 - About converting Opus `.ogg` files used by telegram voice messages: [SoX doesn't work with Opus Audio files](https://stackoverflow.com/questions/22322372/sox-doesnt-work-with-opus-audio-files)
