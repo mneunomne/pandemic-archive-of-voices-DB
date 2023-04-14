@@ -21,6 +21,8 @@ var aws = require('aws-sdk');
 const WaveFile = require('wavefile').WaveFile;
 const request = require('request');
 
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
 /* -------------------------------------------------
 Global vars
 ---------------------------------------------------*/
@@ -43,26 +45,38 @@ var s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-
 /* -------------------------------------------------
 MongoDB
 ---------------------------------------------------*/
+
 const mongoUri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOSTNAME}/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`;
 var mongoConnected = false
 
-mongoose.connect(mongoUri, { useNewUrlParser: true }, function (err, res) {
-  if (err) {
-    console.error(err)
-    throw err
+const client = new MongoClient(mongoUri, { serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
   }
-  mongoConnected = true
-  console.log(`[MongoDB] Connected to database "${process.env.MONGODB_DATABASE}"`)
+)
 
-
-})
+async function connect() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    mongoConnected = true
+    console.log(`[MongoDB] Connected to database "${process.env.MONGODB_DATABASE}"`)
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
 
 // MongoDB Audio Schema 
-const Audio = mongoose.model('Audio', mongoose.Schema({
+const Audio = mongoose.model('Audio', new mongoose.Schema({
     id: String,
     name: String,
     path: String,
@@ -76,7 +90,7 @@ const Audio = mongoose.model('Audio', mongoose.Schema({
 }));
 
 // MongoDB User Schema 
-const User = mongoose.model('User', mongoose.Schema({
+const User = mongoose.model('User', new mongoose.Schema({
     name: String,
     id: String
 }));
@@ -140,14 +154,15 @@ server.listen(port, (err) => {
 Routes
 ---------------------------------------------------*/
 app.get('/api/data', function (req, res) {
-  console.log("mongoConnected", mongoConnected)
+  console.log("mongoConnected 3", mongoConnected)
   if (!mongoConnected) {
     res.status(503).send('Ufff: MongoDb not loaded yet');
     return
   }
   // dont return the audios with "deleted==true"
   let query = { $or: [ { deleted: false }, { deleted: { $exists: false} } ] }
-  Audio.find(query, function (err, audios) {
+  console.log("data2")
+  const data = Audio.find(query).then((err, audios) => {
     if (err) console.error(err)
     User.find({}, function (err, users) {
       if (err) console.error(err)
@@ -158,6 +173,19 @@ app.get('/api/data', function (req, res) {
       });
     })
   })
+  /*
+  .then((err, audios) => {
+    if (err) console.error(err)
+    User.find({}, function (err, users) {
+      if (err) console.error(err)
+      console.log("object", audios, users)
+      res.json({
+        audios,
+        users
+      });
+    })
+  })
+  */
 })
 
 app.get('/api/speakers', function (req, res) {
@@ -499,5 +527,6 @@ charactersLength));
  return result;
 }
 
+connect()
 
 module.exports = app
