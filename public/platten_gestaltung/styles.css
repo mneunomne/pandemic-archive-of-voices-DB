@@ -41,7 +41,7 @@ p, span {
   margin-top: 1em;
 }
 
-#canvas svg {
+#canvas > svg {
   left: 50%;
   top: 50%;
   position: absolute;

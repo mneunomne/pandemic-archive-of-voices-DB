@@ -11,7 +11,7 @@ $(document).ready(() => {
     content: '',
     cols: 0,
     rows: 0,
-    audio_id: 500+Math.floor(Math.random()*499)
+    audio_id: 500+Math.floor(Math.random()*499),
   }
 
   var renderMode = 'binary' // 'text'
@@ -241,11 +241,11 @@ $(document).ready(() => {
 
     for (var d in data) {
       svg.append("rect")
-      .attr("width", data[d]['width'])
-      .attr("height", data[d]['height'])
-      .attr("x", data[d]['x'])
-      .attr("y", data[d]['y'])
-      .attr('fill', 'black')  
+        .attr("width", data[d]['width'])
+        .attr("height", data[d]['height'])
+        .attr("x", data[d]['x'])
+        .attr("y", data[d]['y'])
+        .attr('fill', 'black')  
     }
   }
 
