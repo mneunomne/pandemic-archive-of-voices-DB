@@ -307,26 +307,33 @@ $(document).ready(() => {
           .attr('x', data.margin + (data_rects_width + gap) * j + 'mm')
           .attr('y', data.margin + (data_rects_height + gap) * i + 'mm')
         console.log('drawData', d);
+        
         // merge strings of lat, long and timestamp
         var lat = d.lat
         var lon = d.lon
         var timestamp = d.timestap
+        // remove last 4 digits of timestamp
+        timestamp = timestamp.substring(0, timestamp.length - 5)
         var s = `${lat}|${lon}|${timestamp}`.split('')
+        
         // shuffle string
-        s = s.sort(() => Math.random() - 0.5)
-        var cols = Math.ceil(Math.sqrt(s.length))
+        // s = s.sort(() => Math.random() - 0.5)
+        // console.log("s", s)
+        
+        var cols = 7
+        var rows = 8
 
-        var w = data_rects_width / (cols - 1)
+        var w = data_rects_width / (cols)
 
-        for (var i = 0; i < cols; i++) {
-          for (var j = 0; j < cols; j++) {
+        for (var i = 0; i < cols ; i++) {
+          for (var j = 0; j < rows; j++) {
             var char = s[i * cols + j]
             var x =  w * i
             var y = 1 + w * j
             if (char == undefined) {
-              continue;
+              char = '20'
             }
-            console.log("index" ,i * cols + j, s[i * cols + j])
+            // console.log("index" ,i * cols + j, s[i * cols + j])
             char = char == '0' ? '10' : char
             char = char == '.' ? '-' : char
             var image_anchor = anchor.append("svg")
