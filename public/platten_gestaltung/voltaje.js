@@ -1,115 +1,37 @@
 $(document).ready(() => {
+
+  const default_data_rect = {
+    lat:        '4.5002073856140',      // latitude in degrees
+    lon:        '-73.93514644020',      // longitude in degrees
+    timestap:   '-2018668331024000',    // timestamp in milliseconds
+    az:         '66',                   // (0 = north, 90 = east, 180 = south, 270 = west)
+  }
+
+  /* date references
+    -2018668331024000 -60000  - 12/12/-60000/12:30
+    -125251211024000  -2000     12/12/-60000
+    -13696563208000   1563
+    1700168294468     2023
+    1894393717200000  60000
+  */ 
+
+var d = new Date("-002000/12/12")
+
+  var data_rect = []
+  for (var i = 0; i < 20; i++) {
+    data_rect.push(default_data_rect)
+  }
+
   const default_data = {
     name: 'test',
     width: 320,
     height: 450,
     margin: 15.0,
     gap: 5.0,
-    data_rect: [
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514649029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.9351464402196',
-        timestap: '-136965630208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514649029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.9351464402196',
-        timestap: '-136965630208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514649029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.9351464402196',
-        timestap: '-136965630208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514649029196',
-        timestap: '-13696563208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.9351464402196',
-        timestap: '-136965630208000',
-      },
-      {
-        lat: '4.5002073856147655',
-        lon: '-73.93514644029196',
-        timestap: '-13696563208000',
-      },
-    ],
-    lat: '4.5002073856147655',
-    lon: '-73.93514644029196',
-    timestap: '-13696563208000',
+    data_rect: data_rect,
+    lat: default_data_rect.lat,
+    lon: default_data_rect.lon,
+    timestap: default_data_rect.timestap,
     data_rects_cols: 4,
     data_rects_rows: 5,
   }
@@ -155,7 +77,6 @@ $(document).ready(() => {
   }
 
   function getCharImage(char) {
-    console.log("char", char, svgNumeralImages)
     var clone = svgNumeralImages.find((item) => item.char == char).svg.cloneNode(true)
     return clone
   }
@@ -163,7 +84,6 @@ $(document).ready(() => {
 
   loadSvgImages().then(function (svgData) {
     svgNumeralImages = [...svgData]
-    console.log("svgNumeralImages", svgNumeralImages)
   }); 
     
 
@@ -185,8 +105,6 @@ $(document).ready(() => {
       return res.json();
     }).then(function(json) {
       dict = json;
-      console.log("dict", dict)
-      console.log('init!');
       initForm(default_data)
       initMap()
       drawRect(data);
@@ -297,8 +215,6 @@ $(document).ready(() => {
     var data_rects_width = (content_width - (gap * (data.data_rects_cols - 1))) / data.data_rects_cols
     var data_rects_height = (content_height - (gap * (data.data_rects_rows - 1))) / data.data_rects_rows
 
-    console.log("data_rects_width", data_rects_width)
-
     const drawData = function (data) {
       data.data_rect.forEach((d, i) => {
         var j = i % data.data_rects_cols
@@ -306,20 +222,49 @@ $(document).ready(() => {
         var anchor = svg.append('svg')
           .attr('x', data.margin + (data_rects_width + gap) * j + 'mm')
           .attr('y', data.margin + (data_rects_height + gap) * i + 'mm')
-        console.log('drawData', d);
         
         // merge strings of lat, long and timestamp
-        var lat = d.lat
-        var lon = d.lon
-        var timestamp = d.timestap
+        var lat = d.lat               // 18 char
+        var lon = d.lon               // 18 char 
+        var timestamp = d.timestap    // 18 char
+        var az = d.az                 // 3 char
+        
+        // i need to fit everything in 56 characters
+        
+
+        // limit lat to 14 char
+        lat = lat.substring(0, 16).padEnd(16, '0')
+        // limit lon to 14 char
+        lon = lon.substring(0, 16).padEnd(16, '0')
+        // limit timestamp to 14 char
+        timestamp = timestamp.substring(0, 18)//.padEnd(18, '0')
+        // limit az to 3 char
+        az = az.substring(0, 3).padStart(3, '0')
+        
         // remove last 4 digits of timestamp
-        timestamp = timestamp.substring(0, timestamp.length - 5)
-        var s = `${lat}|${lon}|${timestamp}`.split('')
+        //timestamp = timestamp.substring(0, timestamp.length - 6)
+        
+        var s = `${lat}|${lon}|${timestamp}|${az}`.split('')
+
+        // decode function
+        var decode = function (string) {
+          return string.split("|").map((item) => {
+            let result = ''
+            if (item[0] == '-') {
+              result = '-' + item.substring(1, item.length).replace('-', '.')
+            } else {
+              result = item.replace('-', '.')
+            }
+            return parseFloat(result)
+          })
+        }
         
         // shuffle string
         // s = s.sort(() => Math.random() - 0.5)
-        // console.log("s", s)
+        console.log("s", s.join(''))
         
+        // there is some error here... 
+
         var cols = 7
         var rows = 8
 
@@ -327,9 +272,11 @@ $(document).ready(() => {
 
         for (var i = 0; i < cols ; i++) {
           for (var j = 0; j < rows; j++) {
-            var char = s[i * cols + j]
-            var x =  w * i
-            var y = 1 + w * j
+
+            var char = s[j * cols + i]; // Fix the calculation of char
+            var x = w * i; // Fix the calculation of x
+            var y = w * j; // Fix the calculation of y
+
             if (char == undefined) {
               char = '20'
             }
