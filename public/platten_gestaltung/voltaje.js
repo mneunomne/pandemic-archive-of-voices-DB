@@ -3,7 +3,7 @@ $(document).ready(() => {
   const default_data_rect = {
     lat:        '4.5002073856140',      // latitude in degrees
     lon:        '-73.93514644020',      // longitude in degrees
-    timestap:   '-2018668331024000',    // timestamp in milliseconds
+    timestamp:   '-2018668331024000',    // timestamp in milliseconds
     az:         '66',                   // (0 = north, 90 = east, 180 = south, 270 = west)
   }
 
@@ -15,12 +15,97 @@ $(document).ready(() => {
     1894393717200000  60000
   */ 
 
-var d = new Date("-002000/12/12")
+  var d = new Date("-002000/12/12")
+
+  const real_data = [
+    { // cerimonio de ubaque
+      index: 0,
+      lat:        '4.5002073856140',
+      lon:        '-73.93514644020',
+      timestamp:   new Date("1563/12/27 00:00:00").getTime(),
+      az:         '66', // ?? where was kupited and saturn located?
+    },
+    { // bogotazo
+      index: 1,
+      lat:        '4.59811373930837',
+      lon:        '-74.07614559598456',
+      timestamp:   new Date("1948/4/9 15:00:00").getTime(),
+      az:         '90', // looking towards the mountains
+    },
+    { // tomada del palacio de justicia
+      index: 2,
+      lat:        '4.599030507947898',
+      lon:        '-74.0754373818926',
+      timestamp:   new Date("1985/11/7 19:00:00").getTime(),
+      az:         '212', // looking towards the mountains
+    },
+    { // el hacer de la ceramica
+      index: 3,
+      lat:        '4.64716172739487',
+      lon:        '-74.0699379152959',
+      timestamp:   new Date("2023/11/16 15:00:00").getTime(),
+      az:         '31', // looking towards the mountains
+    },
+    { // grande conjuncion de jupiter y saturno
+      index: 4,
+      lat:        '4.61203073951671',
+      lon:        '-74.0688130995132',
+      timestamp:   new Date("2020/12/21 23:55:00").getTime(),
+      az:         '31', // looking towards the jupiter and saturn?
+    },
+    { // protestos colombia 2019
+      index: 5,
+      lat:        '4.645423923616294',
+      lon:        '-74.06192698948639',
+      timestamp:   new Date("2020/12/21 23:55:00").getTime(),
+      az:         '121',
+    },
+    { // pnext great clustering
+      index: 6,
+      lat:        '4.50019134186379',
+      lon:        '-73.9350820670254',
+      timestamp:   new Date("2040/9/21 23:55:00").getTime(),
+      az:         '31', // looking towards the jupiter and saturn?
+    },
+    { // Bogotá Earthquake 1917
+      index: 7,
+      lat:        '4.50019134186379',
+      lon:        '-73.9350820670254',
+      timestamp:   new Date("1917/8/31 6:36:00").getTime(),
+      az:         '307', // looking outwards from the church of chapinero
+    },
+    { // Bogotá Earthquake 1763
+      index: 8,
+      lat:       '4.47211681706265',
+      lon:       '-73.9098395262587',
+      timestamp:   new Date("1763/10/18 11:30:00").getTime(),
+      az:         '0',
+    },
+    { // Colombia solar eclipse of 1991
+      index: 9,
+      lat:      '4.61203073951671',
+      lon:      '-74.0688130995132',
+      timestamp:   new Date("1991/7/11 11:30:00").getTime(),
+      az:         '200',
+    },
+    { // Colombia solar eclipse of 2023
+      index: 10,
+      lat:      '4.61203073951671',
+      lon:      '-74.0688130995132',
+      timestamp:  new Date("2023/10/14 11:30:00").getTime(),
+      az:         '200',
+    },
+  ]
 
   var data_rect = []
   for (var i = 0; i < 20; i++) {
-    data_rect.push(default_data_rect)
+    if (real_data[i]) {
+      data_rect.push(real_data[i])
+    } else {
+      data_rect.push(default_data_rect)
+    }
   }
+
 
   const default_data = {
     name: 'test',
@@ -31,7 +116,7 @@ var d = new Date("-002000/12/12")
     data_rect: data_rect,
     lat: default_data_rect.lat,
     lon: default_data_rect.lon,
-    timestap: default_data_rect.timestap,
+    timestamp: default_data_rect.timestamp,
     data_rects_cols: 4,
     data_rects_rows: 5,
   }
@@ -226,20 +311,21 @@ var d = new Date("-002000/12/12")
         // merge strings of lat, long and timestamp
         var lat = d.lat               // 18 char
         var lon = d.lon               // 18 char 
-        var timestamp = d.timestap    // 18 char
+        var timestamp = d.timestamp + ''   // 18 char
         var az = d.az                 // 3 char
         
         // i need to fit everything in 56 characters
         
 
         // limit lat to 14 char
-        lat = lat.substring(0, 16).padEnd(16, '0')
+        lat = lat.substring(0, 16).padEnd(16, 'X')
         // limit lon to 14 char
-        lon = lon.substring(0, 16).padEnd(16, '0')
+        lon = lon.substring(0, 16).padEnd(16, 'X')
         // limit timestamp to 14 char
-        timestamp = timestamp.substring(0, 18)//.padEnd(18, '0')
+        console.log("d", d)
+        timestamp = timestamp.substring(0, 18).padStart(18, 'X')
         // limit az to 3 char
-        az = az.substring(0, 3).padStart(3, '0')
+        az = az.substring(0, 3).padStart(3, 'X')
         
         // remove last 4 digits of timestamp
         //timestamp = timestamp.substring(0, timestamp.length - 6)
@@ -277,10 +363,10 @@ var d = new Date("-002000/12/12")
             var x = w * i; // Fix the calculation of x
             var y = w * j; // Fix the calculation of y
 
-            if (char == undefined) {
+            if (char == undefined || char == 'X') {
               char = '20'
             }
-            // console.log("index" ,i * cols + j, s[i * cols + j])
+
             char = char == '0' ? '10' : char
             char = char == '.' ? '-' : char
             var image_anchor = anchor.append("svg")
@@ -292,8 +378,6 @@ var d = new Date("-002000/12/12")
             svgImage.setAttribute('width', '9.5mm')
             svgImage.setAttribute('height', '9.5mm')
             svgImage.setAttribute('stroke-width', 3)
-            //console.log('svgImage', svgImage);
-            //svgImage.setAttribute('x', 10 * i + 'mm')
             image_anchor.node().appendChild(svgImage)
           }
         }
@@ -313,9 +397,7 @@ var d = new Date("-002000/12/12")
           .attr('height', data_rects_height + 'mm')
           .attr('fill', 'none')
           .attr('stroke', 'black')
-          .attr('stroke-width', 0)
-        // draw fiducial markers
-      
+          .attr('stroke-width', 0)      
       }
     }
 
@@ -343,6 +425,7 @@ var d = new Date("-002000/12/12")
             .attr('stroke', 'black')
             .attr('stroke-width', 0)
         }
+
         // vertical lines
         if (i < data.data_rects_rows) {
           rect_x = x - 3.5
