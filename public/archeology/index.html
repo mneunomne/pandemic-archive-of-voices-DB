@@ -22,6 +22,7 @@
       <img id="clay" src="clay.jpg"></img>
       <img id="interface" src="interface_voltaje.png"></img>
       <img id="svg_1" src="__762.png"></img>
+      <img id="sky" src="sky.png"></img>
     </a-assets>
     <a-entity id="camera" camera orbit-controls="target: 0 1.6 0; initialPosition: 0.386 14.978 15.685; enablePan: true; autoRotate: false; autoRotateSpeed: 0.15; maxDistance: 30; zoomSpeed: 3; maxPolarAngle: 90;"></a-entity> <!-- wasd-controls="acceleration:50; fly: true;" -->
 
@@ -42,10 +43,17 @@
       <a-box  material="src:#clay;" id="ceramics_0" width="2.3" height="3.2" depth="0.2"></a-box>
     </a-entity>
 
-    <!-- screen 70x120cm dimentions-->
+    <!-- screen 70x120cm dimentions
     <a-entity id="screen" position="0 7 -8">
       <a-image id="image" src="#interface" height="7.2" width="4.2" ></a-image>
       <a-box id="box" scale="4.2 0.15 7.2" material="transparent: true; opacity: 1" rotation="90 0 0" position="0 0 -0.15"></a-box>
+    </a-entity>
+    -->
+
+    <!-- sky projection 175x175 dimentions-->
+    <a-entity id="screen" position="0 12 0">
+      <a-image id="image" src="#sky" height="10.8" width="10.8" rotation="90 0 0"></a-image>
+      <a-box id="box" scale="10.8 0.15 10.8" material="transparent: true; opacity: 1" position="0 0.15 0"></a-box>
     </a-entity>
 
     <!-- light 1 -->

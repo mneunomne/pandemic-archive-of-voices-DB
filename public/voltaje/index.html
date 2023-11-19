@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platten Gestaltung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../lib/jquery-3.6.0.min.js"></script>
+  <script src="stuquery.js"></script>
+	<script src="virtualsky.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="./js/dates.js"></script>
+  <style>
+    .skymap-container {
+      display: inline-block;
+      max-width: 400px;
+    }
+    .skymap-container h2 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="col-50" id="l-side">
+    <div class="col-50_content">
+      <!-- Title -->
+      <h1>Platten Gestaltung - Bogotá 2023</h1>
+      
+      <!-- Dimetions -->
+      <h3>Piece Dimentions</h3>
+      <div class="input_section">
+        <p>  
+          <!-- piece width -->
+          <label for="width">Width (mm)</label>
+          <input type="number" id="width" name="width" min="1" max="1000"/>
+          <!-- piece height -->
+          <label for="height">Height (mm)</label>
+          <input type="number" id="height" name="height" min="1" max="1000"/>
+        </p>
+        <p>
+          <!-- margin -->
+          <label for="margin">Margin (mm)</label>
+          <input type="number" id="margin" name="margin" min="1" max="1000"/>
+          <!-- gap -->
+          <label for="margin">Gap (mm)</label>
+          <input type="number" id="gap" name="gap" min="0" max="1000"/>
+        </p>
+      </div>
+
+      <div class="skymaps">
+        <div class="skymap-container"><div class="skymap" id="skymap1"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap2"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap3"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap4"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap5"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap6"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap7"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap8"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap9"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap10"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap11"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap12"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap13"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap14"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap15"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap16"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap17"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap18"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap19"></div></div>
+        <div class="skymap-container"><div class="skymap" id="skymap20"></div></div>
+      </div>
+
+      <h3>Data</h3>
+      <div class="input_section">
+        <!-- download .svg file-->
+        <div class="input_section">
+          <label for="name">test</label>
+          <input type="string" id="name" name="name"/>
+        </div>
+        <div class="input_section">
+          <button id="download-svg">download svg</button>
+          <a download="download.svg" href="" id="link-svg"></a>
+          <button id="download-json">download data.json</button>
+          <a download="data.json" href="" id="link-json"></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-50" id="r-side">
+    <div id="canvas">
+      <svg font-family="Arial Unicode MS" preserveAspectRatio="xMinYMin" width="100" height="100"></svg>
+    </div>
+  </div>
+  <script src="./js/script.js"></script>
+</body>
+</html>

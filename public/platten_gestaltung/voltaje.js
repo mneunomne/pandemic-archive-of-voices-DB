@@ -17,86 +17,6 @@ $(document).ready(() => {
 
   var d = new Date("-002000/12/12")
 
-  const real_data = [
-    { // cerimonio de ubaque
-      index: 0,
-      lat:        '4.5002073856140',
-      lon:        '-73.93514644020',
-      timestamp:   new Date("1563/12/27 00:00:00").getTime(),
-      az:         '66', // ?? where was kupited and saturn located?
-    },
-    { // bogotazo
-      index: 1,
-      lat:        '4.59811373930837',
-      lon:        '-74.07614559598456',
-      timestamp:   new Date("1948/4/9 15:00:00").getTime(),
-      az:         '90', // looking towards the mountains
-    },
-    { // tomada del palacio de justicia
-      index: 2,
-      lat:        '4.599030507947898',
-      lon:        '-74.0754373818926',
-      timestamp:   new Date("1985/11/7 19:00:00").getTime(),
-      az:         '212', // looking towards the mountains
-    },
-    { // el hacer de la ceramica
-      index: 3,
-      lat:        '4.64716172739487',
-      lon:        '-74.0699379152959',
-      timestamp:   new Date("2023/11/16 15:00:00").getTime(),
-      az:         '31', // looking towards the mountains
-    },
-    { // grande conjuncion de jupiter y saturno
-      index: 4,
-      lat:        '4.61203073951671',
-      lon:        '-74.0688130995132',
-      timestamp:   new Date("2020/12/21 23:55:00").getTime(),
-      az:         '31', // looking towards the jupiter and saturn?
-    },
-    { // protestos colombia 2019
-      index: 5,
-      lat:        '4.645423923616294',
-      lon:        '-74.06192698948639',
-      timestamp:   new Date("2020/12/21 23:55:00").getTime(),
-      az:         '121',
-    },
-    { // pnext great clustering
-      index: 6,
-      lat:        '4.50019134186379',
-      lon:        '-73.9350820670254',
-      timestamp:   new Date("2040/9/21 23:55:00").getTime(),
-      az:         '31', // looking towards the jupiter and saturn?
-    },
-    { // Bogotá Earthquake 1917
-      index: 7,
-      lat:        '4.50019134186379',
-      lon:        '-73.9350820670254',
-      timestamp:   new Date("1917/8/31 6:36:00").getTime(),
-      az:         '307', // looking outwards from the church of chapinero
-    },
-    { // Bogotá Earthquake 1763
-      index: 8,
-      lat:       '4.47211681706265',
-      lon:       '-73.9098395262587',
-      timestamp:   new Date("1763/10/18 11:30:00").getTime(),
-      az:         '0',
-    },
-    { // Colombia solar eclipse of 1991
-      index: 9,
-      lat:      '4.61203073951671',
-      lon:      '-74.0688130995132',
-      timestamp:   new Date("1991/7/11 11:30:00").getTime(),
-      az:         '200',
-    },
-    { // Colombia solar eclipse of 2023
-      index: 10,
-      lat:      '4.61203073951671',
-      lon:      '-74.0688130995132',
-      timestamp:  new Date("2023/10/14 11:30:00").getTime(),
-      az:         '200',
-    },
-  ]
-
   var data_rect = []
   for (var i = 0; i < 20; i++) {
     if (real_data[i]) {
@@ -322,7 +242,6 @@ $(document).ready(() => {
         // limit lon to 14 char
         lon = lon.substring(0, 16).padEnd(16, 'X')
         // limit timestamp to 14 char
-        console.log("d", d)
         timestamp = timestamp.substring(0, 18).padStart(18, 'X')
         // limit az to 3 char
         az = az.substring(0, 3).padStart(3, 'X')
