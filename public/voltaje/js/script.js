@@ -29,10 +29,11 @@ $(document).ready(() => {
   }
 
 
+
   const default_data = {
     name: 'test',
-    width: 320,
-    height: 450,
+    width: 285,
+    height: 338,
     margin: 15.0,
     gap: 5.0,
     data_rect: data_rect,
@@ -41,6 +42,8 @@ $(document).ready(() => {
     timestamp: default_data_rect.timestamp,
     data_rects_cols: 4,
     data_rects_rows: 5,
+    char_w: 7.6,
+    char_h: 7.6,
   }
 
   var form = {
@@ -201,8 +204,10 @@ $(document).ready(() => {
     var content_width = data.width - data.margin * 2
     var content_height = data.height - data.margin * 2
 
-    var data_rects_width = (content_width - (gap * (data.data_rects_cols - 1))) / data.data_rects_cols
-    var data_rects_height = (content_height - (gap * (data.data_rects_rows - 1))) / data.data_rects_rows
+    var data_rects_width = ((content_width - (gap * (data.data_rects_cols - 1))) / data.data_rects_cols)
+    var data_rects_height = ((content_height - (gap * (data.data_rects_rows - 1))) / data.data_rects_rows)
+
+    console.log("data_rects_width", data_rects_width)
 
     const drawData = function (data) {
       data.data_rect.forEach((d, i) => {
@@ -223,11 +228,11 @@ $(document).ready(() => {
         
 
         // limit lat to 14 char
-        lat = lat.substring(0, 16).padEnd(16, 'X')
+        lat = lat.substring(0, 13).padEnd(13, 'X')
         // limit lon to 14 char
-        lon = lon.substring(0, 16).padEnd(16, 'X')
+        lon = lon.substring(0, 13).padEnd(13, 'X')
         // limit timestamp to 14 char
-        timestamp = timestamp.substring(0, 18).padStart(18, 'X')
+        timestamp = timestamp.substring(0, 17).padStart(17, 'X')
         // limit az to 3 char
         az = az.substring(0, 3).padStart(3, 'X')
         
@@ -253,19 +258,23 @@ $(document).ready(() => {
         // s = s.sort(() => Math.random() - 0.5)
         console.log("s", s.join(''))
         
-        // there is some error here... 
+        var inner_padding_y = 1;
+
+        var inner_padding_x = 2;
 
         var cols = 7
-        var rows = 8
+        var rows = 7
 
-        var w = data_rects_width / (cols)
+        var inner_width = data_rects_width - inner_padding_x * 2 
+        
+        var w = (inner_width / (cols)) 
 
         for (var i = 0; i < cols ; i++) {
           for (var j = 0; j < rows; j++) {
 
             var char = s[j * cols + i]; // Fix the calculation of char
-            var x = w * i; // Fix the calculation of x
-            var y = w * j; // Fix the calculation of y
+            var x = inner_padding_x + w * i; // Fix the calculation of x
+            var y = inner_padding_y + w * j; // Fix the calculation of y
 
             if (char == undefined || char == 'X') {
               char = '20'
@@ -279,9 +288,8 @@ $(document).ready(() => {
               .attr('viewBox', `0 0 ${width} ${width}`)
 
             var svgImage = getCharImage(char)
-            svgImage.setAttribute('width', '9.5mm')
-            svgImage.setAttribute('height', '9.5mm')
-            svgImage.setAttribute('stroke-width', 3)
+            svgImage.setAttribute('width', `${data.char_w}mm`)
+            svgImage.setAttribute('height', `${data.char_h}mm`)
             image_anchor.node().appendChild(svgImage)
           }
         }
@@ -392,7 +400,7 @@ $(document).ready(() => {
       keyboard: true, 
       mouse: true,
       constellations: true,
-      constellationlabels: false,
+      constellationlabels: true,
       lang: 'es',
       fontsize: '12px',
       clock: d,
