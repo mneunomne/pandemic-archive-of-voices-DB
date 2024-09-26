@@ -15,6 +15,22 @@ const dates  = [
     timestamp:   new Date("1948/4/9 19:00:00").getTime(),
     az:         '90', // looking towards the mountains ok 
   },
+  { // tomada del palacio de justicia
+    name: "tomada del palacio de justicia",
+    index: 2,
+    lat:        '4.599030507947898',
+    lon:        '-74.0754373818926',
+    timestamp:   new Date("1985/11/7 17:34:11").getTime(),
+    az:         '250', // looking towards the mountains ok
+  },
+  { // el hacer de la ceramica
+    name: "el hacer de la ceramica",
+    index: 3,
+    lat:        '4.64716172739487',
+    lon:        '-74.0699379152959',
+    timestamp:   new Date("2023/11/16 13:30:00").getTime(),
+    az:         '250', // looking towards the mountains
+  },
   { // grande conjuncion de jupiter y saturno
     name: "grande conjuncion de jupiter y saturno",
     index: 4,
@@ -76,7 +92,7 @@ const dates  = [
     index: 12,
     lat: '4.597223490451007', 
     lon: '-74.06977816014044',
-    timestamp: new Date("1538/8/6 18:00:00").getTime(),
+    timestamp: new Date("1538/8/6 14:00:00").getTime(),
     az: '270',
   },
   {
@@ -86,6 +102,14 @@ const dates  = [
     lon: '-74.06977816014044',
     timestamp: new Date("2080/3/15 6:06:13").getTime(),
     az: '110',
+  },
+  {
+    name: 'great conjunction of 4 March 1226',
+    index: 14,
+    lat: '4.597223490451007', 
+    lon: '-74.06977816014044',
+    timestamp: new Date("1224/2/21 6:15:00").getTime(),
+    az: '180',
   },
   {
     name: 'voltaje exhibition',
@@ -126,6 +150,14 @@ const dates  = [
     lon: '-74.06977816014044',
     timestamp: new Date("7548/7/11 1:52:00").getTime(),
     az: '180',
+  },
+  {
+    name: 'ley de 1890',
+    index: 19,
+    lat: '4.597223490451007', 
+    lon: '-74.06977816014044',
+    timestamp: new Date("1890/11/25 18:25:00").getTime(),
+    az: '250',
   },
 ].sort((a, b) => a.timestamp - b.timestamp);
 

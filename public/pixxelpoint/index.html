@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platten Gestaltung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../lib/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABc2FYPPzxrAMu_Atv1JQ5O_KrYBuXxQo"></script>
+
+  <style>
+		#map {
+			width: 100%;
+			height: 400px;
+		}
+  </style>
+</head>
+<body>
+  <div class="col-50" id="l-side">
+    <div class="col-50_content">
+      <!-- Title -->
+      <h1>Platten Gestaltung - PixxelPoint 2024</h1>
+      
+      <!-- Dimetions -->
+      <h3>Piece Dimentions</h3>
+      <div class="input_section">
+        <p>  
+          <!-- piece width -->
+          <label for="width">Width (mm)</label>
+          <input type="number" id="width" name="width" min="1" max="1000"/>
+          <!-- piece height -->
+          <label for="height">Height (mm)</label>
+          <input type="number" id="height" name="height" min="1" max="1000"/>
+        </p>
+        <p>
+          <!-- margin -->
+          <label for="margin">Margin (mm)</label>
+          <input type="number" id="margin" name="margin" min="1" max="1000"/>
+          <!-- gap -->
+          <label for="margin">Gap (mm)</label>
+          <input type="number" id="gap" name="gap" min="0" max="1000"/>
+        </p>
+
+      </div>
+
+      <h3>Data</h3>
+      <div class="input_section">
+        <!-- download .svg file-->
+        <div class="input_section">
+          <label for="name">test</label>
+          <input type="string" id="name" name="name"/>
+        </div>
+        <div class="input_section">
+          <button id="download-svg">download svg</button>
+          <a download="download.svg" href="" id="link-svg"></a>
+          <button id="download-json">download data.json</button>
+          <a download="data.json" href="" id="link-json"></a>
+        </div>
+      </div>
+    </div>
+
+		<div id="map"></div>
+
+
+  </div>
+  <div class="col-50" id="r-side">
+    <div id="canvas">
+      <svg font-family="Arial Unicode MS" preserveAspectRatio="xMinYMin" width="100" height="100"></svg>
+    </div>
+  </div>
+  <script src="./js/script.js"></script>
+</body>
+</html>

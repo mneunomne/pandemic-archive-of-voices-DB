@@ -32,9 +32,9 @@ $(document).ready(() => {
 
   const default_data = {
     name: 'test',
-    width: 285,
-    height: 338,
-    margin: 15.0,
+    width: 265,
+    height: 318,
+    margin: 12.0,
     gap: 5.0,
     data_rect: data_rect,
     lat: default_data_rect.lat,
@@ -281,7 +281,7 @@ $(document).ready(() => {
             }
 
             char = char == '0' ? '10' : char
-            char = char == '.' ? '-' : char
+            char = char == '.' ? '20' : char
             var image_anchor = anchor.append("svg")
               .attr('x', x + 'mm')
               .attr('y', y + 'mm')
@@ -395,8 +395,8 @@ $(document).ready(() => {
       meteorshowers: true,
       showstarlabels: true,
       scalestars: 2,
-      width: 400 ,
-      height: 400,// + 15,
+      width: 300 ,
+      height: 300,// + 15,
       keyboard: true, 
       mouse: true,
       constellations: true,
