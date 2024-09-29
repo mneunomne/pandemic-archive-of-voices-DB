@@ -2,47 +2,40 @@ $(document).ready(() => {
   const default_data_rect = {
     lat:        '45.95240734807733',      // latitude in degrees
     lon:        '13.6340635055379566',      // longitude in degrees
-    timestamp:   '-2018668331024000',    // timestamp in milliseconds
-    az:         '66',                   // (0 = north, 90 = east, 180 = south, 270 = west)
   }
 
   var d = new Date("-002000/12/12")
 
-	var ammount = 20
+	console.log("border", border)
+
+	var ammount = 40
 
   // fill an array with 20 elements of default_data_rect
 	real_data = Array(ammount).fill(default_data_rect)
 	console.log("real_data", real_data)
 
-  var data_rect = []
-  for (var i = 0; i < ammount; i++) {
-    if (real_data[i]) {
-      data_rect.push(real_data[i])
-    } else {
-      data_rect.push(default_data_rect)
-    }
-  }
-
-	data_rect = data_rect.map((item) => {
-		let lat = `${parseFloat(item.lat) + Math.random() * 0.001 - 0.0005}`
-		let lon = `${parseFloat(item.lon) + Math.random() * 0.001 - 0.0005} `
-		return { ...item, lat, lon }
+  
+  var data_rect = border.map((item) => {
+		return {
+			lat: `${item.lat}`,
+			lon: `${item.lon}`
+		}
 	})
+
 
   const default_data = {
     name: 'test',
-    width: 265,
-    height: 318,
+    width: 250,
+    height: 400,
     margin: 12.0,
     gap: 5.0,
     data_rect: data_rect,
     lat: default_data_rect.lat,
     lon: default_data_rect.lon,
-    timestamp: default_data_rect.timestamp,
-    data_rects_cols: 4,
-    data_rects_rows: 5,
-    char_w: 7.6,
-    char_h: 7.6,
+    data_rects_cols: 5,
+    data_rects_rows: 8,
+    char_w: 5,
+    char_h: 6,
   }
 
   var form = {
@@ -105,9 +98,9 @@ $(document).ready(() => {
   const markerWidth = 4
   const markerHeight = 4
 
-  const markerSize = 7
+  const markerSize = 5
 
-  const strokeWidth = 2
+  const strokeWidth = 1
 
   function init() {
     var loadDict = fetch('dict.json').then(function(res) {
@@ -219,8 +212,6 @@ $(document).ready(() => {
         // merge strings of lat, long and timestamp
         var lat = d.lat               // 18 char
         var lon = d.lon               // 18 char 
-        var timestamp = d.timestamp + ''   // 18 char
-        var az = d.az                 // 3 char
         
         // i need to fit everything in 56 characters
         
@@ -229,15 +220,8 @@ $(document).ready(() => {
         lat = lat.substring(0, 13).padEnd(13, 'X')
         // limit lon to 14 char
         lon = lon.substring(0, 13).padEnd(13, 'X')
-        // limit timestamp to 14 char
-        timestamp = timestamp.substring(0, 17).padStart(17, 'X')
-        // limit az to 3 char
-        az = az.substring(0, 3).padStart(3, 'X')
         
-        // remove last 4 digits of timestamp
-        //timestamp = timestamp.substring(0, timestamp.length - 6)
-        
-        var s = `${lat}|${lon}|${timestamp}|${az}`.split('')
+        var s = `${lat}|${lon}`.split('')
 
         // decode function
         var decode = function (string) {
@@ -390,9 +374,6 @@ $(document).ready(() => {
 			const latlng =  new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lon))
 			return latlng
 		})
-
-		console.log("pathCoordinates", pathCoordinates)
-
 	
 		// Set satellite view
 		map.setMapTypeId('satellite');
