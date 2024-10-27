@@ -4,11 +4,7 @@ $(document).ready(() => {
     lon:        '13.6340635055379566',      // longitude in degrees
   }
 
-  var d = new Date("-002000/12/12")
-
-	console.log("border", border)
-
-	var ammount = 40
+	var ammount = 80
 
   // fill an array with 20 elements of default_data_rect
 	real_data = Array(ammount).fill(default_data_rect)
@@ -22,6 +18,8 @@ $(document).ready(() => {
 		}
 	})
 
+	// limit data_rect to 80 elements
+	data_rect = data_rect.slice(0, ammount)
 
   const default_data = {
     name: 'test',
@@ -32,9 +30,9 @@ $(document).ready(() => {
     data_rect: data_rect,
     lat: default_data_rect.lat,
     lon: default_data_rect.lon,
-    data_rects_cols: 5,
-    data_rects_rows: 8,
-    char_w: 5,
+    data_rects_cols: 8,
+    data_rects_rows: 10,
+    char_w: 4.5,
     char_h: 6,
   }
 
@@ -49,19 +47,18 @@ $(document).ready(() => {
   }
 
   var svgNumeralImages = [
-    {'char': '1', path: "../images/nova_gorica/1.svg" },
-    {'char': '2', path: "../images/nova_gorica/2.svg" },
-    {'char': '3', path: "../images/nova_gorica/3.svg" },
-    {'char': '4', path: "../images/nova_gorica/4.svg" },
-    {'char': '5', path: "../images/nova_gorica/5.svg" },
-    {'char': '6', path: "../images/nova_gorica/6.svg" },
-    {'char': '7', path: "../images/nova_gorica/7.svg" },
-    {'char': '8', path: "../images/nova_gorica/8.svg" },
-    {'char': '9', path: "../images/nova_gorica/9.svg" },
-    {'char': '10', path: "../images/nova_gorica/10.svg" },
-    {'char': '20', path: "../images/nova_gorica/20.svg" },
-    {'char': '|', path: "../images/nova_gorica/|.svg" },
-    {'char': '-', path: "../images/nova_gorica/-.svg" },
+    {'char': '1', path: "../images/nova_gorica/white/1.svg" },
+    {'char': '2', path: "../images/nova_gorica/white/2.svg" },
+    {'char': '3', path: "../images/nova_gorica/white/3.svg" },
+    {'char': '4', path: "../images/nova_gorica/white/4.svg" },
+    {'char': '5', path: "../images/nova_gorica/white/5.svg" },
+    {'char': '6', path: "../images/nova_gorica/white/6.svg" },
+    {'char': '7', path: "../images/nova_gorica/white/7.svg" },
+    {'char': '8', path: "../images/nova_gorica/white/8.svg" },
+    {'char': '9', path: "../images/nova_gorica/white/9.svg" },
+    {'char': '0', path: "../images/nova_gorica/white/0.svg" },
+    {'char': '|', path: "../images/nova_gorica/white/|.svg" },
+    {'char': '-', path: "../images/nova_gorica/white/-.svg" },
   ]
 
   const loadSvgImages = function () {
@@ -98,7 +95,7 @@ $(document).ready(() => {
   const markerWidth = 4
   const markerHeight = 4
 
-  const markerSize = 5
+  const markerSize = 7
 
   const strokeWidth = 1
 
@@ -157,7 +154,7 @@ $(document).ready(() => {
     // Background rect
     var anchor = svg.append("svg")
       .attr("id", id)
-      .attr('width', markerSize +'mm')
+      .attr('width', markerSize +'mm') 
       .attr('height', markerSize + 'mm')
       .attr('viewBox', `0 0 ${markerWidth + 2} ${markerHeight + 2}`)
       .attr('x', x)
@@ -196,18 +193,19 @@ $(document).ready(() => {
     var content_width = data.width - data.margin * 2
     var content_height = data.height - data.margin * 2
 
-    var data_rects_width = ((content_width - (gap * (data.data_rects_cols - 1))) / data.data_rects_cols)
-    var data_rects_height = ((content_height - (gap * (data.data_rects_rows - 1))) / data.data_rects_rows)
+    var data_rects_width = (content_width / data.data_rects_cols)
+    var data_rects_height = (content_height / data.data_rects_rows)
 
     console.log("data_rects_width", data_rects_width)
+    console.log("data.data_rect", data.data_rect)
 
     const drawData = function (data) {
       data.data_rect.forEach((d, i) => {
         var j = i % data.data_rects_cols
         var i = Math.floor(i / data.data_rects_cols)
         var anchor = svg.append('svg')
-          .attr('x', data.margin + (data_rects_width + gap) * j + 'mm')
-          .attr('y', data.margin + (data_rects_height + gap) * i + 'mm')
+          .attr('x', data.margin + (data_rects_width) * j + 'mm')
+          .attr('y', data.margin + (data_rects_height) * i + 'mm')
         
         // merge strings of lat, long and timestamp
         var lat = d.lat               // 18 char
@@ -217,9 +215,9 @@ $(document).ready(() => {
         
 
         // limit lat to 14 char
-        lat = lat.substring(0, 13).padEnd(13, 'X')
+        lat = lat.substring(0, 20).padEnd(20, '0')
         // limit lon to 14 char
-        lon = lon.substring(0, 13).padEnd(13, 'X')
+        lon = lon.substring(0, 20).padEnd(20, '0')
         
         var s = `${lat}|${lon}`.split('')
 
@@ -242,28 +240,38 @@ $(document).ready(() => {
         
         var inner_padding_y = 1;
 
-        var inner_padding_x = 2;
+        var inner_padding_x = 1;
+				
+				let z = 2
 
-        var cols = 7
-        var rows = 7
+        var cols = 5 + z
+        var rows = 6 + z
+
 
         var inner_width = data_rects_width - inner_padding_x * 2 
+				var inner_height = data_rects_height - inner_padding_y * 2
         
         var w = (inner_width / (cols)) 
-
+				var h = (inner_height / (rows))
+				let char_index = 0
         for (var i = 0; i < cols ; i++) {
           for (var j = 0; j < rows; j++) {
+						if (i < z && j < z || i > cols - (z+1) && j > rows - (z+1)) {
+							continue;
+						}
+						if (i < z && j > rows - (z+1) || i > cols - (z+1) && j < z) {
+							continue;
+						}
 
-            var char = s[j * cols + i]; // Fix the calculation of char
+
+            var char = s[char_index]; // Fix the calculation of char
             var x = inner_padding_x + w * i; // Fix the calculation of x
-            var y = inner_padding_y + w * j; // Fix the calculation of y
+            var y = inner_padding_y + h * j; // Fix the calculation of y
 
-            if (char == undefined || char == 'X') {
-              char = '20'
-            }
 
-            char = char == '0' ? '10' : char
-            char = char == '.' ? '20' : char
+            char = char == '.' ? '-' : char
+						console.log("char", char, char_index)
+
             var image_anchor = anchor.append("svg")
               .attr('x', x + 'mm')
               .attr('y', y + 'mm')
@@ -273,6 +281,7 @@ $(document).ready(() => {
             svgImage.setAttribute('width', `${data.char_w}mm`)
             svgImage.setAttribute('height', `${data.char_h}mm`)
             image_anchor.node().appendChild(svgImage)
+						char_index++;
           }
         }
       })
@@ -282,8 +291,8 @@ $(document).ready(() => {
     // append data rects in svg
     for (var i = 0; i < data.data_rects_rows; i++) {
       for (var j = 0; j < data.data_rects_cols; j++) {
-        x = data.margin + (data_rects_width + gap) * j
-        y = data.margin + (data_rects_height + gap) * i
+        x = data.margin + (data_rects_width) * j
+        y = data.margin + (data_rects_height) * i
         svg.append('rect')
           .attr('x', x + 'mm')
           .attr('y', y + 'mm')
@@ -291,22 +300,24 @@ $(document).ready(() => {
           .attr('height', data_rects_height + 'mm')
           .attr('fill', 'none')
           .attr('stroke', 'black')
-          .attr('stroke-width', 0)      
+          .attr('stroke-width', 0)
       }
     }
 
     for (var i = 0; i < data.data_rects_rows + 1; i++) {
       for (var j = 0; j < data.data_rects_cols + 1; j++) {
-        x = data.margin + (data_rects_width + gap) * j
-        y = data.margin + (data_rects_height + gap) * i
-        let _x = (x - (markerSize + gap)/2)
-        let _y = (y - (markerSize + gap)/2)
+        x = data.margin + (data_rects_width) * j
+        y = data.margin + (data_rects_height) * i
+        let _x = (x - (markerSize)/2)
+        let _y = (y - (markerSize)/2)
         generateMarker(index, "4x4_1000", _x+ 'mm', _y+ 'mm')
         index++
-        let rect_x = x + 3
-        let rect_y = y - 3.5
-        let rect_width = data_rects_width - (markerSize + gap)/2
-        let rect_height = data_rects_height - (markerSize + gap)/2
+        let rect_x = x + markerSize
+        let rect_y = y 
+        let rect_width = data_rects_width - (markerSize + gap)
+        let rect_height = data_rects_height - (markerSize + gap)
+
+				let line_stroke_weight = 0//0.2
         
         // horizontal lines
         if (j < data.data_rects_cols) {
@@ -314,25 +325,27 @@ $(document).ready(() => {
             .attr('x', rect_x + 'mm')
             .attr('y', rect_y + 'mm')
             .attr('width', rect_width + 'mm')
-            .attr('height', strokeWidth + 'mm')
+            .attr('height', line_stroke_weight + 'mm')
             .attr('fill', 'black')
             .attr('stroke', 'black')
             .attr('stroke-width', 0)
         }
 
-        // vertical lines
+				
+
         if (i < data.data_rects_rows) {
-          rect_x = x - 3.5
-          rect_y = y + 3
+          rect_x = x 
+          rect_y = y + markerSize
           svg.append('rect')
             .attr('x', rect_x + 'mm')
             .attr('y', rect_y + 'mm')
-            .attr('width', strokeWidth + 'mm')
+            .attr('width', line_stroke_weight + 'mm')
             .attr('height', rect_height + 'mm')
             .attr('fill', 'black')
             .attr('stroke', 'black')
             .attr('stroke-width', 0)
         }
+				
 
       }
     }
