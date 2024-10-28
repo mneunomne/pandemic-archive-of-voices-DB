@@ -24,7 +24,7 @@ $(document).ready(() => {
   const default_data = {
     name: 'test',
     width: 250,
-    height: 400,
+    height: 380,
     margin: 12.0,
     gap: 5.0,
     data_rect: data_rect,
@@ -32,7 +32,7 @@ $(document).ready(() => {
     lon: default_data_rect.lon,
     data_rects_cols: 8,
     data_rects_rows: 10,
-    char_w: 4.5,
+    char_w: 3.7,
     char_h: 6,
   }
 
@@ -46,19 +46,21 @@ $(document).ready(() => {
     name: $("#name"),
   }
 
+	let folder = 'white'
+
   var svgNumeralImages = [
-    {'char': '1', path: "../images/nova_gorica/white/1.svg" },
-    {'char': '2', path: "../images/nova_gorica/white/2.svg" },
-    {'char': '3', path: "../images/nova_gorica/white/3.svg" },
-    {'char': '4', path: "../images/nova_gorica/white/4.svg" },
-    {'char': '5', path: "../images/nova_gorica/white/5.svg" },
-    {'char': '6', path: "../images/nova_gorica/white/6.svg" },
-    {'char': '7', path: "../images/nova_gorica/white/7.svg" },
-    {'char': '8', path: "../images/nova_gorica/white/8.svg" },
-    {'char': '9', path: "../images/nova_gorica/white/9.svg" },
-    {'char': '0', path: "../images/nova_gorica/white/0.svg" },
-    {'char': '|', path: "../images/nova_gorica/white/|.svg" },
-    {'char': '-', path: "../images/nova_gorica/white/-.svg" },
+    {'char': '1', path: `../images/nova_gorica/${folder}/1.svg` },
+    {'char': '2', path: `../images/nova_gorica/${folder}/2.svg` },
+    {'char': '3', path: `../images/nova_gorica/${folder}/3.svg` },
+    {'char': '4', path: `../images/nova_gorica/${folder}/4.svg` },
+    {'char': '5', path: `../images/nova_gorica/${folder}/5.svg` },
+    {'char': '6', path: `../images/nova_gorica/${folder}/6.svg` },
+    {'char': '7', path: `../images/nova_gorica/${folder}/7.svg` },
+    {'char': '8', path: `../images/nova_gorica/${folder}/8.svg` },
+    {'char': '9', path: `../images/nova_gorica/${folder}/9.svg` },
+    {'char': '0', path: `../images/nova_gorica/${folder}/0.svg` },
+    {'char': '|', path: `../images/nova_gorica/${folder}/|.svg` },
+    {'char': '-', path: `../images/nova_gorica/${folder}/-.svg` },
   ]
 
   const loadSvgImages = function () {
@@ -201,6 +203,7 @@ $(document).ready(() => {
 
     const drawData = function (data) {
       data.data_rect.forEach((d, i) => {
+				let type = i % 2 == 0 ? 'black' : 'white'
         var j = i % data.data_rects_cols
         var i = Math.floor(i / data.data_rects_cols)
         var anchor = svg.append('svg')
@@ -238,7 +241,7 @@ $(document).ready(() => {
         // s = s.sort(() => Math.random() - 0.5)
         console.log("s", s.join(''))
         
-        var inner_padding_y = 1;
+        var inner_padding_y = 1.1;
 
         var inner_padding_x = 1;
 				
@@ -251,7 +254,7 @@ $(document).ready(() => {
         var inner_width = data_rects_width - inner_padding_x * 2 
 				var inner_height = data_rects_height - inner_padding_y * 2
         
-        var w = (inner_width / (cols)) 
+        var w = (inner_width / (cols))
 				var h = (inner_height / (rows))
 				let char_index = 0
         for (var i = 0; i < cols ; i++) {
@@ -266,7 +269,7 @@ $(document).ready(() => {
 
             var char = s[char_index]; // Fix the calculation of char
             var x = inner_padding_x + w * i; // Fix the calculation of x
-            var y = inner_padding_y + h * j; // Fix the calculation of y
+            var y = 0 + h * j; // Fix the calculation of y
 
 
             char = char == '.' ? '-' : char
@@ -428,9 +431,10 @@ $(document).ready(() => {
     var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
 
     //set url value to a element's href attribute.
-    $("#link-svg").attr("download", data['name'])
+		let name = `${data.width}x${data.height}_${data.data_rects_cols}-${data.data_rects_rows}_${folder}`
+    $("#link-svg").attr("download", name)
     document.getElementById("link-svg").href = url;
-    document.getElementById("link-svg").textContent = "download"
+    document.getElementById("link-svg").textContent = name + ".svg"
     //you can download svg file by right click menu.
   }
 
