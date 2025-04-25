@@ -34,6 +34,17 @@ label {
   font-family: 'Arial Unicode MS';
 }
 
+#map {
+  height: calc(100vh - 100px) !important;
+  position: fixed !important;
+  overflow: hidden;
+  top: 50px;
+  left: 20px;
+  z-index: -1;
+  width: 50%;
+}
+
+
 p, span {
   font-size: 11px;
 }

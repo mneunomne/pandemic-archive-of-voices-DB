@@ -4,36 +4,41 @@ $(document).ready(() => {
     lon:        '13.6340635055379566',      // longitude in degrees
   }
 
-	var ammount = 80
+	var ammount = 63
 
   // fill an array with 20 elements of default_data_rect
-	real_data = Array(ammount).fill(default_data_rect)
-	console.log("real_data", real_data)
+	var real_data = Array(ammount).fill(default_data_rect)
+	// console.log("real_data", real_data)
 
   
-  var data_rect = border.map((item) => {
+  var all_data_rect = border.map((item) => {
 		return {
 			lat: `${item.lat}`,
 			lon: `${item.lon}`
 		}
 	})
 
+
+  var polyline
+
 	// limit data_rect to 80 elements
-	data_rect = data_rect.slice(0, ammount)
+	var data_rect = all_data_rect.slice(0, ammount)
 
   const default_data = {
     name: 'test',
-    width: 250,
-    height: 380,
-    margin: 12.0,
+    width: 184,
+    height: 266,
+    margin: 20.0,
     gap: 5.0,
     data_rect: data_rect,
     lat: default_data_rect.lat,
     lon: default_data_rect.lon,
-    data_rects_cols: 8,
-    data_rects_rows: 10,
-    char_w: 3.7,
-    char_h: 6,
+    cols: 7,
+    rows: 9,
+    char_w: 3,
+    char_h: 3,
+    markerSize: 7,
+    startIndex: 0,
   }
 
   var form = {
@@ -44,6 +49,12 @@ $(document).ready(() => {
     lat: $("#latitude"),
     lon: $("#longitude"),
     name: $("#name"),
+    cols: $("#cols"),
+    rows: $("#rows"),
+    char_w: $("#char_w"),
+    char_h: $("#char_h"),
+    markerSize: $("#markerSize"),
+    startIndex: $("#startIndex"),
   }
 
 	let folder = 'white'
@@ -97,8 +108,6 @@ $(document).ready(() => {
   const markerWidth = 4
   const markerHeight = 4
 
-  const markerSize = 7
-
   const strokeWidth = 1
 
   function init() {
@@ -121,7 +130,19 @@ $(document).ready(() => {
   }
 
   const setFieldData = function (key, value) {
-    if (key == 'width' || key == 'height') updateSize(key, value)
+    console.log("setFieldData", key, value)
+    if (key == 'width' || key == 'height') {
+      updateSize(key, value)
+      updateMapSize() // Add this line
+    }
+    if (key !== "name") {
+      value = parseFloat(value)
+    }
+    data[key] = value
+    data.data_rect = all_data_rect.slice(data.startIndex, data.startIndex + (data.cols * data.rows))
+    drawRect(data);
+
+    updatePolyline(data.data_rect)
   }
 
   const updateSize = function (key, value) {
@@ -138,6 +159,7 @@ $(document).ready(() => {
   }
 
   const generateMarker = function (id, dictName, x, y) {
+    //console.log("generateMarker", id, dictName, x, y)
     var bytes = dict[dictName][id];
     var bits = [];
     var bitsCount = markerWidth * markerHeight;
@@ -148,29 +170,36 @@ $(document).ready(() => {
         bits.push((byte >> i) & 1);
       }
     }
-    return generateMarkerRect(x, y, bits, id);
+    generateMarkerRect(x, y, bits, id);
   }
 
   function generateMarkerRect(x, y, bits, id) {
-    var group = svg.selectAll("#markers")
     // Background rect
-    var anchor = svg.append("svg")
+    /*
+    var bg = svg.append("rect")
       .attr("id", id)
-      .attr('width', markerSize +'mm') 
-      .attr('height', markerSize + 'mm')
-      .attr('viewBox', `0 0 ${markerWidth + 2} ${markerHeight + 2}`)
-      .attr('x', x)
-      .attr('y', y)
+      .attr('width', data.markerSize + 'mm') 
+      .attr('height', data.markerSize + 'mm')
+      .attr('x', x + 'mm')
+      .attr('y', y + 'mm')
+      .attr('fill', 'white')
+      .attr('stroke', 'black')
+    */
+    x = parseFloat(x)
+    y = parseFloat(y)
+
+    let pixelWidth = data.markerSize / (markerWidth + 2)
+
     // "Pixels"
     for (var i = 0; i < markerHeight; i++) {
       for (var j = 0; j < markerWidth; j++) {
         var white = bits[i * markerHeight + j];
         if (!white) {
-          var pixel = anchor.append("rect")
-            .attr('width', 1)
-            .attr('height', 1)
-            .attr('x', j + 1)
-            .attr('y', i + 1)
+          svg.append("rect")
+            .attr('width', pixelWidth + 'mm')
+            .attr('height', pixelWidth + 'mm')
+            .attr('x', (x + (j + 1) * pixelWidth) + 'mm')
+            .attr('y', (y + (i + 1) * pixelWidth) + 'mm')
             .attr('fill', 'black')
         }
       }
@@ -179,181 +208,171 @@ $(document).ready(() => {
     for (var i = 0; i < markerHeight+2; i++) {
       for (var j = 0; j < markerWidth+2; j++) {
         if (i == 0 || j == 0 || i == markerWidth+1 || j == markerHeight+1) {
-          anchor.append("rect")
-            .attr('width', 1)
-            .attr('height', 1)
-            .attr('x', j)
-            .attr('y', i)
+          svg.append("rect")
+            .attr('width', pixelWidth + 'mm')
+            .attr('height', pixelWidth + 'mm')
+            .attr('x', (x + j * pixelWidth) + 'mm')
+            .attr('y', (y + i * pixelWidth) + 'mm')
             .attr('fill', 'black')
         }
       }
     }
-  }
+}
 
-  const drawRect = function (data) {
-    var gap = data.gap
-    var content_width = data.width - data.margin * 2
-    var content_height = data.height - data.margin * 2
+  
+const drawRect = function (data) {
+  // clear svg
+  svg.selectAll("*").remove()
+  // set svg size
+  svg.attr('width', data.width + 'mm')
+  svg.attr('height', data.height + 'mm')
 
-    var data_rects_width = (content_width / data.data_rects_cols)
-    var data_rects_height = (content_height / data.data_rects_rows)
+  var gap = data.gap
+  var content_width = data.width - data.margin * 2
+  var content_height = data.height - data.margin * 2
 
-    console.log("data_rects_width", data_rects_width)
-    console.log("data.data_rect", data.data_rect)
+  var data_rects_width = (content_width / data.cols)
+  var data_rects_height = (content_height / data.rows)
+  
+  var index = 0
 
-    const drawData = function (data) {
-      data.data_rect.forEach((d, i) => {
-				let type = i % 2 == 0 ? 'black' : 'white'
-        var j = i % data.data_rects_cols
-        var i = Math.floor(i / data.data_rects_cols)
-        var anchor = svg.append('svg')
-          .attr('x', data.margin + (data_rects_width) * j + 'mm')
-          .attr('y', data.margin + (data_rects_height) * i + 'mm')
-        
-        // merge strings of lat, long and timestamp
-        var lat = d.lat               // 18 char
-        var lon = d.lon               // 18 char 
-        
-        // i need to fit everything in 56 characters
-        
+  const drawData = function (data) {
+    data.data_rect.forEach((d, idx) => {
+      let type = idx % 2 == 0 ? 'black' : 'white'
+      var j = idx % data.cols
+      var i = Math.floor(idx / data.cols)
+      let base_x = data.margin + (data_rects_width) * j
+      let base_y = data.margin + (data_rects_height) * i
+      
+      var lat = d.lat               // 18 char
+      var lon = d.lon               // 18 char 
+      
+      // limit lat to 14 char
+      lat = lat.substring(0, 20).padEnd(20, '0')
+      // limit lon to 14 char
+      lon = lon.substring(0, 20).padEnd(20, '0')
+      
+      var s = `${lat}|${lon}`.split('')
 
-        // limit lat to 14 char
-        lat = lat.substring(0, 20).padEnd(20, '0')
-        // limit lon to 14 char
-        lon = lon.substring(0, 20).padEnd(20, '0')
-        
-        var s = `${lat}|${lon}`.split('')
-
-        // decode function
-        var decode = function (string) {
-          return string.split("|").map((item) => {
-            let result = ''
-            if (item[0] == '-') {
-              result = '-' + item.substring(1, item.length).replace('-', '.')
-            } else {
-              result = item.replace('-', '.')
-            }
-            return parseFloat(result)
-          })
-        }
-        
-        // shuffle string
-        // s = s.sort(() => Math.random() - 0.5)
-        console.log("s", s.join(''))
-        
-        var inner_padding_y = 1.1;
-
-        var inner_padding_x = 1;
-				
-				let z = 2
-
-        var cols = 5 + z
-        var rows = 6 + z
-
-
-        var inner_width = data_rects_width - inner_padding_x * 2 
-				var inner_height = data_rects_height - inner_padding_y * 2
-        
-        var w = (inner_width / (cols))
-				var h = (inner_height / (rows))
-				let char_index = 0
-        for (var i = 0; i < cols ; i++) {
-          for (var j = 0; j < rows; j++) {
-						if (i < z && j < z || i > cols - (z+1) && j > rows - (z+1)) {
-							continue;
-						}
-						if (i < z && j > rows - (z+1) || i > cols - (z+1) && j < z) {
-							continue;
-						}
-
-
-            var char = s[char_index]; // Fix the calculation of char
-            var x = inner_padding_x + w * i; // Fix the calculation of x
-            var y = 0 + h * j; // Fix the calculation of y
-
-
-            char = char == '.' ? '-' : char
-						console.log("char", char, char_index)
-
-            var image_anchor = anchor.append("svg")
-              .attr('x', x + 'mm')
-              .attr('y', y + 'mm')
-              .attr('viewBox', `0 0 ${width} ${width}`)
-
-            var svgImage = getCharImage(char)
-            svgImage.setAttribute('width', `${data.char_w}mm`)
-            svgImage.setAttribute('height', `${data.char_h}mm`)
-            image_anchor.node().appendChild(svgImage)
-						char_index++;
+      // decode function
+      var decode = function (string) {
+        return string.split("|").map((item) => {
+          let result = ''
+          if (item[0] == '-') {
+            result = '-' + item.substring(1, item.length).replace('-', '.')
+          } else {
+            result = item.replace('-', '.')
           }
+          return parseFloat(result)
+        })
+      }
+      
+      // console.log("s", s.join(''))
+      
+      var inner_padding_y = 1.1;
+      var inner_padding_x = 1;
+      let z = 2
+      var cols = 5 + z
+      var rows = 6 + z
+
+      var inner_width = data_rects_width - inner_padding_x * 2 
+      var inner_height = data_rects_height - inner_padding_y * 2
+      
+      var w = (inner_width / (cols))
+      var h = (inner_height / (rows))
+      let char_index = 0
+      
+      for (var i = 0; i < cols ; i++) {
+        for (var j = 0; j < rows; j++) {
+          if (i < z && j < z || i > cols - (z+1) && j > rows - (z+1)) {
+            continue;
+          }
+          if (i < z && j > rows - (z+1) || i > cols - (z+1) && j < z) {
+            continue;
+          }
+
+          var char = s[char_index];
+          var x = base_x + inner_padding_x + w * i;
+          var y = base_y + inner_padding_y + h * j;
+
+          char = char == '.' ? '-' : char
+
+          var svgImage = getCharImage(char)
+          svgImage.setAttribute('width', `${data.char_w}mm`)
+          svgImage.setAttribute('height', `${data.char_h}mm`)
+          svgImage.setAttribute('x', x + 'mm')
+          svgImage.setAttribute('y', y + 'mm')
+          svg.node().appendChild(svgImage)
+          char_index++;
         }
-      })
+      }
+    })
+  }
+  
+ //var index = 0
+  var x, y = 0
+  // append data rects in svg
+  // no need for this...
+  /*
+  for (var i = 0; i < data.rows; i++) {
+    for (var j = 0; j < data.cols; j++) {
+      x = data.margin + (data_rects_width) * j
+      y = data.margin + (data_rects_height) * i
+      svg.append('rect')
+        .attr('x', x + 'mm')
+        .attr('y', y + 'mm')
+        .attr('width', data_rects_width + 'mm')
+        .attr('height', data_rects_height + 'mm')
+        .attr('fill', 'none')
+        .attr('stroke', 'black')
+        .attr('stroke-width', 0)
     }
-    var index = 0
-    var x, y = 0
-    // append data rects in svg
-    for (var i = 0; i < data.data_rects_rows; i++) {
-      for (var j = 0; j < data.data_rects_cols; j++) {
-        x = data.margin + (data_rects_width) * j
-        y = data.margin + (data_rects_height) * i
+  }
+  */
+
+  for (var i = 0; i < data.rows + 1; i++) {
+    for (var j = 0; j < data.cols + 1; j++) {
+      let _index = i * (data.cols + 1) + j
+      x = data.margin + (data_rects_width) * j
+      y = data.margin + (data_rects_height) * i
+      let _x = (x - (data.markerSize)/2)
+      let _y = (y - (data.markerSize)/2)
+      generateMarker(_index + data.startIndex, "4x4_1000", _x, _y)
+      let rect_x = x + data.markerSize
+      let rect_y = y 
+      let rect_width = data_rects_width - (data.markerSize + gap)
+      let rect_height = data_rects_height - (data.markerSize + gap)
+
+      let line_stroke_weight = 0//0.2
+      
+      // horizontal lines
+      if (j < data.cols) {
         svg.append('rect')
-          .attr('x', x + 'mm')
-          .attr('y', y + 'mm')
-          .attr('width', data_rects_width + 'mm')
-          .attr('height', data_rects_height + 'mm')
-          .attr('fill', 'none')
+          .attr('x', rect_x + 'mm')
+          .attr('y', rect_y + 'mm')
+          .attr('width', rect_width + 'mm')
+          .attr('height', line_stroke_weight + 'mm')
+          .attr('fill', 'black')
+          .attr('stroke', 'black')
+          .attr('stroke-width', 0)
+      }
+      // vertical lines
+      if (i < data.rows) {
+        rect_x = x 
+        rect_y = y + data.markerSize
+        svg.append('rect')
+          .attr('x', rect_x + 'mm')
+          .attr('y', rect_y + 'mm')
+          .attr('width', line_stroke_weight + 'mm')
+          .attr('height', rect_height + 'mm')
+          .attr('fill', 'black')
           .attr('stroke', 'black')
           .attr('stroke-width', 0)
       }
     }
-
-    for (var i = 0; i < data.data_rects_rows + 1; i++) {
-      for (var j = 0; j < data.data_rects_cols + 1; j++) {
-        x = data.margin + (data_rects_width) * j
-        y = data.margin + (data_rects_height) * i
-        let _x = (x - (markerSize)/2)
-        let _y = (y - (markerSize)/2)
-        generateMarker(index, "4x4_1000", _x+ 'mm', _y+ 'mm')
-        index++
-        let rect_x = x + markerSize
-        let rect_y = y 
-        let rect_width = data_rects_width - (markerSize + gap)
-        let rect_height = data_rects_height - (markerSize + gap)
-
-				let line_stroke_weight = 0//0.2
-        
-        // horizontal lines
-        if (j < data.data_rects_cols) {
-          svg.append('rect')
-            .attr('x', rect_x + 'mm')
-            .attr('y', rect_y + 'mm')
-            .attr('width', rect_width + 'mm')
-            .attr('height', line_stroke_weight + 'mm')
-            .attr('fill', 'black')
-            .attr('stroke', 'black')
-            .attr('stroke-width', 0)
-        }
-
-				
-
-        if (i < data.data_rects_rows) {
-          rect_x = x 
-          rect_y = y + markerSize
-          svg.append('rect')
-            .attr('x', rect_x + 'mm')
-            .attr('y', rect_y + 'mm')
-            .attr('width', line_stroke_weight + 'mm')
-            .attr('height', rect_height + 'mm')
-            .attr('fill', 'black')
-            .attr('stroke', 'black')
-            .attr('stroke-width', 0)
-        }
-				
-
-      }
-    }
-    drawData(data)
   }
+  drawData(data)
+}
 
   const addEvents = function () {
     for (var field in form) {
@@ -373,44 +392,91 @@ $(document).ready(() => {
     $("#download-svg").click(downloadSvg)
   }
 
-	function initMap() {
-		// Define the bounds using the given lat/lng values
+  function updatePolyline(_data_rect) {
+    // Clear existing polylines
+    if (polyline) {
+        polyline.setMap(null);
+    }
+    
+    // Create new path coordinates from the data_rect
+    const pathCoordinates = _data_rect.map(item => {
+        return new google.maps.LatLng(
+            parseFloat(item.lat),
+            parseFloat(item.lon)
+        );
+    });
+    
+    // Create new polyline
+    polyline = new google.maps.Polyline({
+        path: pathCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1,
+        strokeWeight: 2.2
+    });
+    
+    // Add to map
+    polyline.setMap(map);
+    
+    // Fit the map to the bounds of the polyline
+    if (pathCoordinates.length > 0) {
+        const bounds = new google.maps.LatLngBounds();
+        pathCoordinates.forEach(coord => bounds.extend(coord));
+        map.fitBounds(bounds);
+        
+        // Add some padding if needed
+        map.padding = 20;
+    }
+}
 
-		let pathCoordinates = []; // Array to store the path coordinates
+function updateMapSize() {
+  // Get SVG dimensions in mm
+  const svgWidth = parseFloat(svg.attr('width'));
+  const svgHeight = parseFloat(svg.attr('height'));
+  console.log("svgWidth, svgHeight", svgWidth, svgHeight)
+  
+  // Calculate aspect ratio
+  const aspectRatio = svgWidth / svgHeight;
+  
+  // Get the map container
+  const mapElement = document.getElementById('map');
+  
+  // Set map width based on its current height
+  const mapHeight = mapElement.offsetHeight;
+  const mapWidth = mapHeight * aspectRatio;
 
-		// Create a map centered within the bounds
-		map = new google.maps.Map(document.getElementById("map"), {			
-			center: { lat: parseFloat(default_data_rect.lat), lng: parseFloat(default_data_rect.lon) },
-			zoom: 17,
-			disableDefaultUI: true
-		});
+  console.log("|mapWidth", mapWidth, mapElement)
+  
+  // Apply the new height
+  mapElement.style.width = `${mapWidth}px !important`;
 
-		pathCoordinates = data_rect.map((item) => {
-			console.log("item", item)
-			const latlng =  new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lon))
-			return latlng
-		})
-	
-		// Set satellite view
-		map.setMapTypeId('satellite');
+  
+  // Trigger a map resize if the map is already initialized
+  if (map) {
+      google.maps.event.trigger(map, 'resize');
+  }
+}
 
-		// Initialize the Polyline with an empty path
-		polyline = new google.maps.Polyline({
-			path: pathCoordinates,
-			geodesic: true,
-			strokeColor: '#0029FF',
-			strokeOpacity: 1,
-			strokeWeight: 2.2
-		});
+  function initMap() {
+    // Create a map centered within the bounds
+    map = new google.maps.Map(document.getElementById("map"), {			
+        center: { lat: parseFloat(default_data_rect.lat), lng: parseFloat(default_data_rect.lon) },
+        zoom: 17,
+        disableDefaultUI: true
+    });
 
+    // Set satellite view
+    map.setMapTypeId('satellite');
 
-		// Add the polyline to the map
-		polyline.setMap(map); // 
-	}
+    // Initialize the polyline with the current data_rect
+    updatePolyline(data_rect);
+    
+    // Set initial map size
+    updateMapSize();
+}
 
   const downloadSvg = function () {
     var svgDom = document.querySelector('svg').cloneNode(true);
-    var style = svgDom.style
     svgDom.style = ''
     //get svg source.
     var serializer = new XMLSerializer();
@@ -431,7 +497,7 @@ $(document).ready(() => {
     var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
 
     //set url value to a element's href attribute.
-		let name = `${data.width}x${data.height}_${data.data_rects_cols}-${data.data_rects_rows}_${folder}`
+		let name = `${document.getElementById("name").value}_${data.width}x${data.height}_${data.cols}-${data.rows}-${data.startIndex}`
     $("#link-svg").attr("download", name)
     document.getElementById("link-svg").href = url;
     document.getElementById("link-svg").textContent = name + ".svg"

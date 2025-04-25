@@ -11,13 +11,9 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../lib/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="styles.css">
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABc2FYPPzxrAMu_Atv1JQ5O_KrYBuXxQo"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiG69KxyAao6tiuRhBH5ZinHoquFTu6Ww"></script>
 	<script src="./js/border.js"></script>
   <style>
-		#map {
-			width: 100%;
-			height: 600px;
-		}
   </style>
 </head>
 <body>
@@ -46,9 +42,32 @@
           <input type="number" id="gap" name="gap" min="0" max="1000"/>
         </p>
 
+        <p>
+          <!-- marker size -->
+          <label for="margin">Marker Size (mm)</label>
+          <input type="number" id="markerSize" name="markerSize" min="1" max="1000"/>
+          <!-- char_w -->
+          <label for="margin">char_w (mm)</label>
+          <input type="number" id="char_w" name="char_w" min="0" max="1000"/>
+          <!-- char_h -->
+          <label for="margin">char_h (mm)</label>
+          <input type="number" id="char_h" name="char_h" min="0" max="1000"/>
+        </p>
+
       </div>
 
       <h3>Data</h3>
+
+      <!-- data cols -->
+      <label for="cols">Cols</label>
+      <input type="number" id="cols" name="cols" min="1" max="100"/>
+      <!-- data cols -->
+      <label for="cols">Rows</label>
+      <input type="number" id="rows" name="rows" min="1" max="100"/>
+      <!-- start index -->
+      <label for="cols">Start Index</label>
+      <input type="number" id="startIndex" name="startIndex" min="1" max="100"/>
+
       <div class="input_section">
         <!-- download .svg file-->
         <div class="input_section">

@@ -11,7 +11,8 @@
     "compress": "cd public/ && zip -r db.zip db/",
     "migrate": "nodemon server/migrate_to_mongodb.js",
     "max": "nodemon server/generate_max_filders.js",
-    "gen_svg": "nodemon server/generate_svg.js"
+    "gen_svg": "nodemon server/generate_svg.js",
+    "simple": "node server/simple.js"
   },
   "repository": {
     "type": "git",
